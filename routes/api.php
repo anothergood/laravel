@@ -13,13 +13,13 @@ use App\User;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('user/new-password', 'ResetPasswordController@newPassword')->middleware('throttle:60,1');
 Route::group(['prefix' => 'user'], function () {
     Route::post('register', 'RegisterController@store');
     Route::post('login', 'LoginController@store');
     Route::get('verify/{token}', 'RegisterController@verifyUser');
     Route::get('self', 'UserController@userSelf')->middleware('auth:api')->middleware('verify');
-    Route::post('reset-password', 'ResetPasswordController@resetPassword');
-    Route::post('new-password', 'ResetPasswordController@newPassword');
+    Route::post('reset-password', 'ResetPasswordController@resetPassword')->middleware('throttle:60,1');
     // Route::post('logout','LogoutController@????')->middleware('auth:api');
 });
 

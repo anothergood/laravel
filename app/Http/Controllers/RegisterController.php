@@ -45,20 +45,5 @@ class RegisterController extends Controller
         } else {
             return response(['message' => 'Sorry your email cannot be identified.'], 422);
         }
-
-
-        // $verifyUser = VerifyUser::where('token', $token)->first();
-        // if (isset($verifyUser)) {
-        //     $user = $verifyUser->user;
-        //     if (!$user->verified) {
-        //         $verifyUser->user->verified = 1;
-        //         $verifyUser->user->save();
-        //         return response(['message' => 'Your e-mail is verified. You can now login.']);
-        //     } else {
-        //         return response(['message' => 'Your e-mail is already verified. You can now login.'], 422);
-        //     }
-        // } else {
-        //     return response(['message' => 'Sorry your email cannot be identified.'], 422);
-        // }
     }
 }
