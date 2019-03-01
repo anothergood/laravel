@@ -13,29 +13,38 @@ use App\User;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('user/new-password', 'ResetPasswordController@newPassword')->middleware('throttle:60,1');
-Route::group(['prefix' => 'user'], function () {
-    Route::post('register', 'RegisterController@store');
-    Route::post('login', 'LoginController@store');
-    Route::get('verify/{token}', 'RegisterController@verifyUser');
-    Route::get('self', 'UserController@userSelf')->middleware('auth:api')->middleware('verify');
-    Route::post('reset-password', 'ResetPasswordController@resetPassword')->middleware('throttle:60,1');
-    // Route::post('logout','LogoutController@????')->middleware('auth:api');
+Route::group(['prefix' => 'user','middleware' => 'throttle:5,1'], function () {
+
+    Route::post('new-password', 'ResetPasswordController@newPassword');
+    Route::post('reset-password', 'ResetPasswordController@resetPassword');
+
 });
 
-Route::group(['prefix' => 'friends','middleware' => 'auth:api'], function () {
-    Route::post('invite', 'FriendController@inviteFriend');
-    Route::post('approve', 'FriendController@approveFriend');
-});
+Route::middleware('throttle:60,1')->group(function () {
 
-Route::group(['prefix' => 'posts','middleware' => 'auth:api'], function () {
-    Route::apiResource('comments', 'CommentController');
-    Route::apiResource('', 'PostController');
-    Route::apiResource('like', 'LikeController');
-    Route::get('friends-posts', 'PostController@friendsPosts');
-    Route::group(['prefix' => 'my-posts'], function () {
-        Route::get('', 'PostController@myPosts');
-        Route::get('{post}', 'PostController@myPost');
-        Route::get('{post}/comments', 'CommentController@myPostComments');
+    Route::group(['prefix' => 'user'], function () {
+        Route::post('register', 'RegisterController@store');
+        Route::post('login', 'LoginController@store');
+        Route::get('verify/{token}', 'RegisterController@verifyUser');
+        Route::get('self', 'UserController@userSelf')->middleware('auth:api')->middleware('verify');
+        // Route::post('logout','LogoutController@????')->middleware('auth:api');
     });
+
+    Route::group(['prefix' => 'friends','middleware' => 'auth:api'], function () {
+        Route::post('invite', 'FriendController@inviteFriend');
+        Route::post('approve', 'FriendController@approveFriend');
+    });
+
+    Route::group(['prefix' => 'posts','middleware' => 'auth:api'], function () {
+        Route::apiResource('comments', 'CommentController');
+        Route::apiResource('', 'PostController');
+        Route::apiResource('like', 'LikeController');
+        Route::get('friends-posts', 'PostController@friendsPosts');
+        Route::group(['prefix' => 'my-posts'], function () {
+            Route::get('', 'PostController@myPosts');
+            Route::get('{post}', 'PostController@myPost');
+            Route::get('{post}/comments', 'CommentController@myPostComments');
+        });
+    });
+
 });
