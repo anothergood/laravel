@@ -43,6 +43,7 @@ class MailConfirmation extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return $this->mail->to($this->mail->user->email);
+        // return $this->mail->to($notifiable->mail);
     }
 
     /**

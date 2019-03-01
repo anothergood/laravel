@@ -12,14 +12,9 @@
 */
 
 Route::get('/', function () {
-      // $posts =DB::table('posts')->get();
-      // return view('welcome',compact('posts'));
     return view('welcome');
 });
 
-// Route::group(['prefix' => 'posts'], function(){
-//   // Route::post('/store_post','PostController@store')->middleware('auth:api');
-//
-//     Route::get('/','PostController@index')->middleware('auth:api');
-//     Route::get('/{post}','PostController@show');
-// });
+Route::get('/welcome', function () {
+    return view('welcome');
+});

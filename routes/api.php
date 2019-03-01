@@ -13,14 +13,15 @@ use App\User;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('user-self', 'UserController@userSelf')->middleware('auth:api')->middleware('verify');
-
-Route::post('register', 'RegisterController@store');
-Route::get('user/verify/{token}', 'RegisterController@verifyUser');
-
-Route::post('login', 'LoginController@store');
-// Route::post('logout','LogoutController@????')->middleware('auth:api');
+Route::group(['prefix' => 'user'], function () {
+    Route::post('register', 'RegisterController@store');
+    Route::post('login', 'LoginController@store');
+    Route::get('verify/{token}', 'RegisterController@verifyUser');
+    Route::get('self', 'UserController@userSelf')->middleware('auth:api')->middleware('verify');
+    Route::post('reset-password', 'ResetPasswordController@resetPassword');
+    Route::post('new-password', 'ResetPasswordController@newPassword');
+    // Route::post('logout','LogoutController@????')->middleware('auth:api');
+});
 
 Route::group(['prefix' => 'friends','middleware' => 'auth:api'], function () {
     Route::post('invite', 'FriendController@inviteFriend');

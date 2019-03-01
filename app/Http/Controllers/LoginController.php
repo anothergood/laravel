@@ -87,31 +87,42 @@ class LoginController extends Controller
         $user_access = new User;
 
         if (User::where('email', $request->email)->exists()){                   //проверка на существование email
-            $user = DB::table('users')->where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
             $user_access->id = $user->id;
 
             if (Hash::check($request->password, $user->password)) {           //проверка совпадения пароля
-                $date_now = Carbon::now();
-                $date_expires = $access_token->token->expires_at;
-                $expires_in = $date_expires->diffInSeconds($date_now);        //expires_in
-                $userId = $user->id;
-                $name = 'MyToken';
-                $req = $this->make($userId, $name, '');
+                if($user->verified == 1){
+                    $date_now = Carbon::now();
+                    $userId = $user->id;
+                    $name = 'MyToken';
 
-                // return $req;
-                // $access_token = $user_access->createToken('MyToken');
-                 // $value = ['1' => $access_token,
-                 //           '2' => $req];
+                    $token = $this->make($userId, $name, '');
+                    $date_expires = $token->token->expires_at;
+                    $expires_in = $date_expires->diffInSeconds($date_now);        //expires_in
 
-                return response(['token_type' => "Bearer",
-                                 'expires_in' => $expires_in,
-                                 'access_token' => $req->accessToken]);
-                return $value;
+                    // $korobka = $user->createToken('MyToken')->accessToken;
+
+                    // return response(['token_type' => "Bearer",
+                    //                  'expires_in' => $expires_in,
+                    //                  'access_token' => $token->accessToken]);
+                    $values = [
+                        'token_type' => "Bearer",
+                        'expires_in' => $expires_in,
+                        'access_token' => $token->accessToken,
+                        // 'korobka' => $korobka
+                    ];
+                    return response([
+                        'user' => $user,
+                        'token' => $values,
+                    ]);
+                } else {
+                    return response(['message' => 'Your e-mail is not verified.'], 422);
+                }
             } else {
-                return response('message' => 'wrong password',400); //bed request 400?
+                return response(['message' => 'Wrong password.'],400); //bed request 400?
             }
         } else {
-            return response('message' => 'user with such mail is not registered',400); //bed request 400?
+            return response(['message' => 'User with such e-mail is not registered.'],400); //bed request 400?
         }
     }
 }
