@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\User;
 
+use App\Events\ChatMessage;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,4 +48,8 @@ Route::middleware('throttle:60,1')->group(function () {
         });
     });
 
+});
+
+Route::post('test-event', function () {
+    event(new ChatMessage("Hellow!"));
 });

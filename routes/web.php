@@ -11,10 +11,22 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('', function () {
     return view('welcome');
 });
 
-Route::get('/welcome', function () {
+Route::get('welcome', function () {
+    \App\Events\ChatMessage::dispatch("Message");
     return view('welcome');
 });
+
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::get('start', function () {
+    // \App\Events\ChatMessage::dispatch("Message?");
+    return view('web-sockets-test');
+});
+
+Route::get('start/send-message', 'ChatController@sendMessage');
