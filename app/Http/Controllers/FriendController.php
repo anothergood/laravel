@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserUser;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreFriendRequest;
 
@@ -44,5 +45,35 @@ class FriendController extends Controller
         } else {
             return response(['message'=>'there is no request from this user'], 422);   //422 Unprocessable Entity??
         }
+    }
+
+    public function allFriends(Request $request)
+    {
+        // $friends = $request->user()->users()->get();
+        // return response(['friends' => $friends]);
+        // return $this->belongsToMany('App\User', 'user_user', 'user_id', 'user_initiator_id');
+        //
+        // $friends = UserUser::where('user_id', '=', $request->user()->id & 'status' == 'approved')
+        //                     ->orWhere('user_initiator_id', '=', $request->user()->id & 'status' == 'approved')->get();
+        $friends_init = UserUser::where('status', '=', 'approved')
+        ->Where('user_initiator_id', '=', $request->user()->id)
+        ->get();
+        $friends_recip = UserUser::where('status', '=', 'approved')
+                           ->where('user_id', '=', $request->user()->id)
+        ->get();
+
+        $friends_init_id = [];
+        $friends_recip_id = [];
+        foreach ($friends_init as $friend) {
+            $friends_init_id[] = $friend->user_id;
+        }
+
+        foreach ($friends_recip as $friend) {
+            $friends_recip_id[] = $friend->user_initiator_id;
+        }
+        $ids = array_merge($friends_init_id,$friends_recip_id);
+        $friends = User::whereIn('id', $ids)->get();
+
+        return response(['friends' => $friends]);
     }
 }

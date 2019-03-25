@@ -24,8 +24,8 @@ Route::group(['prefix' => 'user','middleware' => 'throttle:5,1'], function () {
 Route::middleware('throttle:60,1')->group(function () {
 
     Route::group(['prefix' => 'user'], function () {
-        Route::post('register', 'RegisterController@store');
-        Route::post('login', 'LoginController@store');
+        Route::post('register', 'RegisterController@store')->name('register');
+        Route::post('login', 'LoginController@store')->name('login');
         Route::get('verify/{token}', 'RegisterController@verifyUser');
         Route::get('self', 'UserController@userSelf')->middleware('auth:api')->middleware('verify');
         // Route::post('logout','LogoutController@????')->middleware('auth:api');
@@ -34,6 +34,7 @@ Route::middleware('throttle:60,1')->group(function () {
     Route::group(['prefix' => 'friends','middleware' => 'auth:api'], function () {
         Route::post('invite', 'FriendController@inviteFriend');
         Route::post('approve', 'FriendController@approveFriend');
+        Route::get('all', 'FriendController@allFriends');
     });
 
     Route::group(['prefix' => 'posts','middleware' => 'auth:api'], function () {
@@ -48,8 +49,14 @@ Route::middleware('throttle:60,1')->group(function () {
         });
     });
 
+    Route::group(['prefix' => 'messages','middleware' => 'auth:api'], function () {
+        Route::post('send', 'MessageController@sendMessage');
+        Route::post('received', 'MessageController@receivedFriendMessages');
+        Route::post('sended', 'MessageController@sendedFriendMessages');
+        Route::post('all-friend', 'MessageController@allFriendMessages');
+    });
+
 });
 
-Route::post('test-event', function () {
-    event(new ChatMessage("Hellow!"));
-});
+Route::get('chat/send-message', 'ChatController@sendMessage');
+Route::post('chat/send-private-message', 'ChatController@sendPrivateMessage');

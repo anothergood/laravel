@@ -11,22 +11,25 @@
 |
 */
 
-Route::get('', function () {
-    return view('welcome');
-});
+//
+// Route::middleware('auth')->group(function () {
+//     Route::get('start', function () {
+//       return view('start');
+//     });
+// });
 
-Route::get('welcome', function () {
-    \App\Events\ChatMessage::dispatch("Message");
-    return view('welcome');
-});
+// Route::get('welcome', function () {
+//     return view('welcome');
+// });
 
-Route::get('login', function () {
-    return view('login');
-});
+// Route::get('login', function () {
+//     return view('login');
+// });
 
-Route::get('start', function () {
-    // \App\Events\ChatMessage::dispatch("Message?");
-    return view('web-sockets-test');
-});
+Route::get('{any}', function () {
+  return view('start');
+})->where('any', '.*');
 
-Route::get('start/send-message', 'ChatController@sendMessage');
+// Route::get('chat', function () {
+//     return view('chat');
+// });

@@ -17,8 +17,8 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
-        if (Hash::check($request->password, $user->password)) {
-            if($user->verified == 1){
+        if($user->verified == 1){
+            if (Hash::check($request->password, $user->password)) {
                 $date_now = Carbon::now();
                 $userId = $user->id;
                 $name = 'MyToken';
@@ -35,11 +35,12 @@ class LoginController extends Controller
                     'user' => $user,
                     'token' => $values,
                 ]);
+
             } else {
-                return response(['message' => 'Your e-mail is not verified.'], 422);
+                return response(['message' => 'Wrong password.'],400); //bed request 400?
             }
         } else {
-            return response(['message' => 'Wrong password.'],400); //bed request 400?
+            return response(['message' => 'Your e-mail is not verified.'], 422);
         }
     }
 }
