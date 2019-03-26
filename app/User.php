@@ -56,7 +56,6 @@ class User extends Authenticatable
     }
     public function userPush($data)
     {
-        // \Log::info($user, $data);
         event(new ChatPrivateMessage($this, $data));
     }
 }

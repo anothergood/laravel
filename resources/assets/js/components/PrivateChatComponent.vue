@@ -102,6 +102,7 @@
                 Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
                 Echo.private('channel.'+this.user.id)
                 .listen('ChatPrivateMessage', ({data}) => {
+                    // console.log(data);
                     if(this.userSelect == data.from_user_id){
                         this.dataMessages.push({body: data.message, from_user_username: data.from_user_username});
                     }
@@ -159,7 +160,7 @@
                     method: 'post',
                     url: '/api/v1/chat/send-private-message/'+this.userSelect,
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                    params: { message: this.message, from_user_id: this.user.id, from_user_username: this.user.username }
+                    params: { body: this.message}
                 })
                 .then((response) => {
                     this.dataMessages.push({body: this.message, from_user_username: this.user.username});

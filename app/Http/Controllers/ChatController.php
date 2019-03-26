@@ -7,6 +7,7 @@ use App\User;
 use App\Events\ChatMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreMessageRequest;
 
 class ChatController extends Controller
 {
@@ -16,7 +17,7 @@ class ChatController extends Controller
 
     }
 
-    public function sendPrivateMessage(Request $request, User $user) {
+    public function sendPrivateMessage(StoreMessageRequest $request, User $user) {
 
         $friend = DB::table('user_user')
         ->where(function ($query) use($user, $request) {
@@ -31,8 +32,14 @@ class ChatController extends Controller
         })
         ->exists();
 
-        if ($friend or $request->user()->id == $request->user_id) {
-            $user->userPush($request->all());
+        if ($friend or $request->user()->id == $user->id) {
+
+            $data = [
+                'from_user_id' => $request->user()->id,
+                'from_user_username' => $request->user()->username,
+                'message' => $request->body,
+            ];
+            $user->userPush($data);
         }
     }
 

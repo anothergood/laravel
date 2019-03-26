@@ -15,7 +15,7 @@ class ChatPrivateMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user;
+    private $user;
     public $data;
     /**
      * Create a new event instance.
@@ -36,5 +36,12 @@ class ChatPrivateMessage implements ShouldBroadcast
     public function broadcastOn()
     {
         return new PrivateChannel('channel.'.$this->user->id);
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'data' => $this->data
+        ];
     }
 }
