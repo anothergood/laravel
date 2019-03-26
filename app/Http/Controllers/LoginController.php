@@ -37,7 +37,7 @@ class LoginController extends Controller
                 ]);
 
             } else {
-                return response(['message' => 'Wrong password.'],400); //bed request 400?
+                return response(['message' => 'Wrong password.'],400); 
             }
         } else {
             return response(['message' => 'Your e-mail is not verified.'], 422);

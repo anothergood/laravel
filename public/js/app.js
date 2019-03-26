@@ -63544,12 +63544,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                     container.scrollTop = container.scrollHeight;
                 });
             });
-            // axios({
-            //     method: 'post',
-            //     url: '/api/v1/messages/'+this.userSelect+'/send',
-            //     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-            //     params: { body: this.message }
-            // });
+            axios({
+                method: 'post',
+                url: '/api/v1/messages/' + this.userSelect + '/send',
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                params: { body: this.message }
+            });
         },
         makeActive: function makeActive(friend) {
             this.userSelect = friend.id;

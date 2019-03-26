@@ -28,7 +28,6 @@ Route::middleware('throttle:60,1')->group(function () {
         Route::post('login', 'LoginController@store')->name('login');
         Route::get('verify/{token}', 'RegisterController@verifyUser');
         Route::get('self', 'UserController@userSelf')->middleware('auth:api')->middleware('verify');
-        // Route::post('logout','LogoutController@????')->middleware('auth:api');
     });
 
     Route::group(['prefix' => 'friends','middleware' => 'auth:api'], function () {

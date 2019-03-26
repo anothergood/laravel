@@ -94,12 +94,6 @@ class MessageController extends Controller
 
     public function allFriendMessages(Request $request, User $user) {
 
-        // $user = User::find($request->user_id);
-        // $initiator_user = $request->user()->users()->where('user_id', '=', $user->id)->where('status', '=', 'approved')->exists();
-        // $initiator_friend = $user->users()->where('user_id', '=', $request->user()->id)->where('status', '=', 'approved')->exists();
-        //
-        // if ($initiator_user or $initiator_friend or $request->user()->id == $request->user_id) {
-
         $friend = DB::table('user_user')
         ->where(function ($query) use($user, $request) {
             $query->where('user_id', $user->id)
@@ -128,7 +122,7 @@ class MessageController extends Controller
 
             $mes_coll = $messages->getCollection()->reverse()->values();
             $messages->setCollection($mes_coll);
-            
+
             return response(["messages" => $messages], 200);
 
         } else {

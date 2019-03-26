@@ -170,12 +170,12 @@
                         container.scrollTop = container.scrollHeight;
                     });
                 });
-                // axios({
-                //     method: 'post',
-                //     url: '/api/v1/messages/'+this.userSelect+'/send',
-                //     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                //     params: { body: this.message }
-                // });
+                axios({
+                    method: 'post',
+                    url: '/api/v1/messages/'+this.userSelect+'/send',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    params: { body: this.message }
+                });
             },
             makeActive: function (friend) {
                 this.userSelect = friend.id;

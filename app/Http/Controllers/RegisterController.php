@@ -18,7 +18,6 @@ class RegisterController extends Controller
         $user->email = $request->email;
         $user->password =  bcrypt($request ->password);
         $user->save();
-        // $token = $user->createToken('MyToken')->accessToken;
 
         $verify_token = sha1(str_random(70));
         $expiresAt = now()->addMinutes(10);

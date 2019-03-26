@@ -35,9 +35,10 @@ class ChatController extends Controller
         if ($friend or $request->user()->id == $user->id) {
 
             $data = [
+                'push_type' => 'private_chat',
+                'message' => $request->body,
                 'from_user_id' => $request->user()->id,
                 'from_user_username' => $request->user()->username,
-                'message' => $request->body,
             ];
             $user->userPush($data);
         }
