@@ -3,6 +3,7 @@
 namespace App;
 
 use Laravel\Passport\HasApiTokens;
+use App\Events\ChatPrivateMessage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,5 +53,10 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+    public function userPush($data)
+    {
+        // \Log::info($user, $data);
+        event(new ChatPrivateMessage($this, $data));
     }
 }

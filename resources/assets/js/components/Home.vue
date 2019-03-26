@@ -31,13 +31,13 @@
 
     <div id="element" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
         <div class="toast-header">
-            <strong class="mr-auto">{{this.message.user}}</strong>
+            <strong class="mr-auto">{{this.from_user}}</strong>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="toast-body">
-            {{this.message.message}}
+            {{this.message}}
         </div>
     </div>
 
@@ -54,6 +54,7 @@ export default {
         return {
             message_notification: false,
             message: "",
+            from_user: "",
             user: {}
         }
     },
@@ -65,9 +66,6 @@ export default {
             headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
         })
         .then((response) => {
-            // Object.assign(this.user, response.data);
-            // this.$set(this.user, 'username', response.data.username);
-            // this.$set(this.user, 'id', response.data.id);
             this.user = response.data;
         });
     },
@@ -77,20 +75,12 @@ export default {
             Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
             Echo.private('channel.'+this.user.id)
                 .listen('ChatPrivateMessage', ({data}) => {
-                    this.message = data;
+                    this.message = data.message;
+                    this.from_user = data.from_user_username;
                     $('#element').toast('show');
-                    console.log(this.message.user);
             });
         },
     },
-
-    // mounted() {
-    //     window.Echo.channel('test')
-    //         .listen('ChatMessage', (e) => {
-    //             this.dataMessages.push(e.message)
-    //     });
-    // },
-    // status: '',
     methods: {
         home: function () {
             this.$router.push({ path: '/home' });

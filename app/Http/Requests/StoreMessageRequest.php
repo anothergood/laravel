@@ -25,7 +25,6 @@ class StoreMessageRequest extends FormRequest
     {
         return [
             'body' => 'required|max:255',
-            'user_id' => 'required',
         ];
     }
 }

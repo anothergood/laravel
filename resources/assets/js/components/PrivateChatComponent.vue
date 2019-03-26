@@ -16,15 +16,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <h5>Sunil Rajput
-                                        <span class="chat_date">Dec 25</span>
-                                    </h5>
-                            </div>
-                          </div>
-                        </div> -->
                         <p>User id: {{userSelect}}</p>
                     </div>
                 </div>
@@ -94,8 +85,6 @@
             })
             .then((response) => {
                 this.friends.push(...response.data.friends);
-                // console.log(this.friends);
-                // this.$set(this.friends, 'id', response.data.id);
             });
             axios({
                 method: 'get',
@@ -103,9 +92,6 @@
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
             })
             .then((response) => {
-                // Object.assign(this.user, response.data);
-                // this.$set(this.user, 'username', response.data.username);
-                // this.$set(this.user, 'id', response.data.id);
                 this.user = response.data;
             });
 
@@ -113,33 +99,28 @@
 
         watch: {
             user: function (val, oldVal) {
-                // console.log(Array.from(this.user));
-
-                // console.log(this.friends);
-                if(this.userSelect){
-                    Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
-                    Echo.private('channel.'+this.user.id)
-                    .listen('ChatPrivateMessage', ({data}) => {
-                        this.dataMessages.push({body: data.message, from_user_username: data.user});
-                        this.$nextTick(() => {
-                            var container = this.$el.querySelector(".msg_history");
-                            container.scrollTop = container.scrollHeight;
-                        });
+                Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
+                Echo.private('channel.'+this.user.id)
+                .listen('ChatPrivateMessage', ({data}) => {
+                    if(this.userSelect == data.from_user_id){
+                        this.dataMessages.push({body: data.message, from_user_username: data.from_user_username});
+                    }
+                    this.$nextTick(() => {
+                        var container = this.$el.querySelector(".msg_history");
+                        container.scrollTop = container.scrollHeight;
                     });
-
-                }
+                });
             },
             userSelect: function (val, oldVal) {
                 axios({
                     method: 'post',
-                    url: '/api/v1/messages/all-friend',
+                    url: '/api/v1/messages/'+this.userSelect+'/all',
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                    params: { user_id: this.userSelect },
                 })
                 .then((response) => {
                     this.nextPage = response.data.messages.next_page_url;
                     this.dataMessages.splice( 0, this.dataMessages.length);
-                    this.dataMessages.push(...response.data.messages.data.reverse()); //reverse()
+                    this.dataMessages.push(...response.data.messages.data);
                     this.$nextTick(() => {
                         var container = this.$el.querySelector(".msg_history");
                         container.scrollTop = container.scrollHeight;
@@ -161,26 +142,24 @@
                         })
                         .then((response) => {
                             this.nextPage = response.data.messages.next_page_url;
-                            this.dataMessages.unshift(...response.data.messages.data.reverse());
+                            this.dataMessages.unshift(...response.data.messages.data);
                             this.$nextTick(() => {
-                                var container = this.$el.querySelector(".msg_history");
-                                // container.scrollTop = container.scrollHeight;
+                                var container = this.$el.querySelector(".msg_history");     //??????????????
+                                // container.scrollTop = container.scrollHeight;            //??????????????
                             });
                         });
                     });
-// let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-
                 }
             });
         },
 
         methods: {
             sendMessage: function () {
-
                 axios({
                     method: 'post',
-                    url: '/api/v1/chat/send-private-message',
-                    params: { channel: 'channel.'+this.userSelect, message: this.message, user: this.user.username }
+                    url: '/api/v1/chat/send-private-message/'+this.userSelect,
+                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    params: { message: this.message, from_user_id: this.user.id, from_user_username: this.user.username }
                 })
                 .then((response) => {
                     this.dataMessages.push({body: this.message, from_user_username: this.user.username});
@@ -190,12 +169,12 @@
                         container.scrollTop = container.scrollHeight;
                     });
                 });
-                axios({
-                    method: 'post',
-                    url: '/api/v1/messages/send',
-                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                    params: { user_id: this.userSelect, body: this.message }
-                });
+                // axios({
+                //     method: 'post',
+                //     url: '/api/v1/messages/'+this.userSelect+'/send',
+                //     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                //     params: { body: this.message }
+                // });
             },
             makeActive: function (friend) {
                 this.userSelect = friend.id;

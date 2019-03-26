@@ -12,7 +12,7 @@ class FriendController extends Controller
     public function inviteFriend(StoreFriendRequest $request)
     {
         $initiator = $request->user();
-        $friend = $initiator->users()->where('user_id', '=', $request->user_id);
+        $friend = $initiator->users()->where('user_id', $request->user_id);
         if ($friend->exists()) {
             $status = $friend->first()->pivot->status;
             if ($status == 'pending') {
@@ -31,7 +31,7 @@ class FriendController extends Controller
     public function approveFriend(StoreFriendRequest $request)
     {
         $initiator = User::find($request->user_id);
-        $friend = $initiator->users()->where('user_id', '=', $request->user()->id);
+        $friend = $initiator->users()->where('user_id', $request->user()->id);
         if ($friend->exists()) {
             $status = $friend->first()->pivot->status;
             if ($status == 'pending') {
@@ -49,12 +49,6 @@ class FriendController extends Controller
 
     public function allFriends(Request $request)
     {
-        // $friends = $request->user()->users()->get();
-        // return response(['friends' => $friends]);
-        // return $this->belongsToMany('App\User', 'user_user', 'user_id', 'user_initiator_id');
-        //
-        // $friends = UserUser::where('user_id', '=', $request->user()->id & 'status' == 'approved')
-        //                     ->orWhere('user_initiator_id', '=', $request->user()->id & 'status' == 'approved')->get();
         $friends_init = UserUser::where('status', '=', 'approved')
         ->Where('user_initiator_id', '=', $request->user()->id)
         ->get();

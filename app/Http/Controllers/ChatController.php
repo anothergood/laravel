@@ -2,26 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use Log;
+use App\User;
+use App\Events\ChatMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
     public function sendMessage(Request $request){
 
-        // \App\Events\ChatMessage::dispatch("Message?");
-        event(new \App\Events\ChatMessage($request->input('message')));
+        event(new ChatMessage($request->input('message')));
 
     }
 
-    public function sendPrivateMessage(Request $request){
-        // event(new \App\Events\ChatPrivateMessage($request->input('body')));
-        // return $request->all();
-        // \Illuminate\Support\Facades\Log::info($request->all());
-        // \App\Events\ChatPrivateMessage::dispatch($request->all());
+    public function sendPrivateMessage(Request $request, User $user) {
 
-        \Illuminate\Support\Facades\Log::info($request->all());
+        $friend = DB::table('user_user')
+        ->where(function ($query) use($user, $request) {
+            $query->where('user_id', $user->id)
+                  ->where('user_initiator_id', $request->user()->id)
+                  ->where('status', 'approved');
+        })
+        ->orWhere(function ($query) use($user, $request) {
+            $query->where('user_id', $request->user()->id)
+                  ->where('user_initiator_id', $user->id)
+                  ->where('status', 'approved');
+        })
+        ->exists();
 
-        event(new \App\Events\ChatPrivateMessage($request->all()));
+        if ($friend or $request->user()->id == $request->user_id) {
+            $user->userPush($request->all());
+        }
     }
 
 }

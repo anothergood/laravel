@@ -15,7 +15,6 @@
             mounted() {
                 if (!localStorage.access_token){
                     this.$router.push({ path: '/login' });
-                    console.log('access_token');
                 } else {
                     this.$router.push({ path: '/home' });
                 }

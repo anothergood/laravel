@@ -63266,6 +63266,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             message_notification: false,
             message: "",
+            from_user: "",
             user: {}
         };
     },
@@ -63278,9 +63279,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             url: '/api/v1/user/self',
             headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
         }).then(function (response) {
-            // Object.assign(this.user, response.data);
-            // this.$set(this.user, 'username', response.data.username);
-            // this.$set(this.user, 'id', response.data.id);
             _this.user = response.data;
         });
     },
@@ -63294,20 +63292,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Echo.private('channel.' + this.user.id).listen('ChatPrivateMessage', function (_ref) {
                 var data = _ref.data;
 
-                _this2.message = data;
+                _this2.message = data.message;
+                _this2.from_user = data.from_user_username;
                 $('#element').toast('show');
-                console.log(_this2.message.user);
             });
         }
     },
-
-    // mounted() {
-    //     window.Echo.channel('test')
-    //         .listen('ChatMessage', (e) => {
-    //             this.dataMessages.push(e.message)
-    //     });
-    // },
-    // status: '',
     methods: {
         home: function home() {
             this.$router.push({ path: '/home' });
@@ -63356,7 +63346,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container{max-width:1170px; margin:auto;} */\nimg{ max-width:100%;\n}\n.inbox_people {\nbackground: #f8f8f8 none repeat scroll 0 0;\nfloat: left;\noverflow: hidden;\nwidth: 40%; border-right:1px solid #c4c4c4;\n}\n.inbox_msg {\nborder: 1px solid #c4c4c4;\nclear: both;\noverflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\ndisplay: inline-block;\ntext-align: right;\nwidth: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\ncolor: #05728f;\nfont-size: 21px;\nmargin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\npadding: 0;\ncolor: #707070;\nfont-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\nfloat: left;\nwidth: 11%;\n}\n.chat_ib {\nfloat: left;\npadding: 0 0 0 15px;\nwidth: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\nborder-bottom: 1px solid #c4c4c4;\nmargin: 0;\npadding: 18px 16px 10px;\n}\n.inbox_chat { height: 550px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\ndisplay: inline-block;\nwidth: 6%;\n}\n.received_msg {\ndisplay: inline-block;\npadding: 0 0 0 0px;\nvertical-align: top;\nwidth: 92%;\n}\n.received_withd_msg p {\nbackground: #ebebeb none repeat scroll 0 0;\nborder-radius: 3px;\ncolor: #646464;\nfont-size: 14px;\nmargin: 0;\npadding: 5px 10px 5px 12px;\nwidth: 100%;\n}\n.time_date {\ncolor: #747474;\ndisplay: block;\nfont-size: 12px;\nmargin: 8px 0 0;\n}\n.received_withd_msg { width: 57%; margin-bottom: 6px;\n}\n.mesgs {\nfloat: left;\npadding: 15px 15px 0 25px;\nwidth: 60%;\n}\n.sent_msg p {\nbackground: #05728f none repeat scroll 0 0;\nborder-radius: 3px;\nfont-size: 14px;\nmargin: 0; color:#fff;\npadding: 5px 10px 5px 12px;\nwidth:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:26px 0 26px;\n}\n.sent_msg {\nfloat: right;\nwidth: 46%;\n}\n.input_msg_write input {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\ncolor: #4c4c4c;\nfont-size: 15px;\nmin-height: 48px;\nwidth: 100%;\n}\n.type_msg {position: relative; margin-top: 3px;\n}\n.msg_send_btn {\nbackground: #05728f none repeat scroll 0 0;\nborder: medium none;\nborder-radius: 50%;\ncolor: #fff;\ncursor: pointer;\nfont-size: 17px;\nheight: 33px;\nposition: absolute;\nright: 0;\ntop: 11px;\nwidth: 33px;\n}\n.messaging { padding: 0 0 50px 0;\n}\n.msg_history {\nheight: 516px;\noverflow-y: scroll;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container{max-width:1170px; margin:auto;} */\nimg{ max-width:100%;\n}\n.inbox_people {\nbackground: #f8f8f8 none repeat scroll 0 0;\nfloat: left;\noverflow: hidden;\nwidth: 40%; border-right:1px solid #c4c4c4;\n}\n.inbox_msg {\nborder: 1px solid #c4c4c4;\nclear: both;\noverflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\ndisplay: inline-block;\ntext-align: right;\nwidth: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\ncolor: #05728f;\nfont-size: 21px;\nmargin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\npadding: 0;\ncolor: #707070;\nfont-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\nfloat: left;\nwidth: 11%;\n}\n.chat_ib {\nfloat: left;\npadding: 0 0 0 15px;\nwidth: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\nborder-bottom: 1px solid #c4c4c4;\nmargin: 0;\npadding: 18px 16px 10px;\n}\n.inbox_chat { height: 550px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\ndisplay: inline-block;\nwidth: 6%;\n}\n.received_msg {\ndisplay: inline-block;\npadding: 0 0 0 0px;\nvertical-align: top;\nwidth: 92%;\n}\n.received_withd_msg p {\nbackground: #ebebeb none repeat scroll 0 0;\nborder-radius: 3px;\ncolor: #646464;\nfont-size: 14px;\nmargin: 0;\npadding: 5px 10px 5px 12px;\nwidth: 100%;\n}\n.time_date {\ncolor: #747474;\ndisplay: block;\nfont-size: 12px;\nmargin: 8px 0 0;\n}\n.received_withd_msg { width: 57%; margin-bottom: 6px;\n}\n.mesgs {\nfloat: left;\npadding: 15px 15px 0 25px;\nwidth: 60%;\n}\n.sent_msg p {\nbackground: #05728f none repeat scroll 0 0;\nborder-radius: 3px;\nfont-size: 14px;\nmargin: 0; color:#fff;\npadding: 5px 10px 5px 12px;\nwidth:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:26px 0 26px;\n}\n.sent_msg {\nfloat: right;\nwidth: 46%;\n}\n.input_msg_write input {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\ncolor: #4c4c4c;\nfont-size: 15px;\nmin-height: 48px;\nwidth: 100%;\n}\n.type_msg {position: relative; margin-top: 3px;\n}\n.msg_send_btn {\nbackground: #05728f none repeat scroll 0 0;\nborder: medium none;\nborder-radius: 50%;\ncolor: #fff;\ncursor: pointer;\nfont-size: 17px;\nheight: 33px;\nposition: absolute;\nright: 0;\ntop: 11px;\nwidth: 33px;\n}\n.messaging { padding: 0 0 50px 0;\n}\n.msg_history {\nheight: 516px;\noverflow-y: scroll;\n}\n", ""]);
 
 // exports
 
@@ -63369,15 +63359,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -63468,17 +63449,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             var _friends;
 
             (_friends = _this.friends).push.apply(_friends, _toConsumableArray(response.data.friends));
-            // console.log(this.friends);
-            // this.$set(this.friends, 'id', response.data.id);
         });
         axios({
             method: 'get',
             url: '/api/v1/user/self',
             headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
         }).then(function (response) {
-            // Object.assign(this.user, response.data);
-            // this.$set(this.user, 'username', response.data.username);
-            // this.$set(this.user, 'id', response.data.id);
             _this.user = response.data;
         });
     },
@@ -63488,36 +63464,32 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         user: function user(val, oldVal) {
             var _this2 = this;
 
-            // console.log(Array.from(this.user));
+            Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
+            Echo.private('channel.' + this.user.id).listen('ChatPrivateMessage', function (_ref) {
+                var data = _ref.data;
 
-            // console.log(this.friends);
-            if (this.userSelect) {
-                Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
-                Echo.private('channel.' + this.user.id).listen('ChatPrivateMessage', function (_ref) {
-                    var data = _ref.data;
-
-                    _this2.dataMessages.push({ body: data.message, from_user_username: data.user });
-                    _this2.$nextTick(function () {
-                        var container = _this2.$el.querySelector(".msg_history");
-                        container.scrollTop = container.scrollHeight;
-                    });
+                if (_this2.userSelect == data.from_user_id) {
+                    _this2.dataMessages.push({ body: data.message, from_user_username: data.from_user_username });
+                }
+                _this2.$nextTick(function () {
+                    var container = _this2.$el.querySelector(".msg_history");
+                    container.scrollTop = container.scrollHeight;
                 });
-            }
+            });
         },
         userSelect: function userSelect(val, oldVal) {
             var _this3 = this;
 
             axios({
                 method: 'post',
-                url: '/api/v1/messages/all-friend',
-                headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                params: { user_id: this.userSelect }
+                url: '/api/v1/messages/' + this.userSelect + '/all',
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
             }).then(function (response) {
                 var _dataMessages;
 
                 _this3.nextPage = response.data.messages.next_page_url;
                 _this3.dataMessages.splice(0, _this3.dataMessages.length);
-                (_dataMessages = _this3.dataMessages).push.apply(_dataMessages, _toConsumableArray(response.data.messages.data.reverse())); //reverse()
+                (_dataMessages = _this3.dataMessages).push.apply(_dataMessages, _toConsumableArray(response.data.messages.data));
                 _this3.$nextTick(function () {
                     var container = _this3.$el.querySelector(".msg_history");
                     container.scrollTop = container.scrollHeight;
@@ -63542,14 +63514,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         var _dataMessages2;
 
                         _this4.nextPage = response.data.messages.next_page_url;
-                        (_dataMessages2 = _this4.dataMessages).unshift.apply(_dataMessages2, _toConsumableArray(response.data.messages.data.reverse()));
+                        (_dataMessages2 = _this4.dataMessages).unshift.apply(_dataMessages2, _toConsumableArray(response.data.messages.data));
                         _this4.$nextTick(function () {
-                            var container = _this4.$el.querySelector(".msg_history");
-                            // container.scrollTop = container.scrollHeight;
+                            var container = _this4.$el.querySelector(".msg_history"); //??????????????
+                            // container.scrollTop = container.scrollHeight;            //??????????????
                         });
                     });
                 });
-                // let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
             }
         });
     },
@@ -63561,8 +63532,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
             axios({
                 method: 'post',
-                url: '/api/v1/chat/send-private-message',
-                params: { channel: 'channel.' + this.userSelect, message: this.message, user: this.user.username }
+                url: '/api/v1/chat/send-private-message/' + this.userSelect,
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                params: { message: this.message, from_user_id: this.user.id, from_user_username: this.user.username }
             }).then(function (response) {
                 _this5.dataMessages.push({ body: _this5.message, from_user_username: _this5.user.username });
                 _this5.message = "";
@@ -63571,12 +63543,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                     container.scrollTop = container.scrollHeight;
                 });
             });
-            axios({
-                method: 'post',
-                url: '/api/v1/messages/send',
-                headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                params: { user_id: this.userSelect, body: this.message }
-            });
+            // axios({
+            //     method: 'post',
+            //     url: '/api/v1/messages/'+this.userSelect+'/send',
+            //     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+            //     params: { body: this.message }
+            // });
         },
         makeActive: function makeActive(friend) {
             this.userSelect = friend.id;
@@ -63910,16 +63882,14 @@ var render = function() {
         [
           _c("div", { staticClass: "toast-header" }, [
             _c("strong", { staticClass: "mr-auto" }, [
-              _vm._v(_vm._s(this.message.user))
+              _vm._v(_vm._s(this.from_user))
             ]),
             _vm._v(" "),
             _vm._m(1)
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "toast-body" }, [
-            _vm._v(
-              "\n            " + _vm._s(this.message.message) + "\n        "
-            )
+            _vm._v("\n            " + _vm._s(this.message) + "\n        ")
           ])
         ]
       )
@@ -64331,7 +64301,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         if (!localStorage.access_token) {
             this.$router.push({ path: '/login' });
-            console.log('access_token');
         } else {
             this.$router.push({ path: '/home' });
         }
