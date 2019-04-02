@@ -75,9 +75,10 @@ export default {
             Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
             Echo.private('channel.'+this.user.id)
                 .listen('ChatPrivateMessage', ({data}) => {
-                    this.message = data.message;
-                    this.from_user = data.from_user_username;
-                    $('#element').toast('show');
+                    // console.log(data);
+                    // this.message = data.data.message;
+                    // this.from_user = data.data.from_user.username;
+                    // $('#element').toast('show');
             });
         },
     },

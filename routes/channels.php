@@ -11,12 +11,18 @@
 |
 */
 
-// Broadcast::channel('App.User.{id}', function ($user, $id) {
-//     return (int) $user->id === (int) $id;
-// });
 
 Broadcast::channel('channel.{channel}', function ($user, $channel) {
-    return (int) $user->id === (int) $channel;
+    // return (int) $user->id === (int) $channel;
     // \Log::info("Channel_check");
     return true;
+});
+
+Broadcast::channel('chat.{chat}', function ($user, $chat) {
+
+    $chat_check = $user->chats()->where('id', $chat)->exists();
+
+    if($chat_check) {
+        return true;
+    }
 });

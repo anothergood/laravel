@@ -49,13 +49,21 @@ Route::middleware('throttle:60,1')->group(function () {
     });
 
     Route::group(['prefix' => 'messages','middleware' => 'auth:api'], function () {
-        Route::post('{user}/send', 'MessageController@sendMessage');
+        Route::post('{chat}/send', 'MessageController@sendMessage');
         Route::post('{user}/received', 'MessageController@receivedFriendMessages');
         Route::post('{user}/sended', 'MessageController@sendedFriendMessages');
         Route::post('{user}/all', 'MessageController@allFriendMessages');
     });
+    Route::group(['prefix' => 'chat','middleware' => 'auth:api'], function () {
+        Route::post('create-chat', 'ChatController@createChat');
+        Route::post('{chat}/invite/{user}', 'ChatController@inviteUser');
+        Route::get('all', 'ChatController@allChats');
+        Route::post('{chat}/send', 'MessageController@sendMessage');
+        Route::post('{chat}/all', 'MessageController@allChatMessages');
+        Route::post('{chat}/reset-messages', 'MessageController@resetUnreadMessages');
+    });
 
-    Route::post('chat/send-private-message/{user}', 'ChatController@sendPrivateMessage')->middleware('auth:api');
 });
 
 Route::get('chat/send-message', 'ChatController@sendMessage');
+Route::post('chat/{chat}', 'MessageController@test')->middleware('auth:api');

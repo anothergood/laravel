@@ -4,80 +4,99 @@
         <div class="messaging">
             <div class="inbox_msg">
                 <div class="inbox_people">
-
+                    <div class="headind_srch"  style="z-index: 999999;">
+                        <label>Беседа</label>
+                        <select multiple="" class="form-control form-control-sm" v-model="userSelect">
+                            <option v-for="friend in friends" :value="friend.id" >{{friend.username}}</option>
+                        </select>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" placeholder="Название" v-model="chatTitle">
+                            <div class="input-group-append">
+                                <button @click="createChat" class="btn btn-outline-secondary btn-sm" type="button">Создать</button>
+                            </div>
+                        </div>
+                        <label>Диалог</label>
+                        <div class="input-group">
+                            <select class="form-control form-control-sm" v-model="dialogSelect">
+                                <option v-for="friend in friends" :value="friend" >{{friend.username}}</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" placeholder="Наберите сообщение" v-model="message" :disabled="dialogSelect == null">
+                            <div class="input-group-append">
+                                <button @click="startDialog" class="btn btn-outline-secondary btn-sm" type="button" >Отправить</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="inbox_chat">
-                        <div class="chat_list" v-for="friend in friends" v-bind="{ userSelect: friend.id }" v-bind:class="{ active_chat: isActive }" @click="makeActive(friend)" >
+                        <div class="chat_list unselectable" v-for="chat in chats" v-bind="{ chatSelect: chat }" v-bind:class="{ active_chat: chatSelect.id == chat.id  }" @click="makeActive(chat)" >
                             <div class="chat_people">
                                 <div class="chat_ib">
-                                    <h5>{{friend.username}}
-                                        <!-- <span class="chat_date">Dec 25</span> -->
+                                    <h5>{{chat.title}}  ({{chat.type}})
+                                        <!-- <span class="chat_date">{{chat.created_at}}</span> -->
+                                        <span class="badge badge-pill badge-secondary" v-if="chat.pivot.unread_messages!=0">{{chat.pivot.unread_messages}}</span>
                                     </h5>
-                                    <!-- <p>Test, which is a new approach to have all solutions astrology under one roof.</p> -->
                                 </div>
                             </div>
                         </div>
-                        <p>User id: {{userSelect}}</p>
                     </div>
                 </div>
                 <div class="mesgs">
                     <div class="msg_history">
-
-                        <div class="incoming_msg dataMessage" v-for="dataMessage in dataMessages">
-                            <div class="received_msg">
+                        <div v-for="dataMessage in dataMessages" v-bind:class="{ outgoing_msg: dataMessage.user.id == user.id, incoming_msg: dataMessage.user.id !== user.id }">
+                            <div v-bind:class="{ sent_msg: dataMessage.user.id == user.id, received_msg: dataMessage.user.id !== user.id }">
                                 <div class="received_withd_msg">
-                                    <h6>{{dataMessage.from_user_username}}</h6>
+                                    <h6>{{dataMessage.user.username}}</h6>
                                     <p>{{dataMessage.body}}</p>
-                                    <p>{{dataMessage.id}}</p>
-                                    <!-- <span class="time_date"> 11:01 AM    |    June 9</span> -->
+                                    <span class="time_date"> {{dataMessage.created_at}}</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div class="incoming_msg">
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
-                                    <h6>dcvxcv</h6>
-                                    <p>Test which is a new approach to have all solutions</p>
-                                    <span class="time_date"> 11:01 AM    |    June 9</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <h6>dcvxcv</h6>
-                                <p>Test which is a new approach to have all solutions</p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
-            <div class="type_msg" v-if="userSelect">
+            <div class="type_msg">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Наберите сообщение" v-model="message">
+                    <input type="text" class="form-control" placeholder="Наберите сообщение" v-model="message" :disabled="chatSelect.id == null">
                     <div class="input-group-append">
-                        <button @click="sendMessage" class="btn btn-outline-secondary" type="button">Отправить</button>
+                        <button @click="sendMessage" class="btn btn-outline-secondary" type="button" :disabled="chatSelect.id == null">Отправить</button>
+                    </div>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" data-toggle="dropdown" aria-expanded="false" :disabled="chatSelect.type == 'dialog' || chatSelect.id == null">
+                            Пригласить
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" v-for="friend in friends" @click="inviteUser(friend.id)">{{friend.username}}</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
     export default {
         data : function(){
             return {
+                chats: [],
+                chatTitle: "",
+                friends: [],
+                user: {},
                 dataMessages: [],
                 nextPage: "",
                 message: "",
-                friends: [],
-                user: {},
-                userSelect: "",
-                isActive: false
+                userSelect: [],
+                dialogSelect: "",
+                chatId: "",
+                chatSelect: {},
+                isActive: false,
+                isLoading: false
             }
         },
         created() {
+
             axios({
                 method: 'get',
                 url: '/api/v1/friends/all',
@@ -86,6 +105,7 @@
             .then((response) => {
                 this.friends.push(...response.data.friends);
             });
+
             axios({
                 method: 'get',
                 url: '/api/v1/user/self',
@@ -95,27 +115,61 @@
                 this.user = response.data;
             });
 
+            axios({
+                method: 'get',
+                url: '/api/v1/chat/all',
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+            })
+            .then((response) => {
+                this.chats.push(...response.data.chats);
+            });
+
         },
 
         watch: {
+
             user: function (val, oldVal) {
                 Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
                 Echo.private('channel.'+this.user.id)
-                .listen('ChatPrivateMessage', ({data}) => {
-                    // console.log(data);
-                    if(this.userSelect == data.from_user_id){
-                        this.dataMessages.push({body: data.message, from_user_username: data.from_user_username});
+                    .listen('ChatPrivateMessage', ({data}) => {
+                    if (data.type == 'chat_invite') {
+                        this.chats.push({id: data.data.chat_id, title: data.data.chat_title, type: data.data.chat_type, pivot: {unread_messages: 0}});
+                        this.$nextTick(() => {
+                            var container = this.$el.querySelector(".inbox_chat");
+                            container.scrollTop = container.scrollHeight;
+                        });
+                    } else if (data.type == 'message') {
+                        if (this.chatSelect.id == data.data.chat_id) {
+                            this.dataMessages.push({body: data.data.message, user: { user_id: data.data.from_user.id, username: data.data.from_user.username}, created_at: data.data.created_at });
+                            this.$nextTick(() => {
+                                var container = this.$el.querySelector(".msg_history");
+                                container.scrollTop = container.scrollHeight;
+                            });
+                        } else {
+                            this.chats.forEach(function(item, i, arr) {
+                                if (item.id == data.data.chat_id) {
+                                    item.pivot.unread_messages++;
+                                }
+                            });
+                        }
                     }
-                    this.$nextTick(() => {
-                        var container = this.$el.querySelector(".msg_history");
-                        container.scrollTop = container.scrollHeight;
-                    });
                 });
             },
-            userSelect: function (val, oldVal) {
+
+            chatSelect: function (val, oldVal) {
+                // Echo.private('chat.'+this.chatSelect.id)
+                // .listen('ChatMessage', ({data}) => {
+                //     if(this.user.id !== data.data.from_user.id){
+                //         this.dataMessages.push({body: data.data.message, user: { user_id: data.data.from_user.id, username: data.data.from_user.username}, created_at: data.data.created_at });
+                //     }
+                //     this.$nextTick(() => {
+                //         var container = this.$el.querySelector(".msg_history");
+                //         container.scrollTop = container.scrollHeight;
+                //     });
+                // });
                 axios({
                     method: 'post',
-                    url: '/api/v1/messages/'+this.userSelect+'/all',
+                    url: '/api/v1/chat/'+this.chatSelect.id+'/all',
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                 })
                 .then((response) => {
@@ -127,26 +181,40 @@
                         container.scrollTop = container.scrollHeight;
                     });
                 });
+                axios({
+                    method: 'post',
+                    url: '/api/v1/chat/'+this.chatSelect.id+'/reset-messages',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                })
+                .then((response) => {
+                    this.chats.forEach(function(item, i, arr) {
+                        if (item.id == response.data.chat.id) {
+                            item.pivot.unread_messages = 0;
+                        }
+                    });
+                });
             },
         },
 
         mounted() {
+
             const container = this.$el.querySelector(".msg_history");
             container.addEventListener('scroll', e => {
                 if(container.scrollTop == 0 && this.nextPage !== null){
+
+                    var scroll = container.scrollHeight;
                     this.$nextTick(() => {
                         axios({
                             method: 'post',
                             url: this.nextPage,
                             headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                            params: { user_id: this.userSelect },
                         })
                         .then((response) => {
                             this.nextPage = response.data.messages.next_page_url;
                             this.dataMessages.unshift(...response.data.messages.data);
                             this.$nextTick(() => {
-                                var container = this.$el.querySelector(".msg_history");     //??????????????
-                                // container.scrollTop = container.scrollHeight;            //??????????????
+                                var container = this.$el.querySelector(".msg_history");
+                                container.scrollTop = container.scrollHeight - scroll;
                             });
                         });
                     });
@@ -155,37 +223,124 @@
         },
 
         methods: {
-            sendMessage: function () {
+
+            startDialog: function () {
                 axios({
                     method: 'post',
-                    url: '/api/v1/chat/send-private-message/'+this.userSelect,
+                    url: '/api/v1/chat/create-chat',
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                    params: { body: this.message}
+                    params: { title: this.dialogSelect.username, users: this.dialogSelect.id, type: 'dialog' }
                 })
                 .then((response) => {
-                    this.dataMessages.push({body: this.message, from_user_username: this.user.username});
+                    this.$nextTick(() => {
+                        axios({
+                            method: 'post',
+                            url: '/api/v1/chat/'+response.data.chat.id+'/send',
+                            headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                            params: { body: this.message }
+                        })
+                        .then((response) => {
+                            this.message = "";
+                            this.$nextTick(() => {
+                                var container = this.$el.querySelector(".msg_history");
+                                container.scrollTop = container.scrollHeight;
+                            });
+                        });
+                    });
+                });
+            },
+
+            sendMessage: function () {
+
+                axios({
+                    method: 'post',
+                    url: '/api/v1/chat/'+this.chatSelect.id+'/send',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    params: { body: this.message }
+                })
+                .then((response) => {
+                    this.dataMessages.push({body: response.data.data.message, user: { id: this.user.id, username: this.user.username}, created_at: response.data.data.created_at });
                     this.message = "";
                     this.$nextTick(() => {
                         var container = this.$el.querySelector(".msg_history");
                         container.scrollTop = container.scrollHeight;
                     });
                 });
+            },
+            makeActive: function (chat) {
+                this.chatSelect = chat;
+            },
+
+            createChat: function () {
+
                 axios({
                     method: 'post',
-                    url: '/api/v1/messages/'+this.userSelect+'/send',
+                    url: '/api/v1/chat/create-chat',
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                    params: { body: this.message }
+                    params: { title: this.chatTitle, users: this.userSelect, type: 'chat' }
+                })
+                .then((response) => {
+                    this.chatTitle = "";
+                    this.userSelect = [];
+                });
+
+            },
+            inviteUser: function (user) {
+                axios({
+                    method: 'post',
+                    url: '/api/v1/chat/'+this.chatSelect.id+'/invite/'+user,
+                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                })
+                .then((response) => {
+
                 });
             },
-            makeActive: function (friend) {
-                this.userSelect = friend.id;
+            test: function (user) {
+
             },
         }
     }
 </script>
 
-
 <style>
+    /* .unselectable {
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    } */
+
+    /* .dropdown{
+        z-index: 100;
+    } */
+
+    a.active.focus,
+    a.active:focus,
+    a.focus,
+    a:active.focus,
+    a:active:focus,
+    a:focus,
+    button.active.focus,
+    button.active:focus,
+    button.focus,
+    button:active.focus,
+    button:active:focus,
+    button:focus,
+    .btn.active.focus,
+    .btn.active:focus,
+    .btn.focus,
+    .btn:active.focus,
+    .btn:active:focus,
+    .btn:focus {
+        outline: 0 ;
+        outline-color: transparent ;
+        outline-width: 0 ;
+        outline-style: none ;
+        box-shadow: 0 0 0 0 rgba(0,123,255,0);
+    }
+    label {
+        margin: 0;
+    }
     /* .container{max-width:1170px; margin:auto;} */
     img{ max-width:100%;}
     .inbox_people {
@@ -244,7 +399,7 @@
     margin: 0;
     padding: 18px 16px 10px;
     }
-    .inbox_chat { height: 550px; overflow-y: scroll;}
+    .inbox_chat { height: 372.7px; overflow-y: scroll;}
 
     .active_chat{ background:#ebebeb;}
 
@@ -256,7 +411,7 @@
     display: inline-block;
     padding: 0 0 0 0px;
     vertical-align: top;
-    width: 92%;
+    width: 60%;
     }
     .received_withd_msg p {
     background: #ebebeb none repeat scroll 0 0;
@@ -273,11 +428,13 @@
     font-size: 12px;
     margin: 8px 0 0;
     }
-    .received_withd_msg { width: 57%; margin-bottom: 6px;}
+    .received_withd_msg { width: 100%; margin: 0px;}
     .mesgs {
     float: left;
-    padding: 15px 15px 0 25px;
+    padding: 10px 15px 15px 25px;
     width: 60%;
+    height: 600px;
+    position: relative;
     }
 
     .sent_msg p {
@@ -288,10 +445,11 @@
     padding: 5px 10px 5px 12px;
     width:100%;
     }
-    .outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
+    .outgoing_msg{ overflow:hidden; margin:0 0 13px;}
+    .incoming_msg{ overflow:hidden; margin:0 0 13px;}
     .sent_msg {
     float: right;
-    width: 46%;
+    width: 60%;
     }
     .input_msg_write input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -316,9 +474,13 @@
     top: 11px;
     width: 33px;
     }
-    .messaging { padding: 0 0 50px 0;}
+    .messaging { padding: 0;}
     .msg_history {
-    height: 516px;
+        position: absolute;
+    left:25;
+    right:10;
+    top:15;
+    bottom:15;
     overflow-y: scroll;
     }
 </style>

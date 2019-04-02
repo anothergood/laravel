@@ -16,7 +16,8 @@ class ChatPrivateMessage implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private $user;
-    public $data;
+    private $data;
+    
     /**
      * Create a new event instance.
      *

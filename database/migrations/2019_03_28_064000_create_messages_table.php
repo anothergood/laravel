@@ -14,12 +14,15 @@ class CreateMessagesTable extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('from_user_id')->unsigned()->index();
-            $table->string('from_user_username');
+            $table->integer('chat_id')->unsigned()->index();
             $table->text('body');
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('chat_id')->references('id')->on('chats')->onDelete('cascade');
         });
     }
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Message;
+use App\Chat;
+use App\UserChat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreMessageRequest;
@@ -12,122 +14,74 @@ use App\Http\Requests\FriendMessagesRequest;
 
 class MessageController extends Controller
 {
-    public function sendMessage(StoreMessageRequest $request, User $user) {
 
-        $friend = DB::table('user_user')
-        ->where(function ($query) use($user, $request) {
-            $query->where('user_id', $user->id)
-                  ->where('user_initiator_id', $request->user()->id)
-                  ->where('status', 'approved');
-        })
-        ->orWhere(function ($query) use($user, $request) {
-            $query->where('user_id', $request->user()->id)
-                  ->where('user_initiator_id', $user->id)
-                  ->where('status', 'approved');
-        })
-            ->exists();
+    public function sendMessage(StoreMessageRequest $request, Chat $chat) {
+        $chat_check = $request->user()->chats()->where('id', $chat->id)->exists();
+        if($chat_check) {
 
-        if ($friend or $request->user()->id == $user->id) {
             $message = new Message;
-            $message->user_id = $user->id;
-            $message->from_user_id = $request->user()->id;
-            $message->from_user_username = $request->user()->username;
+            $message->user_id = $request->user()->id;
+            $message->chat_id = $chat->id;
             $message->body = $request->body;
             $message->save();
 
-            return response(['message' => $message ], 200);
+            $chat->users()->where('user_id', '!=', $request->user()->id)->increment('unread_messages');
 
+            $data = [
+                'type' => 'message',
+                'data' => [
+                    'message' => $request->body,
+                    'from_user' => $request->user(),
+                    'created_at' => $message->created_at,
+                    'chat_id' => $chat->id,
+                ],
+            ];
+
+            $users = $chat->users()->where('user_id', '!=', $request->user()->id)->get();
+
+            foreach ($users as $user){
+                User::find($user->id)->userPush($data);
+            }
+
+            return $data;
         } else {
-
-            return response(['message' => 'Only friends can send messages'], 403);
-
+            return response(['message' => 'Forbidden'], 403);
         }
+
     }
 
-    public function receivedFriendMessages(Request $request, User $user) {
+    public function allChatMessages(Request $request, Chat $chat) {
 
-        $friend = DB::table('user_user')
-        ->where(function ($query) use($user, $request) {
-            $query->where('user_id', $user->id)
-                  ->where('user_initiator_id', $request->user()->id)
-                  ->where('status', 'approved');
-        })
-        ->orWhere(function ($query) use($user, $request) {
-            $query->where('user_id', $request->user()->id)
-                  ->where('user_initiator_id', $user->id)
-                  ->where('status', 'approved');
-        })
-            ->exists();
+        $chat_check = $request->user()->chats()->where('id', $chat->id)->exists();
 
-        if ($friend or $request->user()->id == $user->id) {
-
-            return response(['messages' => $request->user()->messages()->where('from_user_id', '=', $user->id)->get() ], 200);
-
-        } else {
-            return response(['message' => 'This user is not your friend'], 403);
-        }
-    }
-
-    public function sendedFriendMessages(Request $request, User $user) {
-
-        $friend = DB::table('user_user')
-        ->where(function ($query) use($user, $request) {
-            $query->where('user_id', $user->id)
-                  ->where('user_initiator_id', $request->user()->id)
-                  ->where('status', 'approved');
-        })
-        ->orWhere(function ($query) use($user, $request) {
-            $query->where('user_id', $request->user()->id)
-                  ->where('user_initiator_id', $user->id)
-                  ->where('status', 'approved');
-        })
-            ->exists();
-
-        if ($friend or $request->user()->id == $user->id) {
-
-            return response(['messages' => $user->messages()->where('from_user_id', '=', $request->user()->id)->get() ]);
-
-        } else {
-            return response(['message' => 'This user is not your friend'], 403);
-        }
-    }
-
-    public function allFriendMessages(Request $request, User $user) {
-
-        $friend = DB::table('user_user')
-        ->where(function ($query) use($user, $request) {
-            $query->where('user_id', $user->id)
-                  ->where('user_initiator_id', $request->user()->id)
-                  ->where('status', 'approved');
-        })
-        ->orWhere(function ($query) use($user, $request) {
-            $query->where('user_id', $request->user()->id)
-                  ->where('user_initiator_id', $user->id)
-                  ->where('status', 'approved');
-        })
-            ->exists();
-
-        if ($friend or $request->user()->id == $user->id) {
-
-            $messages = Message::where(function ($query) use($user, $request) {
-                $query->where('user_id', $request->user()->id)
-                      ->where('from_user_id', $user->id);
-            })
-            ->orWhere(function ($query) use($user, $request) {
-                $query->where('user_id', $user->id)
-                      ->where('from_user_id',$request->user()->id);
-            })
-                ->orderBy('created_at', 'desc')
-                ->paginate(6);
+        if($chat_check) {
+            $messages = $chat->messages()->with('user:id,username')->orderBy('created_at', 'desc')->paginate(6);
 
             $mes_coll = $messages->getCollection()->reverse()->values();
             $messages->setCollection($mes_coll);
 
-            return response(["messages" => $messages], 200);
+            return response(['messages' => $messages]);
 
         } else {
 
-            return response(['message' => 'This user is not your friend'], 403);
+            return response(['message' => 'Forbidden'], 403);
+
+        }
+    }
+
+    public function resetUnreadMessages(Request $request, Chat $chat) {
+
+        $chat_check = $request->user()->chats()->where('id', $chat->id);
+
+        if($chat_check->exists()) {
+
+            $chat_check->updateExistingPivot($request->user()->id, ['unread_messages' => 0]);
+
+            return response(['chat' => $chat_check->first()]);
+
+        } else {
+
+            return response(['message' => 'Forbidden'], 403);
 
         }
     }

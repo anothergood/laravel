@@ -23,7 +23,7 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'pivot',
     ];
 
     public function routeNotificationForMail($notification)
@@ -50,12 +50,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Post::class, 'user_post', 'user_id', 'post_id');
     }
-    public function messages()
+
+    public function chats()
     {
-        return $this->hasMany(Message::class);
+        return $this->belongsToMany(Chat::class, 'user_chat', 'user_id')->using('App\UserChat')->withPivot('unread_messages')->withTimestamps();
     }
+
     public function userPush($data)
     {
         event(new ChatPrivateMessage($this, $data));
     }
+
 }

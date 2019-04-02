@@ -63286,15 +63286,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         user: function user(val, oldVal) {
-            var _this2 = this;
-
             Echo.connector.pusher.config.auth.headers['Authorization'] = 'Bearer ' + localStorage.access_token;
             Echo.private('channel.' + this.user.id).listen('ChatPrivateMessage', function (_ref) {
-                var data = _ref.data;
+                // console.log(data);
+                // this.message = data.data.message;
+                // this.from_user = data.data.from_user.username;
+                // $('#element').toast('show');
 
-                _this2.message = data.message;
-                _this2.from_user = data.from_user_username;
-                $('#element').toast('show');
+                var data = _ref.data;
             });
         }
     },
@@ -63346,7 +63345,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .container{max-width:1170px; margin:auto;} */\nimg{ max-width:100%;\n}\n.inbox_people {\nbackground: #f8f8f8 none repeat scroll 0 0;\nfloat: left;\noverflow: hidden;\nwidth: 40%; border-right:1px solid #c4c4c4;\n}\n.inbox_msg {\nborder: 1px solid #c4c4c4;\nclear: both;\noverflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\ndisplay: inline-block;\ntext-align: right;\nwidth: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\ncolor: #05728f;\nfont-size: 21px;\nmargin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\npadding: 0;\ncolor: #707070;\nfont-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\nfloat: left;\nwidth: 11%;\n}\n.chat_ib {\nfloat: left;\npadding: 0 0 0 15px;\nwidth: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\nborder-bottom: 1px solid #c4c4c4;\nmargin: 0;\npadding: 18px 16px 10px;\n}\n.inbox_chat { height: 550px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\ndisplay: inline-block;\nwidth: 6%;\n}\n.received_msg {\ndisplay: inline-block;\npadding: 0 0 0 0px;\nvertical-align: top;\nwidth: 92%;\n}\n.received_withd_msg p {\nbackground: #ebebeb none repeat scroll 0 0;\nborder-radius: 3px;\ncolor: #646464;\nfont-size: 14px;\nmargin: 0;\npadding: 5px 10px 5px 12px;\nwidth: 100%;\n}\n.time_date {\ncolor: #747474;\ndisplay: block;\nfont-size: 12px;\nmargin: 8px 0 0;\n}\n.received_withd_msg { width: 57%; margin-bottom: 6px;\n}\n.mesgs {\nfloat: left;\npadding: 15px 15px 0 25px;\nwidth: 60%;\n}\n.sent_msg p {\nbackground: #05728f none repeat scroll 0 0;\nborder-radius: 3px;\nfont-size: 14px;\nmargin: 0; color:#fff;\npadding: 5px 10px 5px 12px;\nwidth:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:26px 0 26px;\n}\n.sent_msg {\nfloat: right;\nwidth: 46%;\n}\n.input_msg_write input {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\ncolor: #4c4c4c;\nfont-size: 15px;\nmin-height: 48px;\nwidth: 100%;\n}\n.type_msg {position: relative; margin-top: 3px;\n}\n.msg_send_btn {\nbackground: #05728f none repeat scroll 0 0;\nborder: medium none;\nborder-radius: 50%;\ncolor: #fff;\ncursor: pointer;\nfont-size: 17px;\nheight: 33px;\nposition: absolute;\nright: 0;\ntop: 11px;\nwidth: 33px;\n}\n.messaging { padding: 0 0 50px 0;\n}\n.msg_history {\nheight: 516px;\noverflow-y: scroll;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .unselectable {\n    -moz-user-select: none;\n    -khtml-user-select: none;\n    -webkit-user-select: none;\n    user-select: none;\n} */\n\n/* .dropdown{\n    z-index: 100;\n} */\na.active.focus,\na.active:focus,\na.focus,\na:active.focus,\na:active:focus,\na:focus,\nbutton.active.focus,\nbutton.active:focus,\nbutton.focus,\nbutton:active.focus,\nbutton:active:focus,\nbutton:focus,\n.btn.active.focus,\n.btn.active:focus,\n.btn.focus,\n.btn:active.focus,\n.btn:active:focus,\n.btn:focus {\n    outline: 0 ;\n    outline-color: transparent ;\n    outline-width: 0 ;\n    outline-style: none ;\n    -webkit-box-shadow: 0 0 0 0 rgba(0,123,255,0);\n            box-shadow: 0 0 0 0 rgba(0,123,255,0);\n}\nlabel {\n    margin: 0;\n}\n/* .container{max-width:1170px; margin:auto;} */\nimg{ max-width:100%;\n}\n.inbox_people {\nbackground: #f8f8f8 none repeat scroll 0 0;\nfloat: left;\noverflow: hidden;\nwidth: 40%; border-right:1px solid #c4c4c4;\n}\n.inbox_msg {\nborder: 1px solid #c4c4c4;\nclear: both;\noverflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\ndisplay: inline-block;\ntext-align: right;\nwidth: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\ncolor: #05728f;\nfont-size: 21px;\nmargin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\npadding: 0;\ncolor: #707070;\nfont-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\nfloat: left;\nwidth: 11%;\n}\n.chat_ib {\nfloat: left;\npadding: 0 0 0 15px;\nwidth: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\nborder-bottom: 1px solid #c4c4c4;\nmargin: 0;\npadding: 18px 16px 10px;\n}\n.inbox_chat { height: 372.7px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\ndisplay: inline-block;\nwidth: 6%;\n}\n.received_msg {\ndisplay: inline-block;\npadding: 0 0 0 0px;\nvertical-align: top;\nwidth: 60%;\n}\n.received_withd_msg p {\nbackground: #ebebeb none repeat scroll 0 0;\nborder-radius: 3px;\ncolor: #646464;\nfont-size: 14px;\nmargin: 0;\npadding: 5px 10px 5px 12px;\nwidth: 100%;\n}\n.time_date {\ncolor: #747474;\ndisplay: block;\nfont-size: 12px;\nmargin: 8px 0 0;\n}\n.received_withd_msg { width: 100%; margin: 0px;\n}\n.mesgs {\nfloat: left;\npadding: 10px 15px 15px 25px;\nwidth: 60%;\nheight: 600px;\nposition: relative;\n}\n.sent_msg p {\nbackground: #05728f none repeat scroll 0 0;\nborder-radius: 3px;\nfont-size: 14px;\nmargin: 0; color:#fff;\npadding: 5px 10px 5px 12px;\nwidth:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:0 0 13px;\n}\n.incoming_msg{ overflow:hidden; margin:0 0 13px;\n}\n.sent_msg {\nfloat: right;\nwidth: 60%;\n}\n.input_msg_write input {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\ncolor: #4c4c4c;\nfont-size: 15px;\nmin-height: 48px;\nwidth: 100%;\n}\n.type_msg {position: relative; margin-top: 3px;\n}\n.msg_send_btn {\nbackground: #05728f none repeat scroll 0 0;\nborder: medium none;\nborder-radius: 50%;\ncolor: #fff;\ncursor: pointer;\nfont-size: 17px;\nheight: 33px;\nposition: absolute;\nright: 0;\ntop: 11px;\nwidth: 33px;\n}\n.messaging { padding: 0;\n}\n.msg_history {\n    position: absolute;\nleft:25;\nright:10;\ntop:15;\nbottom:15;\noverflow-y: scroll;\n}\n", ""]);
 
 // exports
 
@@ -63425,17 +63424,35 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            chats: [],
+            chatTitle: "",
+            friends: [],
+            user: {},
             dataMessages: [],
             nextPage: "",
             message: "",
-            friends: [],
-            user: {},
-            userSelect: "",
-            isActive: false
+            userSelect: [],
+            dialogSelect: "",
+            chatId: "",
+            chatSelect: {},
+            isActive: false,
+            isLoading: false
         };
     },
     created: function created() {
@@ -63450,6 +63467,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
             (_friends = _this.friends).push.apply(_friends, _toConsumableArray(response.data.friends));
         });
+
         axios({
             method: 'get',
             url: '/api/v1/user/self',
@@ -63457,10 +63475,21 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }).then(function (response) {
             _this.user = response.data;
         });
+
+        axios({
+            method: 'get',
+            url: '/api/v1/chat/all',
+            headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+        }).then(function (response) {
+            var _chats;
+
+            (_chats = _this.chats).push.apply(_chats, _toConsumableArray(response.data.chats));
+        });
     },
 
 
     watch: {
+
         user: function user(val, oldVal) {
             var _this2 = this;
 
@@ -63468,22 +63497,46 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             Echo.private('channel.' + this.user.id).listen('ChatPrivateMessage', function (_ref) {
                 var data = _ref.data;
 
-                // console.log(data);
-                if (_this2.userSelect == data.from_user_id) {
-                    _this2.dataMessages.push({ body: data.message, from_user_username: data.from_user_username });
+                if (data.type == 'chat_invite') {
+                    _this2.chats.push({ id: data.data.chat_id, title: data.data.chat_title, type: data.data.chat_type, pivot: { unread_messages: 0 } });
+                    _this2.$nextTick(function () {
+                        var container = _this2.$el.querySelector(".inbox_chat");
+                        container.scrollTop = container.scrollHeight;
+                    });
+                } else if (data.type == 'message') {
+                    if (_this2.chatSelect.id == data.data.chat_id) {
+                        _this2.dataMessages.push({ body: data.data.message, user: { user_id: data.data.from_user.id, username: data.data.from_user.username }, created_at: data.data.created_at });
+                        _this2.$nextTick(function () {
+                            var container = _this2.$el.querySelector(".msg_history");
+                            container.scrollTop = container.scrollHeight;
+                        });
+                    } else {
+                        _this2.chats.forEach(function (item, i, arr) {
+                            if (item.id == data.data.chat_id) {
+                                item.pivot.unread_messages++;
+                            }
+                        });
+                    }
                 }
-                _this2.$nextTick(function () {
-                    var container = _this2.$el.querySelector(".msg_history");
-                    container.scrollTop = container.scrollHeight;
-                });
             });
         },
-        userSelect: function userSelect(val, oldVal) {
+
+        chatSelect: function chatSelect(val, oldVal) {
             var _this3 = this;
 
+            // Echo.private('chat.'+this.chatSelect.id)
+            // .listen('ChatMessage', ({data}) => {
+            //     if(this.user.id !== data.data.from_user.id){
+            //         this.dataMessages.push({body: data.data.message, user: { user_id: data.data.from_user.id, username: data.data.from_user.username}, created_at: data.data.created_at });
+            //     }
+            //     this.$nextTick(() => {
+            //         var container = this.$el.querySelector(".msg_history");
+            //         container.scrollTop = container.scrollHeight;
+            //     });
+            // });
             axios({
                 method: 'post',
-                url: '/api/v1/messages/' + this.userSelect + '/all',
+                url: '/api/v1/chat/' + this.chatSelect.id + '/all',
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
             }).then(function (response) {
                 var _dataMessages;
@@ -63496,6 +63549,17 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                     container.scrollTop = container.scrollHeight;
                 });
             });
+            axios({
+                method: 'post',
+                url: '/api/v1/chat/' + this.chatSelect.id + '/reset-messages',
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+            }).then(function (response) {
+                _this3.chats.forEach(function (item, i, arr) {
+                    if (item.id == response.data.chat.id) {
+                        item.pivot.unread_messages = 0;
+                    }
+                });
+            });
         }
     },
 
@@ -63505,20 +63569,21 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         var container = this.$el.querySelector(".msg_history");
         container.addEventListener('scroll', function (e) {
             if (container.scrollTop == 0 && _this4.nextPage !== null) {
+
+                var scroll = container.scrollHeight;
                 _this4.$nextTick(function () {
                     axios({
                         method: 'post',
                         url: _this4.nextPage,
-                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                        params: { user_id: _this4.userSelect }
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
                     }).then(function (response) {
                         var _dataMessages2;
 
                         _this4.nextPage = response.data.messages.next_page_url;
                         (_dataMessages2 = _this4.dataMessages).unshift.apply(_dataMessages2, _toConsumableArray(response.data.messages.data));
                         _this4.$nextTick(function () {
-                            var container = _this4.$el.querySelector(".msg_history"); //??????????????
-                            // container.scrollTop = container.scrollHeight;            //??????????????
+                            var container = _this4.$el.querySelector(".msg_history");
+                            container.scrollTop = container.scrollHeight - scroll;
                         });
                     });
                 });
@@ -63528,32 +63593,75 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
     methods: {
-        sendMessage: function sendMessage() {
+
+        startDialog: function startDialog() {
             var _this5 = this;
 
             axios({
                 method: 'post',
-                url: '/api/v1/chat/send-private-message/' + this.userSelect,
+                url: '/api/v1/chat/create-chat',
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                params: { title: this.dialogSelect.username, users: this.dialogSelect.id, type: 'dialog' }
+            }).then(function (response) {
+                _this5.$nextTick(function () {
+                    axios({
+                        method: 'post',
+                        url: '/api/v1/chat/' + response.data.chat.id + '/send',
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                        params: { body: _this5.message }
+                    }).then(function (response) {
+                        _this5.message = "";
+                        _this5.$nextTick(function () {
+                            var container = _this5.$el.querySelector(".msg_history");
+                            container.scrollTop = container.scrollHeight;
+                        });
+                    });
+                });
+            });
+        },
+
+        sendMessage: function sendMessage() {
+            var _this6 = this;
+
+            axios({
+                method: 'post',
+                url: '/api/v1/chat/' + this.chatSelect.id + '/send',
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                 params: { body: this.message }
             }).then(function (response) {
-                _this5.dataMessages.push({ body: _this5.message, from_user_username: _this5.user.username });
-                _this5.message = "";
-                _this5.$nextTick(function () {
-                    var container = _this5.$el.querySelector(".msg_history");
+                _this6.dataMessages.push({ body: response.data.data.message, user: { id: _this6.user.id, username: _this6.user.username }, created_at: response.data.data.created_at });
+                _this6.message = "";
+                _this6.$nextTick(function () {
+                    var container = _this6.$el.querySelector(".msg_history");
                     container.scrollTop = container.scrollHeight;
                 });
             });
+        },
+        makeActive: function makeActive(chat) {
+            this.chatSelect = chat;
+        },
+
+        createChat: function createChat() {
+            var _this7 = this;
+
             axios({
                 method: 'post',
-                url: '/api/v1/messages/' + this.userSelect + '/send',
+                url: '/api/v1/chat/create-chat',
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                params: { body: this.message }
+                params: { title: this.chatTitle, users: this.userSelect, type: 'chat' }
+            }).then(function (response) {
+                _this7.chatTitle = "";
+                _this7.userSelect = [];
             });
         },
-        makeActive: function makeActive(friend) {
-            this.userSelect = friend.id;
-        }
+        inviteUser: function inviteUser(user) {
+            axios({
+                method: 'post',
+                url: '/api/v1/chat/' + this.chatSelect.id + '/invite/' + user,
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+            }).then(function (response) {});
+        },
+        test: function test(user) {}
     }
 });
 
@@ -63571,43 +63679,215 @@ var render = function() {
         _c("div", { staticClass: "inbox_people" }, [
           _c(
             "div",
-            { staticClass: "inbox_chat" },
+            {
+              staticClass: "headind_srch",
+              staticStyle: { "z-index": "999999" }
+            },
             [
-              _vm._l(_vm.friends, function(friend) {
-                return _c(
-                  "div",
-                  _vm._b(
+              _c("label", [_vm._v("Беседа")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
                     {
-                      staticClass: "chat_list",
-                      class: { active_chat: _vm.isActive },
-                      on: {
-                        click: function($event) {
-                          return _vm.makeActive(friend)
-                        }
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userSelect,
+                      expression: "userSelect"
+                    }
+                  ],
+                  staticClass: "form-control form-control-sm",
+                  attrs: { multiple: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.userSelect = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.friends, function(friend) {
+                  return _c("option", { domProps: { value: friend.id } }, [
+                    _vm._v(_vm._s(friend.username))
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.chatTitle,
+                      expression: "chatTitle"
+                    }
+                  ],
+                  staticClass: "form-control form-control-sm",
+                  attrs: { type: "text", placeholder: "Название" },
+                  domProps: { value: _vm.chatTitle },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
+                      _vm.chatTitle = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-secondary btn-sm",
+                      attrs: { type: "button" },
+                      on: { click: _vm.createChat }
                     },
-                    "div",
-                    { userSelect: friend.id },
-                    false
-                  ),
-                  [
-                    _c("div", { staticClass: "chat_people" }, [
-                      _c("div", { staticClass: "chat_ib" }, [
-                        _c("h5", [
-                          _vm._v(
-                            _vm._s(friend.username) +
-                              "\n                                    "
-                          )
-                        ])
+                    [_vm._v("Создать")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("label", [_vm._v("Диалог")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.dialogSelect,
+                        expression: "dialogSelect"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.dialogSelect = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  _vm._l(_vm.friends, function(friend) {
+                    return _c("option", { domProps: { value: friend } }, [
+                      _vm._v(_vm._s(friend.username))
+                    ])
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.message,
+                      expression: "message"
+                    }
+                  ],
+                  staticClass: "form-control form-control-sm",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Наберите сообщение",
+                    disabled: _vm.dialogSelect == null
+                  },
+                  domProps: { value: _vm.message },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.message = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-secondary btn-sm",
+                      attrs: { type: "button" },
+                      on: { click: _vm.startDialog }
+                    },
+                    [_vm._v("Отправить")]
+                  )
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "inbox_chat" },
+            _vm._l(_vm.chats, function(chat) {
+              return _c(
+                "div",
+                _vm._b(
+                  {
+                    staticClass: "chat_list unselectable",
+                    class: { active_chat: _vm.chatSelect.id == chat.id },
+                    on: {
+                      click: function($event) {
+                        return _vm.makeActive(chat)
+                      }
+                    }
+                  },
+                  "div",
+                  { chatSelect: chat },
+                  false
+                ),
+                [
+                  _c("div", { staticClass: "chat_people" }, [
+                    _c("div", { staticClass: "chat_ib" }, [
+                      _c("h5", [
+                        _vm._v(
+                          _vm._s(chat.title) +
+                            "  (" +
+                            _vm._s(chat.type) +
+                            ")\n                                    "
+                        ),
+                        _vm._v(" "),
+                        chat.pivot.unread_messages != 0
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "badge badge-pill badge-secondary"
+                              },
+                              [_vm._v(_vm._s(chat.pivot.unread_messages))]
+                            )
+                          : _vm._e()
                       ])
                     ])
-                  ]
-                )
-              }),
-              _vm._v(" "),
-              _c("p", [_vm._v("User id: " + _vm._s(_vm.userSelect))])
-            ],
-            2
+                  ])
+                ]
+              )
+            }),
+            0
           )
         ]),
         _vm._v(" "),
@@ -63616,62 +63896,125 @@ var render = function() {
             "div",
             { staticClass: "msg_history" },
             _vm._l(_vm.dataMessages, function(dataMessage) {
-              return _c("div", { staticClass: "incoming_msg dataMessage" }, [
-                _c("div", { staticClass: "received_msg" }, [
-                  _c("div", { staticClass: "received_withd_msg" }, [
-                    _c("h6", [_vm._v(_vm._s(dataMessage.from_user_username))]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(dataMessage.body))]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(dataMessage.id))])
-                  ])
-                ])
-              ])
+              return _c(
+                "div",
+                {
+                  class: {
+                    outgoing_msg: dataMessage.user.id == _vm.user.id,
+                    incoming_msg: dataMessage.user.id !== _vm.user.id
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      class: {
+                        sent_msg: dataMessage.user.id == _vm.user.id,
+                        received_msg: dataMessage.user.id !== _vm.user.id
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "received_withd_msg" }, [
+                        _c("h6", [_vm._v(_vm._s(dataMessage.user.username))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(dataMessage.body))]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "time_date" }, [
+                          _vm._v(" " + _vm._s(dataMessage.created_at))
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
             }),
             0
           )
         ])
       ]),
       _vm._v(" "),
-      _vm.userSelect
-        ? _c("div", { staticClass: "type_msg" }, [
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.message,
-                    expression: "message"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Наберите сообщение" },
-                domProps: { value: _vm.message },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.message = $event.target.value
-                  }
+      _c("div", { staticClass: "type_msg" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.message,
+                expression: "message"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Наберите сообщение",
+              disabled: _vm.chatSelect.id == null
+            },
+            domProps: { value: _vm.message },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
                 }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-secondary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.sendMessage }
-                  },
-                  [_vm._v("Отправить")]
+                _vm.message = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                attrs: { type: "button", disabled: _vm.chatSelect.id == null },
+                on: { click: _vm.sendMessage }
+              },
+              [_vm._v("Отправить")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                attrs: {
+                  type: "button",
+                  "data-toggle": "dropdown",
+                  "aria-expanded": "false",
+                  disabled:
+                    _vm.chatSelect.type == "dialog" || _vm.chatSelect.id == null
+                }
+              },
+              [
+                _vm._v(
+                  "\n                        Пригласить\n                    "
                 )
-              ])
-            ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "dropdown-menu" },
+              _vm._l(_vm.friends, function(friend) {
+                return _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    on: {
+                      click: function($event) {
+                        return _vm.inviteUser(friend.id)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(friend.username))]
+                )
+              }),
+              0
+            )
           ])
-        : _vm._e()
+        ])
+      ])
     ])
   ])
 }
@@ -63720,7 +64063,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
-        window.Echo.channel('test').listen('ChatMessage', function (e) {
+        window.Echo.channel('test').listen('PublicChat', function (e) {
             _this.dataMessages.push(e.message);
         });
     },

@@ -26,7 +26,7 @@
         },
         mounted() {
             window.Echo.channel('test')
-                .listen('ChatMessage', (e) => {
+                .listen('PublicChat', (e) => {
                     this.dataMessages.push(e.message)
             });
         },
