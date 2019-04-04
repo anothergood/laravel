@@ -12,11 +12,22 @@
     export default {
             name: 'main-app',
             components: {Header},
-            mounted() {
+            created() {
                 if (!localStorage.access_token){
                     this.$router.push({ path: '/login' });
                 } else {
-                    this.$router.push({ path: '/home' });
+                    axios({
+                        method: 'get',
+                        url: '/api/v1/user/self',
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+                    })
+                    .then((response) => {
+                        // this.$router.push({ path: '/home' });
+                    })
+                    .catch((error) => {
+                        this.$router.push({ path: '/login' })
+                    });
+                    // console.log(response);
                 }
             }
     }

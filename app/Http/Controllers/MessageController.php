@@ -37,7 +37,7 @@ class MessageController extends Controller
                 ],
             ];
 
-            $users = $chat->users()->where('user_id', '!=', $request->user()->id)->get();
+            $users = $chat->users()->where('user_id', '<>', $request->user()->id)->get();
 
             foreach ($users as $user){
                 User::find($user->id)->userPush($data);
@@ -55,7 +55,7 @@ class MessageController extends Controller
         $chat_check = $request->user()->chats()->where('id', $chat->id)->exists();
 
         if($chat_check) {
-            $messages = $chat->messages()->with('user:id,username')->orderBy('created_at', 'desc')->paginate(6);
+            $messages = $chat->messages()->with('user')->orderBy('created_at', 'desc')->paginate(6);
 
             $mes_coll = $messages->getCollection()->reverse()->values();
             $messages->setCollection($mes_coll);
@@ -69,19 +69,18 @@ class MessageController extends Controller
         }
     }
 
-    public function resetUnreadMessages(Request $request, Chat $chat) {
+    public function resetUnreadMessages(Request $request, $chat) {
 
-        $chat_check = $request->user()->chats()->where('id', $chat->id);
+        $chat_check = $request->user()->chats()->where('id', $chat);
 
         if($chat_check->exists()) {
 
-            $chat_check->updateExistingPivot($request->user()->id, ['unread_messages' => 0]);
-
+            $chat_check->first()->users()->updateExistingPivot($request->user()->id, ['unread_messages' => 0]);
             return response(['chat' => $chat_check->first()]);
 
         } else {
 
-            return response(['message' => 'Forbidden'], 403);
+            return response(['message' => 'Not found'], 404);
 
         }
     }

@@ -31,9 +31,10 @@ Route::middleware('throttle:60,1')->group(function () {
     });
 
     Route::group(['prefix' => 'friends','middleware' => 'auth:api'], function () {
-        Route::post('invite', 'FriendController@inviteFriend');
-        Route::post('approve', 'FriendController@approveFriend');
+        Route::post('{user}/invite', 'FriendController@inviteFriend');
+        Route::post('{initiator}/approve', 'FriendController@approveFriend');
         Route::get('all', 'FriendController@allFriends');
+        Route::get('without-dialog', 'FriendController@withoutDialog');
     });
 
     Route::group(['prefix' => 'posts','middleware' => 'auth:api'], function () {
@@ -61,9 +62,9 @@ Route::middleware('throttle:60,1')->group(function () {
         Route::post('{chat}/send', 'MessageController@sendMessage');
         Route::post('{chat}/all', 'MessageController@allChatMessages');
         Route::post('{chat}/reset-messages', 'MessageController@resetUnreadMessages');
+        Route::post('{chat}/invite-chat-list', 'ChatController@inviteChatList');
     });
 
 });
 
 Route::get('chat/send-message', 'ChatController@sendMessage');
-Route::post('chat/{chat}', 'MessageController@test')->middleware('auth:api');

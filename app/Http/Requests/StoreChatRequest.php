@@ -23,10 +23,15 @@ class StoreChatRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->type == 'chat') {
+            $condition = 'array';
+        }   elseif ($this->type == 'dialog') {
+            $condition = 'required|numeric|exists:users,id';
+        }
         return [
             'title' => 'required|max:50',
-            'users' => 'required',
-            'type' => 'required',
+            'users' => $condition,
+            'type' => 'required|in:chat,dialog',
         ];
     }
 }

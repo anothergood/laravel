@@ -17,10 +17,10 @@ class CreatePostsTable extends Migration
             $table->increments('id'); //unsigned int auto_incremente primary_key
             $table->string('title',50);
             $table->text('body');
-            $table->integer('user_id')->unsigned()->index();
-            $table->timestamps(); 
+            $table->integer('user_id')->unsigned();
+            $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

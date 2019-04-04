@@ -4,6 +4,7 @@ import ChatComponent from './components/ChatComponent.vue';
 import PrivateChatComponent from './components/PrivateChatComponent.vue';
 
 export const routes = [
+    { path: '', redirect: '/private-chat' },
     {
         path: '/home',
         component: Home,

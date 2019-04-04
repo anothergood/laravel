@@ -14,13 +14,13 @@ class CreateUserUserTable extends Migration
     public function up()
     {
       Schema::create('user_user', function (Blueprint $table) {
-          $table->integer('user_initiator_id')->unsigned()->index();
-          $table->integer('user_id')->unsigned()->index();
-          $table->string('status',50)->index();;
+          $table->integer('user_initiator_id')->unsigned();
+          $table->integer('user_id')->unsigned();
+          $table->string('status',50)->index();
           $table->timestamps();
 
-          $table->foreign('user_initiator_id')->references('id')->on('users')->onDelete('cascade');
-          $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+          $table->foreign('user_initiator_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+          $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
       });
     }
 

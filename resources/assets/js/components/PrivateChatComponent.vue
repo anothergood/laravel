@@ -4,38 +4,77 @@
         <div class="messaging">
             <div class="inbox_msg">
                 <div class="inbox_people">
-                    <div class="headind_srch"  style="z-index: 999999;">
-                        <label>Беседа</label>
-                        <select multiple="" class="form-control form-control-sm" v-model="userSelect">
-                            <option v-for="friend in friends" :value="friend.id" >{{friend.username}}</option>
-                        </select>
-                        <div class="input-group">
-                            <input type="text" class="form-control form-control-sm" placeholder="Название" v-model="chatTitle">
-                            <div class="input-group-append">
-                                <button @click="createChat" class="btn btn-outline-secondary btn-sm" type="button">Создать</button>
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-chats-tab" data-toggle="tab" href="#nav-chats" role="tab" aria-controls="nav-chats" aria-selected="true">Chats</a>
+                            <a class="nav-item nav-link" id="nav-dialog-tab" data-toggle="tab" href="#nav-dialog" role="tab" aria-controls="nav-dialog" aria-selected="false">Диалог</a>
+                            <a class="nav-item nav-link" id="nav-chat-tab" data-toggle="tab" href="#nav-chat" role="tab" aria-controls="nav-chat" aria-selected="false">Беседа</a>
+                            <a class="nav-item nav-link" id="nav-invite-tab" data-toggle="tab" href="#nav-invite" role="tab" aria-controls="nav-invite" aria-selected="false" v-bind:class="{ disabled: chatSelect.id == null || chatSelect.type == 'dialog' }" @click="inviteUserList">Пригласить</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-chats" role="tabpanel" aria-labelledby="nav-chats-tab">
+                            <div class="inbox_chats">
+                                <div class="chat_list unselectable" v-for="chat in chats" v-bind="{ chatSelect: chat }" v-bind:class="{ active_chat: chatSelect.id == chat.id  }" @click="makeActiveChat(chat)" >
+                                    <div class="chat_people">
+                                        <div class="chat_ib">
+                                            <h5>{{chat.title}}  ({{chat.type}})
+                                                <!-- <span class="chat_date">{{chat.created_at}}</span> -->
+                                                <span class="badge badge-pill badge-secondary" v-if="chat.pivot.unread_messages!=0">{{chat.pivot.unread_messages}}</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <label>Диалог</label>
-                        <div class="input-group">
-                            <select class="form-control form-control-sm" v-model="dialogSelect">
-                                <option v-for="friend in friends" :value="friend" >{{friend.username}}</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" class="form-control form-control-sm" placeholder="Наберите сообщение" v-model="message" :disabled="dialogSelect == null">
-                            <div class="input-group-append">
-                                <button @click="startDialog" class="btn btn-outline-secondary btn-sm" type="button" >Отправить</button>
+                        <div class="tab-pane fade" id="nav-dialog" role="tabpanel" aria-labelledby="nav-dialog-tab">
+                            <div class="inbox_dialogs">
+                                <div class="chat_list unselectable" v-for="without_dialog in without_dialogs" v-bind="{ dialogSelect: without_dialog }" v-bind:class="{ active_chat: dialogSelect.id == without_dialog.id  }" @click="makeActiveFriend(without_dialog)" >
+                                    <div class="chat_people">
+                                        <div class="chat_ib">
+                                            <h5>{{without_dialog.username}}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm" placeholder="Наберите сообщение" v-model="message" :disabled="dialogSelect == null">
+                                <div class="input-group-append">
+                                    <button @click="startDialog" class="btn btn-outline-secondary btn-sm" type="button" >Отправить</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="inbox_chat">
-                        <div class="chat_list unselectable" v-for="chat in chats" v-bind="{ chatSelect: chat }" v-bind:class="{ active_chat: chatSelect.id == chat.id  }" @click="makeActive(chat)" >
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <h5>{{chat.title}}  ({{chat.type}})
-                                        <!-- <span class="chat_date">{{chat.created_at}}</span> -->
-                                        <span class="badge badge-pill badge-secondary" v-if="chat.pivot.unread_messages!=0">{{chat.pivot.unread_messages}}</span>
-                                    </h5>
+                        <div class="tab-pane fade" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab">
+                            <!-- <label>Беседа</label> -->
+                            <div class="inbox_chat">
+                                <div class="chat_list unselectable" v-for="friend in friends" v-bind:class="{ active_chat: userSelect.indexOf(friend.id) !== -1 }" @click="makeActiveFriends(friend.id)" >
+                                    <div class="chat_people">
+                                        <div class="chat_ib">
+                                            <h5>{{friend.username}}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm" placeholder="Название" v-model="chatTitle">
+                                <div class="input-group-append">
+                                    <button @click="createChat" class="btn btn-outline-secondary btn-sm" type="button">Создать</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-invite" role="tabpanel" aria-labelledby="nav-invite-tab">
+                            <!-- <label>Пригласить</label> -->
+                            <div class="inbox_invite">
+                                <div class="chat_list unselectable" v-for="invite_chat_user in invite_chat_users" @click="inviteUser(invite_chat_user)" >
+                                    <!-- v-bind:class="{ active_chat: userSelect.indexOf(friend.id) !== -1 }" @click="makeActiveFriends(friend.id)"  -->
+                                    <div class="chat_people">
+                                        <div class="chat_ib">
+                                            <h5>{{invite_chat_user.username}}
+                                            </h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -43,6 +82,13 @@
                 </div>
                 <div class="mesgs">
                     <div class="msg_history">
+                        <!-- <div class="loading" v-if="isLoading">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="loader">Loading...</div>
+                                </div>
+                            </div>
+                        </div> -->
                         <div v-for="dataMessage in dataMessages" v-bind:class="{ outgoing_msg: dataMessage.user.id == user.id, incoming_msg: dataMessage.user.id !== user.id }">
                             <div v-bind:class="{ sent_msg: dataMessage.user.id == user.id, received_msg: dataMessage.user.id !== user.id }">
                                 <div class="received_withd_msg">
@@ -57,18 +103,10 @@
             </div>
             <div class="type_msg">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Наберите сообщение" v-model="message" :disabled="chatSelect.id == null">
-                    <div class="input-group-append">
-                        <button @click="sendMessage" class="btn btn-outline-secondary" type="button" :disabled="chatSelect.id == null">Отправить</button>
-                    </div>
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary" data-toggle="dropdown" aria-expanded="false" :disabled="chatSelect.type == 'dialog' || chatSelect.id == null">
-                            Пригласить
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" v-for="friend in friends" @click="inviteUser(friend.id)">{{friend.username}}</a>
-                        </div>
-                    </div>
+                  <input type="text" class="form-control" placeholder="Наберите сообщение" v-model="message" :disabled="chatSelect.id == null">
+                  <div class="input-group-append">
+                    <button @click="sendMessage" class="btn btn-outline-secondary" type="button" :disabled="chatSelect.id == null">Отправить</button>
+                  </div>
                 </div>
             </div>
         </div>
@@ -83,9 +121,15 @@
                 chats: [],
                 chatTitle: "",
                 friends: [],
+                without_dialogs: [],
+                invite_chat_users: [],
                 user: {},
                 dataMessages: [],
-                nextPage: "",
+                nextPageMessages: "",
+                nextPageChats: "",
+                nextPageDialog: "",
+                nextPageChat: "",
+                nextPageInviteList: "",
                 message: "",
                 userSelect: [],
                 dialogSelect: "",
@@ -103,7 +147,9 @@
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
             })
             .then((response) => {
-                this.friends.push(...response.data.friends);
+                this.nextPageChat = response.data.friends.next_page_url;
+                this.friends.push(...response.data.friends.data);
+                // this.friends.push(...response.data.friends);
             });
 
             axios({
@@ -121,7 +167,19 @@
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
             })
             .then((response) => {
-                this.chats.push(...response.data.chats);
+                this.nextPageChats = response.data.chats.next_page_url;
+                this.chats.push(...response.data.chats.data);
+            });
+
+            axios({
+                method: 'get',
+                url: '/api/v1/friends/without-dialog',
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+            })
+            .then((response) => {
+                this.nextPageDialog = response.data.without_dialogs.next_page_url;
+                this.without_dialogs.push(...response.data.without_dialogs.data);
+                // this.without_dialogs.push(...response.data.without_dialogs);
             });
 
         },
@@ -138,12 +196,25 @@
                             var container = this.$el.querySelector(".inbox_chat");
                             container.scrollTop = container.scrollHeight;
                         });
-                    } else if (data.type == 'message') {
+                    }
+                    else if (data.type == 'message') {
                         if (this.chatSelect.id == data.data.chat_id) {
                             this.dataMessages.push({body: data.data.message, user: { user_id: data.data.from_user.id, username: data.data.from_user.username}, created_at: data.data.created_at });
                             this.$nextTick(() => {
                                 var container = this.$el.querySelector(".msg_history");
                                 container.scrollTop = container.scrollHeight;
+                            });
+                            axios({
+                                method: 'post',
+                                url: '/api/v1/chat/'+this.chatSelect.id+'/reset-messages',
+                                headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                            })
+                            .then((response) => {
+                                this.chats.forEach(function(item, i, arr) {
+                                    if (item.id == response.data.chat.id) {
+                                        item.pivot.unread_messages = 0;
+                                    }
+                                });
                             });
                         } else {
                             this.chats.forEach(function(item, i, arr) {
@@ -157,23 +228,13 @@
             },
 
             chatSelect: function (val, oldVal) {
-                // Echo.private('chat.'+this.chatSelect.id)
-                // .listen('ChatMessage', ({data}) => {
-                //     if(this.user.id !== data.data.from_user.id){
-                //         this.dataMessages.push({body: data.data.message, user: { user_id: data.data.from_user.id, username: data.data.from_user.username}, created_at: data.data.created_at });
-                //     }
-                //     this.$nextTick(() => {
-                //         var container = this.$el.querySelector(".msg_history");
-                //         container.scrollTop = container.scrollHeight;
-                //     });
-                // });
                 axios({
                     method: 'post',
                     url: '/api/v1/chat/'+this.chatSelect.id+'/all',
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                 })
                 .then((response) => {
-                    this.nextPage = response.data.messages.next_page_url;
+                    this.nextPageMessages = response.data.messages.next_page_url;
                     this.dataMessages.splice( 0, this.dataMessages.length);
                     this.dataMessages.push(...response.data.messages.data);
                     this.$nextTick(() => {
@@ -200,23 +261,78 @@
 
             const container = this.$el.querySelector(".msg_history");
             container.addEventListener('scroll', e => {
-                if(container.scrollTop == 0 && this.nextPage !== null){
-
+                if(container.scrollTop == 0 && this.nextPageMessages !== null){
                     var scroll = container.scrollHeight;
-                    this.$nextTick(() => {
-                        axios({
-                            method: 'post',
-                            url: this.nextPage,
-                            headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                        })
-                        .then((response) => {
-                            this.nextPage = response.data.messages.next_page_url;
-                            this.dataMessages.unshift(...response.data.messages.data);
-                            this.$nextTick(() => {
-                                var container = this.$el.querySelector(".msg_history");
-                                container.scrollTop = container.scrollHeight - scroll;
-                            });
+                    this.isLoading = true;
+                    axios({
+                        method: 'post',
+                        url: this.nextPageMessages,
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    })
+                    .then((response) => {
+                        this.nextPageMessages = response.data.messages.next_page_url;
+                        this.dataMessages.unshift(...response.data.messages.data);
+                        this.$nextTick(() => {
+                            var container = this.$el.querySelector(".msg_history");
+                            container.scrollTop = container.scrollHeight - scroll;
                         });
+                    });
+                    this.isLoading = false;
+                }
+            });
+            const chats_container = this.$el.querySelector(".inbox_chats");
+            chats_container.addEventListener('scroll', e => {
+                if((chats_container.scrollHeight == chats_container.scrollTop + chats_container.clientHeight || chats_container.scrollHeight == chats_container.clientHeight) && this.nextPageChats !== null){
+                    axios({
+                        method: 'get',
+                        url: this.nextPageChats,
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    })
+                    .then((response) => {
+                        this.nextPageChats = response.data.chats.next_page_url;
+                        this.chats.push(...response.data.chats.data);
+                    });
+                }
+            });
+            const dialog_container = this.$el.querySelector(".inbox_dialogs");
+            dialog_container.addEventListener('scroll', e => {
+                if(dialog_container.scrollHeight == dialog_container.scrollTop + dialog_container.clientHeight && this.nextPageDialog !== null){
+                    axios({
+                        method: 'get',
+                        url: this.nextPageDialog,
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    })
+                    .then((response) => {
+                        this.nextPageDialog = response.data.without_dialogs.next_page_url;
+                        this.without_dialogs.push(...response.data.without_dialogs.data);
+                    });
+                }
+            });
+            const chat_container = this.$el.querySelector(".inbox_chat");
+            chat_container.addEventListener('scroll', e => {
+                if(chat_container.scrollHeight == chat_container.scrollTop + chat_container.clientHeight && this.nextPageChat !== null){
+                    axios({
+                        method: 'get',
+                        url: this.nextPageChat,
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    })
+                    .then((response) => {
+                        this.nextPageChat = response.data.friends.next_page_url;
+                        this.friends.push(...response.data.friends.data);
+                    });
+                }
+            });
+            const invite_container = this.$el.querySelector(".inbox_invite");
+            invite_container.addEventListener('scroll', e => {
+                if(invite_container.scrollHeight == invite_container.scrollTop + invite_container.clientHeight && this.nextPageInviteList !== null){
+                    axios({
+                        method: 'post',
+                        url: this.nextPageInviteList,
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    })
+                    .then((response) => {
+                        this.nextPageInviteList = response.data.invite_chat_list.next_page_url;
+                        this.invite_chat_users.push(...response.data.invite_chat_list.data);
                     });
                 }
             });
@@ -241,6 +357,7 @@
                         })
                         .then((response) => {
                             this.message = "";
+                            this.without_dialogs.splice( this.without_dialogs.indexOf(this.dialogSelect), 1);
                             this.$nextTick(() => {
                                 var container = this.$el.querySelector(".msg_history");
                                 container.scrollTop = container.scrollHeight;
@@ -267,12 +384,22 @@
                     });
                 });
             },
-            makeActive: function (chat) {
+            makeActiveChat: function (chat) {
                 this.chatSelect = chat;
+            },
+            makeActiveFriend: function (friend) {
+                this.dialogSelect = friend;
+            },
+            makeActiveFriends: function (friend) {
+                // console.log(this.userSelect.indexOf(friend) !== -1);
+                if (this.userSelect.indexOf(friend) !== -1) {
+                    this.userSelect.splice( this.userSelect.indexOf(friend), 1);
+                } else {
+                    this.userSelect.push(friend);
+                }
             },
 
             createChat: function () {
-
                 axios({
                     method: 'post',
                     url: '/api/v1/chat/create-chat',
@@ -288,15 +415,23 @@
             inviteUser: function (user) {
                 axios({
                     method: 'post',
-                    url: '/api/v1/chat/'+this.chatSelect.id+'/invite/'+user,
+                    url: '/api/v1/chat/'+this.chatSelect.id+'/invite/'+user.id,
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                 })
                 .then((response) => {
-
+                    this.invite_chat_users.splice( this.invite_chat_users.indexOf(user), 1);
                 });
             },
-            test: function (user) {
-
+            inviteUserList: function () {
+                axios({
+                    method: 'post',
+                    url: '/api/v1/chat/'+this.chatSelect.id+'/invite-chat-list',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                })
+                .then((response) => {
+                    this.nextPageInviteList = response.data.invite_chat_list.next_page_url;
+                    this.invite_chat_users.push(...response.data.invite_chat_list.data);
+                });
             },
         }
     }
@@ -348,6 +483,8 @@
     float: left;
     overflow: hidden;
     width: 40%; border-right:1px solid #c4c4c4;
+    height: 600px;
+    position: relative;
     }
     .inbox_msg {
     border: 1px solid #c4c4c4;
@@ -399,7 +536,10 @@
     margin: 0;
     padding: 18px 16px 10px;
     }
-    .inbox_chat { height: 372.7px; overflow-y: scroll;}
+    .inbox_chats {padding: 0; height: 530.7px; overflow-y: scroll;}
+    .inbox_dialogs {padding: 0; height: 530.7px; overflow-y: scroll;}
+    .inbox_chat {padding: 0; height: 530.7px; overflow-y: scroll;}
+    .inbox_invite {padding: 0; height: 530.7px; overflow-y: scroll;}
 
     .active_chat{ background:#ebebeb;}
 
@@ -483,4 +623,72 @@
     bottom:15;
     overflow-y: scroll;
     }
+
+
+    .loader:before,
+    .loader:after {
+    border-radius: 50%;
+    }
+    .loader:before,
+    .loader:after {
+    position: absolute;
+    content: '';
+    }
+    .loader:before {
+    width: 5.2em;
+    height: 10.2em;
+    background: #1abc9c;
+    border-radius: 10.2em 0 0 10.2em;
+    top: -0.1em;
+    left: -0.1em;
+    -webkit-transform-origin: 5.2em 5.1em;
+    transform-origin: 5.2em 5.1em;
+    -webkit-animation: load2 2s infinite ease 1.5s;
+    animation: load2 2s infinite ease 1.5s;
+    }
+    .loader {
+    font-size: 11px;
+    text-indent: -99999em;
+    margin: 55px auto;
+    position: relative;
+    width: 10em;
+    height: 10em;
+    box-shadow: inset 0 0 0 1em #fff;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    }
+    .loader:after {
+    width: 5.2em;
+    height: 10.2em;
+    background: #1abc9c;
+    border-radius: 0 10.2em 10.2em 0;
+    top: -0.1em;
+    left: 5.1em;
+    -webkit-transform-origin: 0px 5.1em;
+    transform-origin: 0px 5.1em;
+    -webkit-animation: load2 2s infinite ease;
+    animation: load2 2s infinite ease;
+    }
+    @-webkit-keyframes load2 {
+    0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    }
+    100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    }
+    }
+    @keyframes load2 {
+    0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    }
+    100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    }
+    }
+
 </style>

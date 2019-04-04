@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Chat;
 use App\UserUser;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreFriendRequest;
 
 class FriendController extends Controller
 {
-    public function inviteFriend(StoreFriendRequest $request)
+    public function inviteFriend(Request $request, $user)
     {
         $initiator = $request->user();
-        $friend = $initiator->users()->where('user_id', $request->user_id);
+        $friend = $initiator->users()->where('user_id', $user);
+        \Log::info($user);
         if ($friend->exists()) {
             $status = $friend->first()->pivot->status;
             if ($status == 'pending') {
@@ -23,14 +24,13 @@ class FriendController extends Controller
                 return response(['message'=>'request denied'], 422);
             }
         } else {
-            $initiator->users()->attach($request->user_id, ['status' => 'pending']);
+            $initiator->users()->attach($user, ['status' => 'pending']);
             return response(['message' => 'invitation sent']);
         }
     }
 
-    public function approveFriend(StoreFriendRequest $request)
+    public function approveFriend(Request $request, User $initiator)
     {
-        $initiator = User::find($request->user_id);
         $friend = $initiator->users()->where('user_id', $request->user()->id);
         if ($friend->exists()) {
             $status = $friend->first()->pivot->status;
@@ -49,11 +49,12 @@ class FriendController extends Controller
 
     public function allFriends(Request $request)
     {
-        $friends_init = UserUser::where('status', '=', 'approved')
-                                ->Where('user_initiator_id', '=', $request->user()->id)
+
+        $friends_init = UserUser::where('status', 'approved')
+                                ->Where('user_initiator_id', $request->user()->id)
                                 ->get();
-        $friends_recip = UserUser::where('status', '=', 'approved')
-                                 ->where('user_id', '=', $request->user()->id)
+        $friends_recip = UserUser::where('status', 'approved')
+                                 ->where('user_id', $request->user()->id)
                                  ->get();
 
         $friends_init_id = [];
@@ -66,8 +67,38 @@ class FriendController extends Controller
             $friends_recip_id[] = $friend->user_initiator_id;
         }
         $ids = array_merge($friends_init_id,$friends_recip_id);
-        $friends = User::whereIn('id', $ids)->get();
+        $friends = User::whereIn('id', $ids)->paginate(10);
 
         return response(['friends' => $friends]);
     }
+
+    public function withoutDialog(Request $request)
+    {
+        $friends_init = UserUser::where('status', 'approved')
+                                ->Where('user_initiator_id', $request->user()->id)
+                                ->get();
+        $friends_recip = UserUser::where('status', 'approved')
+                                 ->where('user_id', $request->user()->id)
+                                 ->get();
+
+        $friends_init_id = [];
+        $friends_recip_id = [];
+        foreach ($friends_init as $friend) {
+            $friends_init_id[] = $friend->user_id;
+        }
+
+        foreach ($friends_recip as $friend) {
+            $friends_recip_id[] = $friend->user_initiator_id;
+        }
+        $ids = array_merge($friends_init_id,$friends_recip_id);
+        $friends = User::whereIn('id', $ids);
+
+        $with0ut_dialog = $friends->whereDoesntHave('chats', function ($query) use($request) {
+            $query->where('type','dialog')->whereHas('users', function ($query) use($request) {
+                $query->where('id', $request->user()->id);
+            });
+        })->paginate(10);
+        return response(['without_dialogs' => $with0ut_dialog]);
+    }
+    
 }
