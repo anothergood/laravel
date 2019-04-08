@@ -63609,8 +63609,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         container.scrollTop = container.scrollHeight;
                     });
                 } else if (data.type == 'message') {
-                    if (_this2.chatSelect.id == data.data.chat.id) {
-                        _this2.dataMessages.push({ body: data.data.message.body, user: { user_id: data.data.user.id, username: data.data.user.username }, created_at: data.data.message.created_at });
+                    if (_this2.chatSelect.id == data.data.message.chat.id) {
+                        _this2.dataMessages.push({ body: data.data.message.body, user: { user_id: data.data.message.user.id, username: data.data.message.user.username }, created_at: data.data.message.created_at });
                         _this2.$nextTick(function () {
                             var container = _this2.$el.querySelector(".msg_history");
                             container.scrollTop = container.scrollHeight;
@@ -63628,7 +63628,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         });
                     } else {
                         _this2.chats.forEach(function (item, i, arr) {
-                            if (item.id == data.data.chat.id) {
+                            if (item.id == data.data.message.chat.id) {
                                 item.pivot.unread_messages++;
                             }
                         });

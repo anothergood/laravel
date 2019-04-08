@@ -49,7 +49,8 @@ class FriendController extends Controller
     public function allFriends(Request $request)
     {
 
-        return $request->user()->friends()->paginate(10);
+        return $request->user()->friends;
+        // ()->paginate(10);
 
     }
 

@@ -29,9 +29,9 @@ class MessageController extends Controller
         $data = [
             'type' => 'message',
             'data' => [
-                'message' => $message,
-                'chat' => $chat,
-                'user' => $request->user(),
+                'message' => $message->load(['chat', 'user']),
+                // 'chat' => $chat,
+                // 'user' => $request->user(),
             ],
         ];
 

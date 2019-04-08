@@ -243,8 +243,8 @@
                         });
                     }
                     else if (data.type == 'message') {
-                        if (this.chatSelect.id == data.data.chat.id) {
-                            this.dataMessages.push({body: data.data.message.body, user: { user_id: data.data.user.id, username: data.data.user.username}, created_at: data.data.message.created_at });
+                        if (this.chatSelect.id == data.data.message.chat.id) {
+                            this.dataMessages.push({body: data.data.message.body, user: { user_id: data.data.message.user.id, username: data.data.message.user.username}, created_at: data.data.message.created_at });
                             this.$nextTick(() => {
                                 var container = this.$el.querySelector(".msg_history");
                                 container.scrollTop = container.scrollHeight;
@@ -263,7 +263,7 @@
                             });
                         } else {
                             this.chats.forEach(function(item, i, arr) {
-                                if (item.id == data.data.chat.id) {
+                                if (item.id == data.data.message.chat.id) {
                                     item.pivot.unread_messages++;
                                 }
                             });

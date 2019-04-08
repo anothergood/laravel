@@ -47,8 +47,8 @@ class ChatController extends Controller
                     'type' => 'chat_invite',
                     'data' => $chat->load('users'),
                 ];
-
-                User::find($request->users)->userPush($data);
+                $chat->usersNotification($data, $request->user()->id);
+                // User::find($request->users)->userPush($data);
 
                 return $chat;
             }
@@ -83,8 +83,8 @@ class ChatController extends Controller
                 'type' => 'chat_invite',
                 'data' => $chat->load('users'),
             ];
-
-            $user->userPush($data_chat_invite);
+            $chat->usersNotification($data_chat_invite, $request->user()->id);
+            // $user->userPush($data_chat_invite);
 
             $data_new_invited = [
                 'type' => 'new_invited',
@@ -112,10 +112,10 @@ class ChatController extends Controller
 
     public function inviteChatList(Request $request, $chat) {
 
-        $user_chat = $request->user()->chats()->findOrFail($chat);
+        $chat = $request->user()->chats()->findOrFail($chat);
 
-        $inviteChatList = $request->user()->friends()->whereDoesntHave('chats', function ($query) use($request, $chat) {
-            $query->where('id', $chat);
+        $inviteChatList = $request->user()->friends()->whereDoesntHave('chats', function ($query) use($chat) {
+            $query->where('id', $chat->id);
         })->paginate(10);
 
         return $inviteChatList;
