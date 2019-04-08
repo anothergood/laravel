@@ -13,7 +13,6 @@ class FriendController extends Controller
     {
         $initiator = $request->user();
         $friend = $initiator->users()->where('user_id', $user);
-        \Log::info($user);
         if ($friend->exists()) {
             $status = $friend->first()->pivot->status;
             if ($status == 'pending') {
@@ -69,7 +68,7 @@ class FriendController extends Controller
         $ids = array_merge($friends_init_id,$friends_recip_id);
         $friends = User::whereIn('id', $ids)->paginate(10);
 
-        return response(['friends' => $friends]);
+        return $friends;
     }
 
     public function withoutDialog(Request $request)
@@ -98,7 +97,7 @@ class FriendController extends Controller
                 $query->where('id', $request->user()->id);
             });
         })->paginate(10);
-        return response(['without_dialogs' => $with0ut_dialog]);
+        return $with0ut_dialog;
     }
-    
+
 }

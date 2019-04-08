@@ -15,17 +15,17 @@ use App\Http\Requests\FriendMessagesRequest;
 class MessageController extends Controller
 {
 
-    public function sendMessage(StoreMessageRequest $request, Chat $chat) {
-        $chat_check = $request->user()->chats()->where('id', $chat->id)->exists();
+    public function sendMessage(StoreMessageRequest $request, $chat) {
+        $chat_check = $request->user()->chats()->findOrFail($chat);
         if($chat_check) {
 
             $message = new Message;
             $message->user_id = $request->user()->id;
-            $message->chat_id = $chat->id;
+            $message->chat_id = $chat_check->id;
             $message->body = $request->body;
             $message->save();
 
-            $chat->users()->where('user_id', '!=', $request->user()->id)->increment('unread_messages');
+            $chat_check->users()->where('user_id', '<>', $request->user()->id)->increment('unread_messages');
 
             $data = [
                 'type' => 'message',
@@ -33,11 +33,11 @@ class MessageController extends Controller
                     'message' => $request->body,
                     'from_user' => $request->user(),
                     'created_at' => $message->created_at,
-                    'chat_id' => $chat->id,
+                    'chat_id' => $chat_check->id,
                 ],
             ];
 
-            $users = $chat->users()->where('user_id', '<>', $request->user()->id)->get();
+            $users = $chat_check->users()->where('user_id', '<>', $request->user()->id)->get();
 
             foreach ($users as $user){
                 User::find($user->id)->userPush($data);
@@ -50,17 +50,17 @@ class MessageController extends Controller
 
     }
 
-    public function allChatMessages(Request $request, Chat $chat) {
+    public function allChatMessages(Request $request, $chat) {
 
-        $chat_check = $request->user()->chats()->where('id', $chat->id)->exists();
+        $chat_check = $request->user()->chats()->findOrFail($chat);
 
         if($chat_check) {
-            $messages = $chat->messages()->with('user')->orderBy('created_at', 'desc')->paginate(6);
+            $messages = $chat_check->messages()->with('user')->orderBy('created_at', 'desc')->paginate(6);
 
             $mes_coll = $messages->getCollection()->reverse()->values();
             $messages->setCollection($mes_coll);
 
-            return response(['messages' => $messages]);
+            return $messages;
 
         } else {
 
@@ -76,7 +76,7 @@ class MessageController extends Controller
         if($chat_check->exists()) {
 
             $chat_check->first()->users()->updateExistingPivot($request->user()->id, ['unread_messages' => 0]);
-            return response(['chat' => $chat_check->first()]);
+            return $chat_check->first();
 
         } else {
 

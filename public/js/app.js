@@ -63345,7 +63345,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .unselectable {\n    -moz-user-select: none;\n    -khtml-user-select: none;\n    -webkit-user-select: none;\n    user-select: none;\n} */\n\n/* .dropdown{\n    z-index: 100;\n} */\na.active.focus,\na.active:focus,\na.focus,\na:active.focus,\na:active:focus,\na:focus,\nbutton.active.focus,\nbutton.active:focus,\nbutton.focus,\nbutton:active.focus,\nbutton:active:focus,\nbutton:focus,\n.btn.active.focus,\n.btn.active:focus,\n.btn.focus,\n.btn:active.focus,\n.btn:active:focus,\n.btn:focus {\n    outline: 0 ;\n    outline-color: transparent ;\n    outline-width: 0 ;\n    outline-style: none ;\n    -webkit-box-shadow: 0 0 0 0 rgba(0,123,255,0);\n            box-shadow: 0 0 0 0 rgba(0,123,255,0);\n}\nlabel {\n    margin: 0;\n}\n/* .container{max-width:1170px; margin:auto;} */\nimg{ max-width:100%;\n}\n.inbox_people {\nbackground: #f8f8f8 none repeat scroll 0 0;\nfloat: left;\noverflow: hidden;\nwidth: 40%; border-right:1px solid #c4c4c4;\nheight: 600px;\nposition: relative;\n}\n.inbox_msg {\nborder: 1px solid #c4c4c4;\nclear: both;\noverflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\ndisplay: inline-block;\ntext-align: right;\nwidth: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\ncolor: #05728f;\nfont-size: 21px;\nmargin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\npadding: 0;\ncolor: #707070;\nfont-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\nfloat: left;\nwidth: 11%;\n}\n.chat_ib {\nfloat: left;\npadding: 0 0 0 15px;\nwidth: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\nborder-bottom: 1px solid #c4c4c4;\nmargin: 0;\npadding: 18px 16px 10px;\n}\n.inbox_chats {padding: 0; height: 530.7px; overflow-y: scroll;\n}\n.inbox_dialogs {padding: 0; height: 530.7px; overflow-y: scroll;\n}\n.inbox_chat {padding: 0; height: 530.7px; overflow-y: scroll;\n}\n.inbox_invite {padding: 0; height: 530.7px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\ndisplay: inline-block;\nwidth: 6%;\n}\n.received_msg {\ndisplay: inline-block;\npadding: 0 0 0 0px;\nvertical-align: top;\nwidth: 60%;\n}\n.received_withd_msg p {\nbackground: #ebebeb none repeat scroll 0 0;\nborder-radius: 3px;\ncolor: #646464;\nfont-size: 14px;\nmargin: 0;\npadding: 5px 10px 5px 12px;\nwidth: 100%;\n}\n.time_date {\ncolor: #747474;\ndisplay: block;\nfont-size: 12px;\nmargin: 8px 0 0;\n}\n.received_withd_msg { width: 100%; margin: 0px;\n}\n.mesgs {\nfloat: left;\npadding: 10px 15px 15px 25px;\nwidth: 60%;\nheight: 600px;\nposition: relative;\n}\n.sent_msg p {\nbackground: #05728f none repeat scroll 0 0;\nborder-radius: 3px;\nfont-size: 14px;\nmargin: 0; color:#fff;\npadding: 5px 10px 5px 12px;\nwidth:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:0 0 13px;\n}\n.incoming_msg{ overflow:hidden; margin:0 0 13px;\n}\n.sent_msg {\nfloat: right;\nwidth: 60%;\n}\n.input_msg_write input {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\ncolor: #4c4c4c;\nfont-size: 15px;\nmin-height: 48px;\nwidth: 100%;\n}\n.type_msg {position: relative; margin-top: 3px;\n}\n.msg_send_btn {\nbackground: #05728f none repeat scroll 0 0;\nborder: medium none;\nborder-radius: 50%;\ncolor: #fff;\ncursor: pointer;\nfont-size: 17px;\nheight: 33px;\nposition: absolute;\nright: 0;\ntop: 11px;\nwidth: 33px;\n}\n.messaging { padding: 0;\n}\n.msg_history {\n    position: absolute;\nleft:25;\nright:10;\ntop:15;\nbottom:15;\noverflow-y: scroll;\n}\n.loader:before,\n.loader:after {\nborder-radius: 50%;\n}\n.loader:before,\n.loader:after {\nposition: absolute;\ncontent: '';\n}\n.loader:before {\nwidth: 5.2em;\nheight: 10.2em;\nbackground: #1abc9c;\nborder-radius: 10.2em 0 0 10.2em;\ntop: -0.1em;\nleft: -0.1em;\n-webkit-transform-origin: 5.2em 5.1em;\ntransform-origin: 5.2em 5.1em;\n-webkit-animation: load2 2s infinite ease 1.5s;\nanimation: load2 2s infinite ease 1.5s;\n}\n.loader {\nfont-size: 11px;\ntext-indent: -99999em;\nmargin: 55px auto;\nposition: relative;\nwidth: 10em;\nheight: 10em;\n-webkit-box-shadow: inset 0 0 0 1em #fff;\n        box-shadow: inset 0 0 0 1em #fff;\n-webkit-transform: translateZ(0);\ntransform: translateZ(0);\n}\n.loader:after {\nwidth: 5.2em;\nheight: 10.2em;\nbackground: #1abc9c;\nborder-radius: 0 10.2em 10.2em 0;\ntop: -0.1em;\nleft: 5.1em;\n-webkit-transform-origin: 0px 5.1em;\ntransform-origin: 0px 5.1em;\n-webkit-animation: load2 2s infinite ease;\nanimation: load2 2s infinite ease;\n}\n@-webkit-keyframes load2 {\n0% {\n-webkit-transform: rotate(0deg);\ntransform: rotate(0deg);\n}\n100% {\n-webkit-transform: rotate(360deg);\ntransform: rotate(360deg);\n}\n}\n@keyframes load2 {\n0% {\n-webkit-transform: rotate(0deg);\ntransform: rotate(0deg);\n}\n100% {\n-webkit-transform: rotate(360deg);\ntransform: rotate(360deg);\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.parrent{\n    position:relative;\n}\n#create_button{\n    position:absolute;\n    right:35px;\n    bottom: 20px;\n    /* background-color: white; */\n}\n\n\n\n/* .unselectable {\n    -moz-user-select: none;\n    -khtml-user-select: none;\n    -webkit-user-select: none;\n    user-select: none;\n} */\n\n/* .dropdown{\n    z-index: 100;\n} */\na.active.focus,\na.active:focus,\na.focus,\na:active.focus,\na:active:focus,\na:focus,\nbutton.active.focus,\nbutton.active:focus,\nbutton.focus,\nbutton:active.focus,\nbutton:active:focus,\nbutton:focus,\n.btn.active.focus,\n.btn.active:focus,\n.btn.focus,\n.btn:active.focus,\n.btn:active:focus,\n.btn:focus {\n    outline: 0 ;\n    outline-color: transparent ;\n    outline-width: 0 ;\n    outline-style: none ;\n    -webkit-box-shadow: 0 0 0 0 rgba(0,123,255,0);\n            box-shadow: 0 0 0 0 rgba(0,123,255,0);\n}\nlabel {\n    margin: 0;\n}\n/* .container{max-width:1170px; margin:auto;} */\nimg{ max-width:100%;\n}\n.inbox_people {\nbackground: #f8f8f8 none repeat scroll 0 0;\nfloat: left;\noverflow: hidden;\nwidth: 40%; border-right:1px solid #c4c4c4;\nheight: 570px;\nposition: relative;\n}\n.inbox_msg {\nborder: 1px solid #c4c4c4;\nclear: both;\noverflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\ndisplay: inline-block;\ntext-align: right;\nwidth: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\ncolor: #05728f;\nfont-size: 21px;\nmargin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\npadding: 0;\ncolor: #707070;\nfont-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\nfloat: left;\nwidth: 11%;\n}\n.chat_ib {\nfloat: left;\npadding: 0 0 0 15px;\nwidth: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\nborder-bottom: 1px solid #c4c4c4;\nmargin: 0;\npadding: 18px 16px 10px;\n}\n.inbox_chats {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_dialogs {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_chat {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_invite {padding: 0; height: 530px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\ndisplay: inline-block;\nwidth: 6%;\n}\n.received_msg {\ndisplay: inline-block;\npadding: 0 0 0 0px;\nvertical-align: top;\nwidth: 60%;\n}\n.received_withd_msg p {\nbackground: #ebebeb none repeat scroll 0 0;\nborder-radius: 3px;\ncolor: #646464;\nfont-size: 14px;\nmargin: 0;\npadding: 5px 10px 5px 12px;\nwidth: 100%;\n}\n.time_date {\ncolor: #747474;\ndisplay: block;\nfont-size: 12px;\nmargin: 8px 0 0;\n}\n.received_withd_msg { width: 100%; margin: 0px;\n}\n.mesgs {\nfloat: left;\npadding: 10px 15px 15px 25px;\nwidth: 60%;\nheight: 570px;\nposition: relative;\n}\n.sent_msg p {\nbackground: #05728f none repeat scroll 0 0;\nborder-radius: 3px;\nfont-size: 14px;\nmargin: 0; color:#fff;\npadding: 5px 10px 5px 12px;\nwidth:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:0 0 13px;\n}\n.incoming_msg{ overflow:hidden; margin:0 0 13px;\n}\n.sent_msg {\nfloat: right;\nwidth: 60%;\n}\n.input_msg_write input {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\ncolor: #4c4c4c;\nfont-size: 15px;\nmin-height: 48px;\nwidth: 100%;\n}\n.type_msg {position: relative; margin-top: 3px;\n}\n.msg_send_btn {\nbackground: #05728f none repeat scroll 0 0;\nborder: medium none;\nborder-radius: 50%;\ncolor: #fff;\ncursor: pointer;\nfont-size: 17px;\nheight: 33px;\nposition: absolute;\nright: 0;\ntop: 11px;\nwidth: 33px;\n}\n.messaging { padding: 0;\n}\n.msg_history {\n    position: absolute;\nleft:25;\nright:10;\ntop:15;\nbottom:15;\noverflow-y: scroll;\n}\n.loading {\n    z-index:10;\n    margin-left: auto;\n    margin-right: auto;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 0;\n  padding: 20px;  /* если задать в %, то будет рассчитываться от ширины родителя */\n  background:\n   -webkit-gradient(linear, left top, left bottom, color-stop(30%, rgba(0,0,0,1)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.4))),\n   -webkit-gradient(linear, right top, left top, color-stop(30%, rgba(0,0,0,.2)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.8)));\n  background:\n   linear-gradient(rgba(0,0,0,1) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.4) 70%),\n   linear-gradient(to left, rgba(0,0,0,.2) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.8) 70%);\n  background-repeat: no-repeat;\n  background-size: 10% 100%, 100% 10%;\n  background-position: 50% 0%, 0 50%;\n  -webkit-animation: loading .7s infinite steps(8);\n  animation: loading .7s infinite steps(8);\n}\n.loading:after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-image:\n   -webkit-gradient(linear, left top, left bottom, color-stop(30%, rgba(0,0,0,.1)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.5))),\n   -webkit-gradient(linear, right top, left top, color-stop(30%, rgba(0,0,0,.3)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.9)));\n  background-image:\n   linear-gradient(rgba(0,0,0,.1) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.5) 70%),\n   linear-gradient(to left, rgba(0,0,0,.3) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.9) 70%);\n  background-repeat: no-repeat;\n  background-size: 10% 100%, 100% 10%;\n  background-position: 50% 0%, 0 50%;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n@-webkit-keyframes loading {\n100% {-webkit-transform: rotate(1turn);\n}\n}\n@keyframes loading {\n100% {-webkit-transform: rotate(1turn);transform: rotate(1turn);\n}\n}\n\n", ""]);
 
 // exports
 
@@ -63358,6 +63358,39 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -63491,6 +63524,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             nextPageChat: "",
             nextPageInviteList: "",
             message: "",
+            dialog_message: "",
             userSelect: [],
             dialogSelect: "",
             chatId: "",
@@ -63509,8 +63543,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }).then(function (response) {
             var _friends;
 
-            _this.nextPageChat = response.data.friends.next_page_url;
-            (_friends = _this.friends).push.apply(_friends, _toConsumableArray(response.data.friends.data));
+            _this.nextPageChat = response.data.next_page_url;
+            (_friends = _this.friends).push.apply(_friends, _toConsumableArray(response.data.data));
             // this.friends.push(...response.data.friends);
         });
 
@@ -63529,8 +63563,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }).then(function (response) {
             var _chats;
 
-            _this.nextPageChats = response.data.chats.next_page_url;
-            (_chats = _this.chats).push.apply(_chats, _toConsumableArray(response.data.chats.data));
+            _this.nextPageChats = response.data.next_page_url;
+            (_chats = _this.chats).push.apply(_chats, _toConsumableArray(response.data.data));
         });
 
         axios({
@@ -63540,9 +63574,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }).then(function (response) {
             var _without_dialogs;
 
-            _this.nextPageDialog = response.data.without_dialogs.next_page_url;
-            (_without_dialogs = _this.without_dialogs).push.apply(_without_dialogs, _toConsumableArray(response.data.without_dialogs.data));
-            // this.without_dialogs.push(...response.data.without_dialogs);
+            _this.nextPageDialog = response.data.next_page_url;
+            (_without_dialogs = _this.without_dialogs).push.apply(_without_dialogs, _toConsumableArray(response.data.data));
         });
     },
 
@@ -63557,7 +63590,21 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 var data = _ref.data;
 
                 if (data.type == 'chat_invite') {
-                    _this2.chats.push({ id: data.data.chat_id, title: data.data.chat_title, type: data.data.chat_type, pivot: { unread_messages: 0 } });
+                    _this2.chats.push({ id: data.data.id, title: data.data.title, type: data.data.type, pivot: { unread_messages: 0 } });
+                    if (data.data.type == 'dialog') {
+                        axios({
+                            method: 'get',
+                            url: '/api/v1/friends/without-dialog',
+                            headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+                        }).then(function (response) {
+                            var _without_dialogs2;
+
+                            _this2.nextPageDialog = response.data.next_page_url;
+                            _this2.without_dialogs.splice(0, _this2.without_dialogs.length);
+                            (_without_dialogs2 = _this2.without_dialogs).push.apply(_without_dialogs2, _toConsumableArray(response.data.data));
+                            // this.without_dialogs.push(...response.data.without_dialogs);
+                        });
+                    }
                     _this2.$nextTick(function () {
                         var container = _this2.$el.querySelector(".inbox_chat");
                         container.scrollTop = container.scrollHeight;
@@ -63575,7 +63622,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                             headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
                         }).then(function (response) {
                             _this2.chats.forEach(function (item, i, arr) {
-                                if (item.id == response.data.chat.id) {
+                                if (item.id == response.data.id) {
                                     item.pivot.unread_messages = 0;
                                 }
                             });
@@ -63585,6 +63632,20 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                             if (item.id == data.data.chat_id) {
                                 item.pivot.unread_messages++;
                             }
+                        });
+                    }
+                } else if (data.type == 'new_invited') {
+                    if (_this2.chatSelect.id !== null) {
+                        axios({
+                            method: 'post',
+                            url: '/api/v1/chat/' + _this2.chatSelect.id + '/invite-chat-list',
+                            headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+                        }).then(function (response) {
+                            var _invite_chat_users;
+
+                            _this2.nextPageInviteList = response.data.next_page_url;
+                            _this2.invite_chat_users.splice(0, _this2.invite_chat_users.length);
+                            (_invite_chat_users = _this2.invite_chat_users).push.apply(_invite_chat_users, _toConsumableArray(response.data.data));
                         });
                     }
                 }
@@ -63601,9 +63662,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             }).then(function (response) {
                 var _dataMessages;
 
-                _this3.nextPageMessages = response.data.messages.next_page_url;
+                _this3.nextPageMessages = response.data.next_page_url;
                 _this3.dataMessages.splice(0, _this3.dataMessages.length);
-                (_dataMessages = _this3.dataMessages).push.apply(_dataMessages, _toConsumableArray(response.data.messages.data));
+                (_dataMessages = _this3.dataMessages).push.apply(_dataMessages, _toConsumableArray(response.data.data));
                 _this3.$nextTick(function () {
                     var container = _this3.$el.querySelector(".msg_history");
                     container.scrollTop = container.scrollHeight;
@@ -63615,7 +63676,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
             }).then(function (response) {
                 _this3.chats.forEach(function (item, i, arr) {
-                    if (item.id == response.data.chat.id) {
+                    if (item.id == response.data.id) {
                         item.pivot.unread_messages = 0;
                     }
                 });
@@ -63630,7 +63691,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         container.addEventListener('scroll', function (e) {
             if (container.scrollTop == 0 && _this4.nextPageMessages !== null) {
                 var scroll = container.scrollHeight;
-                _this4.isLoading = true;
+                // this.isLoading = true;
                 axios({
                     method: 'post',
                     url: _this4.nextPageMessages,
@@ -63638,49 +63699,53 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 }).then(function (response) {
                     var _dataMessages2;
 
-                    _this4.nextPageMessages = response.data.messages.next_page_url;
-                    (_dataMessages2 = _this4.dataMessages).unshift.apply(_dataMessages2, _toConsumableArray(response.data.messages.data));
+                    _this4.nextPageMessages = response.data.next_page_url;
+                    (_dataMessages2 = _this4.dataMessages).unshift.apply(_dataMessages2, _toConsumableArray(response.data.data));
                     _this4.$nextTick(function () {
                         var container = _this4.$el.querySelector(".msg_history");
                         container.scrollTop = container.scrollHeight - scroll;
                     });
                 });
-                _this4.isLoading = false;
+                // this.$nextTick(() => {
+                //     this.isLoading = false;
+                // });
             }
         });
         var chats_container = this.$el.querySelector(".inbox_chats");
         chats_container.addEventListener('scroll', function (e) {
-            if ((chats_container.scrollHeight == chats_container.scrollTop + chats_container.clientHeight || chats_container.scrollHeight == chats_container.clientHeight) && _this4.nextPageChats !== null) {
+            if (Math.round(chats_container.scrollTop + chats_container.clientHeight) == chats_container.scrollHeight && _this4.nextPageChats !== null) {
                 axios({
                     method: 'get',
                     url: _this4.nextPageChats,
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
                 }).then(function (response) {
-                    var _chats2;
+                    _this4.$nextTick(function () {
+                        var _chats2;
 
-                    _this4.nextPageChats = response.data.chats.next_page_url;
-                    (_chats2 = _this4.chats).push.apply(_chats2, _toConsumableArray(response.data.chats.data));
+                        _this4.nextPageChats = response.data.next_page_url;
+                        (_chats2 = _this4.chats).push.apply(_chats2, _toConsumableArray(response.data.data));
+                    });
                 });
             }
         });
         var dialog_container = this.$el.querySelector(".inbox_dialogs");
         dialog_container.addEventListener('scroll', function (e) {
-            if (dialog_container.scrollHeight == dialog_container.scrollTop + dialog_container.clientHeight && _this4.nextPageDialog !== null) {
+            if (Math.round(dialog_container.scrollTop + dialog_container.clientHeight) >= dialog_container.scrollHeight && _this4.nextPageDialog !== null) {
                 axios({
                     method: 'get',
                     url: _this4.nextPageDialog,
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
                 }).then(function (response) {
-                    var _without_dialogs2;
+                    var _without_dialogs3;
 
-                    _this4.nextPageDialog = response.data.without_dialogs.next_page_url;
-                    (_without_dialogs2 = _this4.without_dialogs).push.apply(_without_dialogs2, _toConsumableArray(response.data.without_dialogs.data));
+                    _this4.nextPageDialog = response.data.next_page_url;
+                    (_without_dialogs3 = _this4.without_dialogs).push.apply(_without_dialogs3, _toConsumableArray(response.data.data));
                 });
             }
         });
         var chat_container = this.$el.querySelector(".inbox_chat");
         chat_container.addEventListener('scroll', function (e) {
-            if (chat_container.scrollHeight == chat_container.scrollTop + chat_container.clientHeight && _this4.nextPageChat !== null) {
+            if (Math.round(chat_container.scrollTop + chat_container.clientHeight) >= chat_container.scrollHeight && _this4.nextPageChat !== null) {
                 axios({
                     method: 'get',
                     url: _this4.nextPageChat,
@@ -63688,23 +63753,23 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 }).then(function (response) {
                     var _friends2;
 
-                    _this4.nextPageChat = response.data.friends.next_page_url;
-                    (_friends2 = _this4.friends).push.apply(_friends2, _toConsumableArray(response.data.friends.data));
+                    _this4.nextPageChat = response.data.next_page_url;
+                    (_friends2 = _this4.friends).push.apply(_friends2, _toConsumableArray(response.data.data));
                 });
             }
         });
         var invite_container = this.$el.querySelector(".inbox_invite");
         invite_container.addEventListener('scroll', function (e) {
-            if (invite_container.scrollHeight == invite_container.scrollTop + invite_container.clientHeight && _this4.nextPageInviteList !== null) {
+            if (Math.round(invite_container.scrollTop + invite_container.clientHeight) >= invite_container.scrollHeight && _this4.nextPageInviteList !== null) {
                 axios({
                     method: 'post',
                     url: _this4.nextPageInviteList,
                     headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
                 }).then(function (response) {
-                    var _invite_chat_users;
+                    var _invite_chat_users2;
 
-                    _this4.nextPageInviteList = response.data.invite_chat_list.next_page_url;
-                    (_invite_chat_users = _this4.invite_chat_users).push.apply(_invite_chat_users, _toConsumableArray(response.data.invite_chat_list.data));
+                    _this4.nextPageInviteList = response.data.next_page_url;
+                    (_invite_chat_users2 = _this4.invite_chat_users).push.apply(_invite_chat_users2, _toConsumableArray(response.data.data));
                 });
             }
         });
@@ -63722,14 +63787,16 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                 params: { title: this.dialogSelect.username, users: this.dialogSelect.id, type: 'dialog' }
             }).then(function (response) {
+                _this5.chats.push({ id: response.data.id, title: response.data.title, type: response.data.type, pivot: { unread_messages: 0 } });
+                _this5.chatSelect = response.data;
                 _this5.$nextTick(function () {
                     axios({
                         method: 'post',
-                        url: '/api/v1/chat/' + response.data.chat.id + '/send',
+                        url: '/api/v1/chat/' + response.data.id + '/send',
                         headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                        params: { body: _this5.message }
+                        params: { body: _this5.dialog_message }
                     }).then(function (response) {
-                        _this5.message = "";
+                        _this5.dialog_message = "";
                         _this5.without_dialogs.splice(_this5.without_dialogs.indexOf(_this5.dialogSelect), 1);
                         _this5.$nextTick(function () {
                             var container = _this5.$el.querySelector(".msg_history");
@@ -63781,6 +63848,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                 params: { title: this.chatTitle, users: this.userSelect, type: 'chat' }
             }).then(function (response) {
+                _this7.chats.push({ id: response.data.id, title: response.data.title, type: response.data.type, pivot: { unread_messages: 0 } });
                 _this7.chatTitle = "";
                 _this7.userSelect = [];
             });
@@ -63804,10 +63872,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 url: '/api/v1/chat/' + this.chatSelect.id + '/invite-chat-list',
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
             }).then(function (response) {
-                var _invite_chat_users2;
+                var _invite_chat_users3;
 
-                _this9.nextPageInviteList = response.data.invite_chat_list.next_page_url;
-                (_invite_chat_users2 = _this9.invite_chat_users).push.apply(_invite_chat_users2, _toConsumableArray(response.data.invite_chat_list.data));
+                _this9.nextPageInviteList = response.data.next_page_url;
+                _this9.invite_chat_users.splice(0, _this9.invite_chat_users.length);
+                (_invite_chat_users3 = _this9.invite_chat_users).push.apply(_invite_chat_users3, _toConsumableArray(response.data.data));
             });
         }
     }
@@ -64003,6 +64072,10 @@ var render = function() {
                               active_chat:
                                 _vm.dialogSelect.id == without_dialog.id
                             },
+                            attrs: {
+                              "data-toggle": "modal",
+                              "data-target": "#exampleModal"
+                            },
                             on: {
                               click: function($event) {
                                 return _vm.makeActiveFriend(without_dialog)
@@ -64028,54 +64101,14 @@ var render = function() {
                       )
                     }),
                     0
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.message,
-                          expression: "message"
-                        }
-                      ],
-                      staticClass: "form-control form-control-sm",
-                      attrs: {
-                        type: "text",
-                        placeholder: "Наберите сообщение",
-                        disabled: _vm.dialogSelect == null
-                      },
-                      domProps: { value: _vm.message },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.message = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group-append" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-outline-secondary btn-sm",
-                          attrs: { type: "button" },
-                          on: { click: _vm.startDialog }
-                        },
-                        [_vm._v("Отправить")]
-                      )
-                    ])
-                  ])
+                  )
                 ]
               ),
               _vm._v(" "),
               _c(
                 "div",
                 {
-                  staticClass: "tab-pane fade",
+                  staticClass: "tab-pane fade parrent",
                   attrs: {
                     id: "nav-chat",
                     role: "tabpanel",
@@ -64118,41 +64151,19 @@ var render = function() {
                     0
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "input-group" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.chatTitle,
-                          expression: "chatTitle"
-                        }
-                      ],
-                      staticClass: "form-control form-control-sm",
-                      attrs: { type: "text", placeholder: "Название" },
-                      domProps: { value: _vm.chatTitle },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.chatTitle = $event.target.value
-                        }
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-sm",
+                      attrs: {
+                        id: "create_button",
+                        "data-toggle": "modal",
+                        "data-target": "#chatModal",
+                        type: "button"
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group-append" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-outline-secondary btn-sm",
-                          attrs: { type: "button" },
-                          on: { click: _vm.createChat }
-                        },
-                        [_vm._v("Создать")]
-                      )
-                    ])
-                  ])
+                    },
+                    [_vm._v("Создать")]
+                  )
                 ]
               ),
               _vm._v(" "),
@@ -64204,6 +64215,8 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "mesgs" }, [
+          _vm.isLoading ? _c("div", { staticClass: "loading" }) : _vm._e(),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "msg_history" },
@@ -64286,10 +64299,221 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.dialog_message,
+                        expression: "dialog_message"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "text", placeholder: "Наберите сообщение" },
+                    domProps: { value: _vm.dialog_message },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.dialog_message = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-secondary btn-sm",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: { click: _vm.startDialog }
+                      },
+                      [_vm._v("Отправить")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "chatModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.chatTitle,
+                        expression: "chatTitle"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "text", placeholder: "Название" },
+                    domProps: { value: _vm.chatTitle },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.chatTitle = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-secondary btn-sm",
+                        attrs: { type: "button" },
+                        on: { click: _vm.createChat }
+                      },
+                      [_vm._v("Создать")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Отправить сообщение")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Закрыть")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Создать беседу")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Закрыть")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

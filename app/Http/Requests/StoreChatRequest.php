@@ -26,11 +26,12 @@ class StoreChatRequest extends FormRequest
         if ($this->type == 'chat') {
             $condition = 'array';
         }   elseif ($this->type == 'dialog') {
-            $condition = 'required|numeric|exists:users,id';
+            $condition = 'required|exists:users,id';
         }
         return [
             'title' => 'required|max:50',
             'users' => $condition,
+            'users.*' => 'exists:users,id',
             'type' => 'required|in:chat,dialog',
         ];
     }
