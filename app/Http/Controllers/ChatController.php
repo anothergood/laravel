@@ -6,7 +6,6 @@ use Log;
 use App\Chat;
 use App\User;
 use App\Message;
-use App\UserUser;
 use App\Events\PublicChat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,13 +40,14 @@ class ChatController extends Controller
                 $chat->type = 'dialog';
                 $chat->save();
 
-                $data = [
-                    'type' => 'chat_invite',
-                    'data' => $chat,
-                ];
-
                 $chat->users()->attach($request->user()->id);
                 $chat->users()->attach($request->users);
+
+                $data = [
+                    'type' => 'chat_invite',
+                    'data' => $chat->load('users'),
+                ];
+
                 User::find($request->users)->userPush($data);
 
                 return $chat;
@@ -60,15 +60,14 @@ class ChatController extends Controller
 
             $data = [
                 'type' => 'chat_invite',
-                'data' => $chat,
+                'data' => $chat->load('users'),
             ];
 
             $chat->users()->attach($request->user()->id);
             if ($request->users !== null) {
                 $chat->users()->syncWithoutDetaching($request->users);
-                foreach ($request->users as $id){
-                    User::find($id)->userPush($data);
-                }
+
+                $chat->usersNotification($data, $request->user()->id);
             }
             return $chat;
         }
@@ -76,35 +75,31 @@ class ChatController extends Controller
 
     public function inviteUser(Request $request, $chat, User $user) {
 
-        $chat_check = $request->user()->chats()->findOrFail($chat);
-        if($chat_check) {
-            $user_chat = $chat_check->users()->where('id',$user->id)->exists();
-            if(!$user_chat) {
-                $chat_check->users()->attach($user->id);
-                $data_chat_invite = [
-                    'type' => 'chat_invite',
-                    'data' => $chat_check,
-                ];
+        $chat = $request->user()->chats()->findOrFail($chat);
+        $user_check = $chat->users()->where('id',$user->id)->first();
+        if(!$user_check) {
+            $chat->users()->attach($user->id);
+            $data_chat_invite = [
+                'type' => 'chat_invite',
+                'data' => $chat->load('users'),
+            ];
 
-                $user->userPush($data_chat_invite);
+            $user->userPush($data_chat_invite);
 
-                $data_new_invited = [
-                    'type' => 'new_invited',
-                    'data' => $chat_check,
-                ];
+            $data_new_invited = [
+                'type' => 'new_invited',
+                'data' => $user,
+            ];
 
-                $users_push = $chat_check->users()->where('id', '<>', $request->user()->id)->where('id', '<>', $user->id)->get();
-                foreach ($users_push as $user){
-                    $user->userPush($data_new_invited);
-                }
 
-                return response(['status'=>'ok']);
+            $chat->usersNotification($data_new_invited, $request->user()->id);
 
-            } else {
+            return response(['status'=>'ok']);
 
-                return response(['status'=>'User is already in chat'], 422);
+        } else {
 
-            }
+            return response(['status'=>'User is already in chat'], 422);
+
         }
     }
 
@@ -115,39 +110,16 @@ class ChatController extends Controller
 
     }
 
-    public function inviteChatList(Request $request, $chat)
-    {
+    public function inviteChatList(Request $request, $chat) {
 
         $user_chat = $request->user()->chats()->findOrFail($chat);
-        if($user_chat) {
 
-            $friends_init = UserUser::where('status', 'approved')
-                                    ->Where('user_initiator_id', $request->user()->id)
-                                    ->get();
-            $friends_recip = UserUser::where('status', 'approved')
-                                     ->where('user_id', $request->user()->id)
-                                     ->get();
+        $inviteChatList = $request->user()->friends()->whereDoesntHave('chats', function ($query) use($request, $chat) {
+            $query->where('id', $chat);
+        })->paginate(10);
 
-            $friends_init_id = [];
-            $friends_recip_id = [];
-            foreach ($friends_init as $friend) {
-                $friends_init_id[] = $friend->user_id;
-            }
+        return $inviteChatList;
 
-            foreach ($friends_recip as $friend) {
-                $friends_recip_id[] = $friend->user_initiator_id;
-            }
-            $ids = array_merge($friends_init_id,$friends_recip_id);
-            $friends = User::whereIn('id', $ids);
-
-            $inviteChatList = $friends->whereDoesntHave('chats', function ($query) use($request, $chat) {
-                $query->where('id', $chat);
-            })->paginate(10);
-            return $inviteChatList;
-
-        } else {
-            return response(['status' => 'Chat not found'], 404);
-        }
     }
 
 }

@@ -61,4 +61,26 @@ class User extends Authenticatable
         event(new ChatPrivateMessage($this, $data));
     }
 
+    public function friends()
+    {
+        $ids = UserUser::where('status', 'approved')
+                ->where('user_initiator_id', $this->id)
+                ->orWhere('user_id', $this->id)
+                ->get();
+
+        $friends_id = [];
+        foreach ($ids as $id) {
+            if ($id->user_initiator_id == $this->id) {
+                $friends_id[] = $id->user_id;
+            }  else {
+                $friends_id[] = $id->user_initiator_id;
+            }
+        }
+
+        $friends = User::whereIn('id', $friends_id);
+
+        return $friends;
+
+    }
+
 }

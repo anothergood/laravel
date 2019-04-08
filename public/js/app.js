@@ -63345,7 +63345,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.parrent{\n    position:relative;\n}\n#create_button{\n    position:absolute;\n    right:35px;\n    bottom: 20px;\n    /* background-color: white; */\n}\n\n\n\n/* .unselectable {\n    -moz-user-select: none;\n    -khtml-user-select: none;\n    -webkit-user-select: none;\n    user-select: none;\n} */\n\n/* .dropdown{\n    z-index: 100;\n} */\na.active.focus,\na.active:focus,\na.focus,\na:active.focus,\na:active:focus,\na:focus,\nbutton.active.focus,\nbutton.active:focus,\nbutton.focus,\nbutton:active.focus,\nbutton:active:focus,\nbutton:focus,\n.btn.active.focus,\n.btn.active:focus,\n.btn.focus,\n.btn:active.focus,\n.btn:active:focus,\n.btn:focus {\n    outline: 0 ;\n    outline-color: transparent ;\n    outline-width: 0 ;\n    outline-style: none ;\n    -webkit-box-shadow: 0 0 0 0 rgba(0,123,255,0);\n            box-shadow: 0 0 0 0 rgba(0,123,255,0);\n}\nlabel {\n    margin: 0;\n}\n/* .container{max-width:1170px; margin:auto;} */\nimg{ max-width:100%;\n}\n.inbox_people {\nbackground: #f8f8f8 none repeat scroll 0 0;\nfloat: left;\noverflow: hidden;\nwidth: 40%; border-right:1px solid #c4c4c4;\nheight: 570px;\nposition: relative;\n}\n.inbox_msg {\nborder: 1px solid #c4c4c4;\nclear: both;\noverflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\ndisplay: inline-block;\ntext-align: right;\nwidth: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\ncolor: #05728f;\nfont-size: 21px;\nmargin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\npadding: 0;\ncolor: #707070;\nfont-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\nfloat: left;\nwidth: 11%;\n}\n.chat_ib {\nfloat: left;\npadding: 0 0 0 15px;\nwidth: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\nborder-bottom: 1px solid #c4c4c4;\nmargin: 0;\npadding: 18px 16px 10px;\n}\n.inbox_chats {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_dialogs {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_chat {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_invite {padding: 0; height: 530px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\ndisplay: inline-block;\nwidth: 6%;\n}\n.received_msg {\ndisplay: inline-block;\npadding: 0 0 0 0px;\nvertical-align: top;\nwidth: 60%;\n}\n.received_withd_msg p {\nbackground: #ebebeb none repeat scroll 0 0;\nborder-radius: 3px;\ncolor: #646464;\nfont-size: 14px;\nmargin: 0;\npadding: 5px 10px 5px 12px;\nwidth: 100%;\n}\n.time_date {\ncolor: #747474;\ndisplay: block;\nfont-size: 12px;\nmargin: 8px 0 0;\n}\n.received_withd_msg { width: 100%; margin: 0px;\n}\n.mesgs {\nfloat: left;\npadding: 10px 15px 15px 25px;\nwidth: 60%;\nheight: 570px;\nposition: relative;\n}\n.sent_msg p {\nbackground: #05728f none repeat scroll 0 0;\nborder-radius: 3px;\nfont-size: 14px;\nmargin: 0; color:#fff;\npadding: 5px 10px 5px 12px;\nwidth:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:0 0 13px;\n}\n.incoming_msg{ overflow:hidden; margin:0 0 13px;\n}\n.sent_msg {\nfloat: right;\nwidth: 60%;\n}\n.input_msg_write input {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\ncolor: #4c4c4c;\nfont-size: 15px;\nmin-height: 48px;\nwidth: 100%;\n}\n.type_msg {position: relative; margin-top: 3px;\n}\n.msg_send_btn {\nbackground: #05728f none repeat scroll 0 0;\nborder: medium none;\nborder-radius: 50%;\ncolor: #fff;\ncursor: pointer;\nfont-size: 17px;\nheight: 33px;\nposition: absolute;\nright: 0;\ntop: 11px;\nwidth: 33px;\n}\n.messaging { padding: 0;\n}\n.msg_history {\n    position: absolute;\nleft:25;\nright:10;\ntop:15;\nbottom:15;\noverflow-y: scroll;\n}\n.loading {\n    z-index:10;\n    margin-left: auto;\n    margin-right: auto;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 0;\n  padding: 20px;  /* если задать в %, то будет рассчитываться от ширины родителя */\n  background:\n   -webkit-gradient(linear, left top, left bottom, color-stop(30%, rgba(0,0,0,1)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.4))),\n   -webkit-gradient(linear, right top, left top, color-stop(30%, rgba(0,0,0,.2)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.8)));\n  background:\n   linear-gradient(rgba(0,0,0,1) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.4) 70%),\n   linear-gradient(to left, rgba(0,0,0,.2) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.8) 70%);\n  background-repeat: no-repeat;\n  background-size: 10% 100%, 100% 10%;\n  background-position: 50% 0%, 0 50%;\n  -webkit-animation: loading .7s infinite steps(8);\n  animation: loading .7s infinite steps(8);\n}\n.loading:after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-image:\n   -webkit-gradient(linear, left top, left bottom, color-stop(30%, rgba(0,0,0,.1)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.5))),\n   -webkit-gradient(linear, right top, left top, color-stop(30%, rgba(0,0,0,.3)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.9)));\n  background-image:\n   linear-gradient(rgba(0,0,0,.1) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.5) 70%),\n   linear-gradient(to left, rgba(0,0,0,.3) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.9) 70%);\n  background-repeat: no-repeat;\n  background-size: 10% 100%, 100% 10%;\n  background-position: 50% 0%, 0 50%;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n@-webkit-keyframes loading {\n100% {-webkit-transform: rotate(1turn);\n}\n}\n@keyframes loading {\n100% {-webkit-transform: rotate(1turn);transform: rotate(1turn);\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.parrent{\n    position:relative;\n}\n#create_button{\n    position:absolute;\n    right:35px;\n    bottom: 20px;\n}\n\n\n\n/* .unselectable {\n    -moz-user-select: none;\n    -khtml-user-select: none;\n    -webkit-user-select: none;\n    user-select: none;\n} */\n\n/* .dropdown{\n    z-index: 100;\n} */\na.active.focus,\na.active:focus,\na.focus,\na:active.focus,\na:active:focus,\na:focus,\nbutton.active.focus,\nbutton.active:focus,\nbutton.focus,\nbutton:active.focus,\nbutton:active:focus,\nbutton:focus,\n.btn.active.focus,\n.btn.active:focus,\n.btn.focus,\n.btn:active.focus,\n.btn:active:focus,\n.btn:focus {\n    outline: 0 ;\n    outline-color: transparent ;\n    outline-width: 0 ;\n    outline-style: none ;\n    -webkit-box-shadow: 0 0 0 0 rgba(0,123,255,0);\n            box-shadow: 0 0 0 0 rgba(0,123,255,0);\n}\nlabel {\n    margin: 0;\n}\n/* .container{max-width:1170px; margin:auto;} */\nimg{ max-width:100%;\n}\n.inbox_people {\nbackground: #f8f8f8 none repeat scroll 0 0;\nfloat: left;\noverflow: hidden;\nwidth: 40%; border-right:1px solid #c4c4c4;\nheight: 570px;\nposition: relative;\n}\n.inbox_msg {\nborder: 1px solid #c4c4c4;\nclear: both;\noverflow: hidden;\n}\n.top_spac{ margin: 20px 0 0;\n}\n.recent_heading {float: left; width:40%;\n}\n.srch_bar {\ndisplay: inline-block;\ntext-align: right;\nwidth: 60%; padding:\n}\n.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;\n}\n.recent_heading h4 {\ncolor: #05728f;\nfont-size: 21px;\nmargin: auto;\n}\n.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;\n}\n.srch_bar .input-group-addon button {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\npadding: 0;\ncolor: #707070;\nfont-size: 18px;\n}\n.srch_bar .input-group-addon { margin: 0 0 0 -27px;\n}\n.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;\n}\n.chat_ib h5 span{ font-size:13px; float:right;\n}\n.chat_ib p{ font-size:14px; color:#989898; margin:auto\n}\n.chat_img {\nfloat: left;\nwidth: 11%;\n}\n.chat_ib {\nfloat: left;\npadding: 0 0 0 15px;\nwidth: 88%;\n}\n.chat_people{ overflow:hidden; clear:both;\n}\n.chat_list {\nborder-bottom: 1px solid #c4c4c4;\nmargin: 0;\npadding: 18px 16px 10px;\n}\n.inbox_chats {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_dialogs {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_chat {padding: 0; height: 530px; overflow-y: scroll;\n}\n.inbox_invite {padding: 0; height: 530px; overflow-y: scroll;\n}\n.active_chat{ background:#ebebeb;\n}\n.incoming_msg_img {\ndisplay: inline-block;\nwidth: 6%;\n}\n.received_msg {\ndisplay: inline-block;\npadding: 0 0 0 0px;\nvertical-align: top;\nwidth: 60%;\n}\n.received_withd_msg p {\nbackground: #ebebeb none repeat scroll 0 0;\nborder-radius: 3px;\ncolor: #646464;\nfont-size: 14px;\nmargin: 0;\npadding: 5px 10px 5px 12px;\nwidth: 100%;\n}\n.time_date {\ncolor: #747474;\ndisplay: block;\nfont-size: 12px;\nmargin: 8px 0 0;\n}\n.received_withd_msg { width: 100%; margin: 0px;\n}\n.mesgs {\nfloat: left;\npadding: 10px 15px 15px 25px;\nwidth: 60%;\nheight: 570px;\nposition: relative;\n}\n.sent_msg p {\nbackground: #05728f none repeat scroll 0 0;\nborder-radius: 3px;\nfont-size: 14px;\nmargin: 0; color:#fff;\npadding: 5px 10px 5px 12px;\nwidth:100%;\n}\n.outgoing_msg{ overflow:hidden; margin:0 0 13px;\n}\n.incoming_msg{ overflow:hidden; margin:0 0 13px;\n}\n.sent_msg {\nfloat: right;\nwidth: 60%;\n}\n.input_msg_write input {\nbackground: rgba(0, 0, 0, 0) none repeat scroll 0 0;\nborder: medium none;\ncolor: #4c4c4c;\nfont-size: 15px;\nmin-height: 48px;\nwidth: 100%;\n}\n.type_msg {position: relative; margin-top: 3px;\n}\n.msg_send_btn {\nbackground: #05728f none repeat scroll 0 0;\nborder: medium none;\nborder-radius: 50%;\ncolor: #fff;\ncursor: pointer;\nfont-size: 17px;\nheight: 33px;\nposition: absolute;\nright: 0;\ntop: 11px;\nwidth: 33px;\n}\n.messaging { padding: 0;\n}\n.msg_history {\n    position: absolute;\nleft:25;\nright:10;\ntop:15;\nbottom:15;\noverflow-y: scroll;\n}\n.loading {\n    z-index:10;\n    margin-left: auto;\n    margin-right: auto;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 0;\n  padding: 20px;  /* если задать в %, то будет рассчитываться от ширины родителя */\n  background:\n   -webkit-gradient(linear, left top, left bottom, color-stop(30%, rgba(0,0,0,1)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.4))),\n   -webkit-gradient(linear, right top, left top, color-stop(30%, rgba(0,0,0,.2)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.8)));\n  background:\n   linear-gradient(rgba(0,0,0,1) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.4) 70%),\n   linear-gradient(to left, rgba(0,0,0,.2) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.8) 70%);\n  background-repeat: no-repeat;\n  background-size: 10% 100%, 100% 10%;\n  background-position: 50% 0%, 0 50%;\n  -webkit-animation: loading .7s infinite steps(8);\n  animation: loading .7s infinite steps(8);\n}\n.loading:after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-image:\n   -webkit-gradient(linear, left top, left bottom, color-stop(30%, rgba(0,0,0,.1)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.5))),\n   -webkit-gradient(linear, right top, left top, color-stop(30%, rgba(0,0,0,.3)), color-stop(30%, transparent), color-stop(70%, transparent), color-stop(70%, rgba(0,0,0,.9)));\n  background-image:\n   linear-gradient(rgba(0,0,0,.1) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.5) 70%),\n   linear-gradient(to left, rgba(0,0,0,.3) 30%, transparent 30%, transparent 70%, rgba(0,0,0,.9) 70%);\n  background-repeat: no-repeat;\n  background-size: 10% 100%, 100% 10%;\n  background-position: 50% 0%, 0 50%;\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n@-webkit-keyframes loading {\n100% {-webkit-transform: rotate(1turn);\n}\n}\n@keyframes loading {\n100% {-webkit-transform: rotate(1turn);transform: rotate(1turn);\n}\n}\n\n", ""]);
 
 // exports
 
@@ -63527,6 +63527,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             dialog_message: "",
             userSelect: [],
             dialogSelect: "",
+            tabSelect: 1,
             chatId: "",
             chatSelect: {},
             isActive: false,
@@ -63545,7 +63546,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
             _this.nextPageChat = response.data.next_page_url;
             (_friends = _this.friends).push.apply(_friends, _toConsumableArray(response.data.data));
-            // this.friends.push(...response.data.friends);
         });
 
         axios({
@@ -63602,7 +63602,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                             _this2.nextPageDialog = response.data.next_page_url;
                             _this2.without_dialogs.splice(0, _this2.without_dialogs.length);
                             (_without_dialogs2 = _this2.without_dialogs).push.apply(_without_dialogs2, _toConsumableArray(response.data.data));
-                            // this.without_dialogs.push(...response.data.without_dialogs);
                         });
                     }
                     _this2.$nextTick(function () {
@@ -63610,8 +63609,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         container.scrollTop = container.scrollHeight;
                     });
                 } else if (data.type == 'message') {
-                    if (_this2.chatSelect.id == data.data.chat_id) {
-                        _this2.dataMessages.push({ body: data.data.message, user: { user_id: data.data.from_user.id, username: data.data.from_user.username }, created_at: data.data.created_at });
+                    if (_this2.chatSelect.id == data.data.chat.id) {
+                        _this2.dataMessages.push({ body: data.data.message.body, user: { user_id: data.data.user.id, username: data.data.user.username }, created_at: data.data.message.created_at });
                         _this2.$nextTick(function () {
                             var container = _this2.$el.querySelector(".msg_history");
                             container.scrollTop = container.scrollHeight;
@@ -63629,7 +63628,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         });
                     } else {
                         _this2.chats.forEach(function (item, i, arr) {
-                            if (item.id == data.data.chat_id) {
+                            if (item.id == data.data.chat.id) {
                                 item.pivot.unread_messages++;
                             }
                         });
@@ -63706,9 +63705,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         container.scrollTop = container.scrollHeight - scroll;
                     });
                 });
-                // this.$nextTick(() => {
-                //     this.isLoading = false;
-                // });
             }
         });
         var chats_container = this.$el.querySelector(".inbox_chats");
@@ -63789,6 +63785,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             }).then(function (response) {
                 _this5.chats.push({ id: response.data.id, title: response.data.title, type: response.data.type, pivot: { unread_messages: 0 } });
                 _this5.chatSelect = response.data;
+                _this5.tabSelect = 1;
                 _this5.$nextTick(function () {
                     axios({
                         method: 'post',
@@ -63796,6 +63793,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                         params: { body: _this5.dialog_message }
                     }).then(function (response) {
+                        _this5.dataMessages.push({ body: response.data.data.message.body, user: { id: _this5.user.id, username: _this5.user.username }, created_at: response.data.data.message.created_at });
                         _this5.dialog_message = "";
                         _this5.without_dialogs.splice(_this5.without_dialogs.indexOf(_this5.dialogSelect), 1);
                         _this5.$nextTick(function () {
@@ -63816,7 +63814,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                 params: { body: this.message }
             }).then(function (response) {
-                _this6.dataMessages.push({ body: response.data.data.message, user: { id: _this6.user.id, username: _this6.user.username }, created_at: response.data.data.created_at });
+                _this6.dataMessages.push({ body: response.data.data.message.body, user: { id: _this6.user.id, username: _this6.user.username }, created_at: response.data.data.message.created_at });
                 _this6.message = "";
                 _this6.$nextTick(function () {
                     var container = _this6.$el.querySelector(".msg_history");
@@ -63831,16 +63829,33 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             this.dialogSelect = friend;
         },
         makeActiveFriends: function makeActiveFriends(friend) {
-            // console.log(this.userSelect.indexOf(friend) !== -1);
             if (this.userSelect.indexOf(friend) !== -1) {
                 this.userSelect.splice(this.userSelect.indexOf(friend), 1);
             } else {
                 this.userSelect.push(friend);
             }
         },
+        tabActive: function tabActive(tab) {
+            var _this7 = this;
+
+            this.tabSelect = tab;
+            if (tab == 4) {
+                axios({
+                    method: 'post',
+                    url: '/api/v1/chat/' + this.chatSelect.id + '/invite-chat-list',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+                }).then(function (response) {
+                    var _invite_chat_users3;
+
+                    _this7.nextPageInviteList = response.data.next_page_url;
+                    _this7.invite_chat_users.splice(0, _this7.invite_chat_users.length);
+                    (_invite_chat_users3 = _this7.invite_chat_users).push.apply(_invite_chat_users3, _toConsumableArray(response.data.data));
+                });
+            }
+        },
 
         createChat: function createChat() {
-            var _this7 = this;
+            var _this8 = this;
 
             axios({
                 method: 'post',
@@ -63848,37 +63863,36 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
                 params: { title: this.chatTitle, users: this.userSelect, type: 'chat' }
             }).then(function (response) {
-                _this7.chats.push({ id: response.data.id, title: response.data.title, type: response.data.type, pivot: { unread_messages: 0 } });
-                _this7.chatTitle = "";
-                _this7.userSelect = [];
+                _this8.chats.push({ id: response.data.id, title: response.data.title, type: response.data.type, pivot: { unread_messages: 0 } });
+                _this8.chatTitle = "";
+                _this8.userSelect = [];
+                _this8.chatSelect = response.data;
+                _this8.tabSelect = 1;
             });
         },
         inviteUser: function inviteUser(user) {
-            var _this8 = this;
+            var _this9 = this;
 
             axios({
                 method: 'post',
                 url: '/api/v1/chat/' + this.chatSelect.id + '/invite/' + user.id,
                 headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
             }).then(function (response) {
-                _this8.invite_chat_users.splice(_this8.invite_chat_users.indexOf(user), 1);
-            });
-        },
-        inviteUserList: function inviteUserList() {
-            var _this9 = this;
-
-            axios({
-                method: 'post',
-                url: '/api/v1/chat/' + this.chatSelect.id + '/invite-chat-list',
-                headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
-            }).then(function (response) {
-                var _invite_chat_users3;
-
-                _this9.nextPageInviteList = response.data.next_page_url;
-                _this9.invite_chat_users.splice(0, _this9.invite_chat_users.length);
-                (_invite_chat_users3 = _this9.invite_chat_users).push.apply(_invite_chat_users3, _toConsumableArray(response.data.data));
+                _this9.invite_chat_users.splice(_this9.invite_chat_users.indexOf(user), 1);
             });
         }
+        // inviteUserList: function () {
+        //     axios({
+        //         method: 'post',
+        //         url: '/api/v1/chat/'+this.chatSelect.id+'/invite-chat-list',
+        //         headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+        //     })
+        //     .then((response) => {
+        //         this.nextPageInviteList = response.data.next_page_url;
+        //         this.invite_chat_users.splice( 0, this.invite_chat_users.length);
+        //         this.invite_chat_users.push(...response.data.data);
+        //     });
+        // },
     }
 });
 
@@ -63905,7 +63919,8 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "nav-item nav-link active",
+                    staticClass: "nav-item nav-link",
+                    class: { active: _vm.tabSelect == 1 },
                     attrs: {
                       id: "nav-chats-tab",
                       "data-toggle": "tab",
@@ -63913,6 +63928,11 @@ var render = function() {
                       role: "tab",
                       "aria-controls": "nav-chats",
                       "aria-selected": "true"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.tabActive(1)
+                      }
                     }
                   },
                   [_vm._v("Chats")]
@@ -63922,6 +63942,7 @@ var render = function() {
                   "a",
                   {
                     staticClass: "nav-item nav-link",
+                    class: { active: _vm.tabSelect == 2 },
                     attrs: {
                       id: "nav-dialog-tab",
                       "data-toggle": "tab",
@@ -63929,6 +63950,11 @@ var render = function() {
                       role: "tab",
                       "aria-controls": "nav-dialog",
                       "aria-selected": "false"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.tabActive(2)
+                      }
                     }
                   },
                   [_vm._v("Диалог")]
@@ -63938,6 +63964,7 @@ var render = function() {
                   "a",
                   {
                     staticClass: "nav-item nav-link",
+                    class: { active: _vm.tabSelect == 3 },
                     attrs: {
                       id: "nav-chat-tab",
                       "data-toggle": "tab",
@@ -63945,6 +63972,11 @@ var render = function() {
                       role: "tab",
                       "aria-controls": "nav-chat",
                       "aria-selected": "false"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.tabActive(3)
+                      }
                     }
                   },
                   [_vm._v("Беседа")]
@@ -63957,7 +63989,8 @@ var render = function() {
                     class: {
                       disabled:
                         _vm.chatSelect.id == null ||
-                        _vm.chatSelect.type == "dialog"
+                        _vm.chatSelect.type == "dialog",
+                      active: _vm.tabSelect == 4
                     },
                     attrs: {
                       id: "nav-invite-tab",
@@ -63967,7 +64000,11 @@ var render = function() {
                       "aria-controls": "nav-invite",
                       "aria-selected": "false"
                     },
-                    on: { click: _vm.inviteUserList }
+                    on: {
+                      click: function($event) {
+                        return _vm.tabActive(4)
+                      }
+                    }
                   },
                   [_vm._v("Пригласить")]
                 )
@@ -63982,7 +64019,11 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "tab-pane fade show active",
+                  staticClass: "tab-pane fade",
+                  class: {
+                    active: _vm.tabSelect == 1,
+                    show: _vm.tabSelect == 1
+                  },
                   attrs: {
                     id: "nav-chats",
                     role: "tabpanel",
@@ -64052,6 +64093,10 @@ var render = function() {
                 "div",
                 {
                   staticClass: "tab-pane fade",
+                  class: {
+                    active: _vm.tabSelect == 2,
+                    show: _vm.tabSelect == 2
+                  },
                   attrs: {
                     id: "nav-dialog",
                     role: "tabpanel",
@@ -64109,6 +64154,10 @@ var render = function() {
                 "div",
                 {
                   staticClass: "tab-pane fade parrent",
+                  class: {
+                    active: _vm.tabSelect == 3,
+                    show: _vm.tabSelect == 3
+                  },
                   attrs: {
                     id: "nav-chat",
                     role: "tabpanel",
@@ -64171,6 +64220,10 @@ var render = function() {
                 "div",
                 {
                   staticClass: "tab-pane fade",
+                  class: {
+                    active: _vm.tabSelect == 4,
+                    show: _vm.tabSelect == 4
+                  },
                   attrs: {
                     id: "nav-invite",
                     role: "tabpanel",
@@ -64349,7 +64402,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-outline-secondary btn-sm",
+                        staticClass: "btn btn-secondary btn-sm",
                         attrs: { type: "button", "data-dismiss": "modal" },
                         on: { click: _vm.startDialog }
                       },
@@ -64414,8 +64467,8 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-outline-secondary btn-sm",
-                        attrs: { type: "button" },
+                        staticClass: "btn btn-secondary btn-sm",
+                        attrs: { type: "button", "data-dismiss": "modal" },
                         on: { click: _vm.createChat }
                       },
                       [_vm._v("Создать")]

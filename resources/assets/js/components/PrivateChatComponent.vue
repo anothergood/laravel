@@ -6,14 +6,14 @@
                 <div class="inbox_people">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-chats-tab" data-toggle="tab" href="#nav-chats" role="tab" aria-controls="nav-chats" aria-selected="true">Chats</a>
-                            <a class="nav-item nav-link" id="nav-dialog-tab" data-toggle="tab" href="#nav-dialog" role="tab" aria-controls="nav-dialog" aria-selected="false">Диалог</a>
-                            <a class="nav-item nav-link" id="nav-chat-tab" data-toggle="tab" href="#nav-chat" role="tab" aria-controls="nav-chat" aria-selected="false">Беседа</a>
-                            <a class="nav-item nav-link" id="nav-invite-tab" data-toggle="tab" href="#nav-invite" role="tab" aria-controls="nav-invite" aria-selected="false" v-bind:class="{ disabled: chatSelect.id == null || chatSelect.type == 'dialog' }" @click="inviteUserList">Пригласить</a>
+                            <a class="nav-item nav-link" id="nav-chats-tab" data-toggle="tab" href="#nav-chats" role="tab" aria-controls="nav-chats" aria-selected="true" v-bind:class="{ active: tabSelect == 1 }" @click="tabActive(1)">Chats</a>
+                            <a class="nav-item nav-link" id="nav-dialog-tab" data-toggle="tab" href="#nav-dialog" role="tab" aria-controls="nav-dialog" aria-selected="false"  v-bind:class="{ active: tabSelect == 2 }"  @click="tabActive(2)">Диалог</a>
+                            <a class="nav-item nav-link" id="nav-chat-tab" data-toggle="tab" href="#nav-chat" role="tab" aria-controls="nav-chat" aria-selected="false" v-bind:class="{ active: tabSelect == 3 }" @click="tabActive(3)">Беседа</a>
+                            <a class="nav-item nav-link" id="nav-invite-tab" data-toggle="tab" href="#nav-invite" role="tab" aria-controls="nav-invite" aria-selected="false" v-bind:class="{ disabled: chatSelect.id == null || chatSelect.type == 'dialog', active: tabSelect == 4}" @click="tabActive(4)">Пригласить</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-chats" role="tabpanel" aria-labelledby="nav-chats-tab">
+                        <div class="tab-pane fade" id="nav-chats" role="tabpanel" aria-labelledby="nav-chats-tab"  v-bind:class="{ active: tabSelect == 1, show: tabSelect == 1 }">
                             <div class="inbox_chats">
                                 <div class="chat_list unselectable" v-for="chat in chats" v-bind="{ chatSelect: chat }" v-bind:class="{ active_chat: chatSelect.id == chat.id  }" @click="makeActiveChat(chat)" >
                                     <div class="chat_people">
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-dialog" role="tabpanel" aria-labelledby="nav-dialog-tab">
+                        <div class="tab-pane fade" id="nav-dialog" role="tabpanel" aria-labelledby="nav-dialog-tab" v-bind:class="{ active: tabSelect == 2, show: tabSelect == 2 }">
                             <div class="inbox_dialogs">
                                 <div class="chat_list unselectable" v-for="without_dialog in without_dialogs" v-bind="{ dialogSelect: without_dialog }" v-bind:class="{ active_chat: dialogSelect.id == without_dialog.id  }" @click="makeActiveFriend(without_dialog)"  data-toggle="modal" data-target="#exampleModal">
                                     <div class="chat_people">
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade parrent" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab">
+                        <div class="tab-pane fade parrent" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab" v-bind:class="{ active: tabSelect == 3, show: tabSelect == 3 }">
                             <!-- <label>Беседа</label> -->
                             <div class="inbox_chat">
                                 <div class="chat_list unselectable" v-for="friend in friends" v-bind:class="{ active_chat: userSelect.indexOf(friend.id) !== -1 }" @click="makeActiveFriends(friend.id)" >
@@ -53,7 +53,7 @@
                             </div>
                             <button id="create_button" data-toggle="modal" data-target="#chatModal" class="btn btn-secondary btn-sm" type="button">Создать</button>
                         </div>
-                        <div class="tab-pane fade" id="nav-invite" role="tabpanel" aria-labelledby="nav-invite-tab">
+                        <div class="tab-pane fade" id="nav-invite" role="tabpanel" aria-labelledby="nav-invite-tab" v-bind:class="{ active: tabSelect == 4, show: tabSelect == 4 }">
                             <!-- <label>Пригласить</label> -->
                             <div class="inbox_invite">
                                 <div class="chat_list unselectable" v-for="invite_chat_user in invite_chat_users" @click="inviteUser(invite_chat_user)" >
@@ -108,7 +108,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control form-control-sm" placeholder="Наберите сообщение" v-model="dialog_message">
                             <div class="input-group-append">
-                                <button @click="startDialog" class="btn btn-outline-secondary btn-sm" type="button" data-dismiss="modal">Отправить</button>
+                                <button @click="startDialog" class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Отправить</button>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control form-control-sm" placeholder="Название" v-model="chatTitle">
                             <div class="input-group-append">
-                                <button @click="createChat" class="btn btn-outline-secondary btn-sm" type="button">Создать</button>
+                                <button @click="createChat" class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Создать</button>
                             </div>
                         </div>
                     </div>
@@ -167,6 +167,7 @@
                 dialog_message: "",
                 userSelect: [],
                 dialogSelect: "",
+                tabSelect: 1,
                 chatId: "",
                 chatSelect: {},
                 isActive: false,
@@ -183,7 +184,6 @@
             .then((response) => {
                 this.nextPageChat = response.data.next_page_url;
                 this.friends.push(...response.data.data);
-                // this.friends.push(...response.data.friends);
             });
 
             axios({
@@ -235,7 +235,6 @@
                                 this.nextPageDialog = response.data.next_page_url;
                                 this.without_dialogs.splice( 0, this.without_dialogs.length);
                                 this.without_dialogs.push(...response.data.data);
-                                // this.without_dialogs.push(...response.data.without_dialogs);
                             });
                         }
                         this.$nextTick(() => {
@@ -244,8 +243,8 @@
                         });
                     }
                     else if (data.type == 'message') {
-                        if (this.chatSelect.id == data.data.chat_id) {
-                            this.dataMessages.push({body: data.data.message, user: { user_id: data.data.from_user.id, username: data.data.from_user.username}, created_at: data.data.created_at });
+                        if (this.chatSelect.id == data.data.chat.id) {
+                            this.dataMessages.push({body: data.data.message.body, user: { user_id: data.data.user.id, username: data.data.user.username}, created_at: data.data.message.created_at });
                             this.$nextTick(() => {
                                 var container = this.$el.querySelector(".msg_history");
                                 container.scrollTop = container.scrollHeight;
@@ -264,7 +263,7 @@
                             });
                         } else {
                             this.chats.forEach(function(item, i, arr) {
-                                if (item.id == data.data.chat_id) {
+                                if (item.id == data.data.chat.id) {
                                     item.pivot.unread_messages++;
                                 }
                             });
@@ -288,6 +287,7 @@
             },
 
             chatSelect: function (val, oldVal) {
+
                 axios({
                     method: 'post',
                     url: '/api/v1/chat/'+this.chatSelect.id+'/all',
@@ -336,9 +336,6 @@
                             container.scrollTop = container.scrollHeight - scroll;
                         });
                     });
-                    // this.$nextTick(() => {
-                    //     this.isLoading = false;
-                    // });
                 }
             });
             const chats_container = this.$el.querySelector(".inbox_chats");
@@ -413,6 +410,7 @@
                 .then((response) => {
                     this.chats.push({id: response.data.id, title: response.data.title, type: response.data.type, pivot: {unread_messages: 0}});
                     this.chatSelect = response.data;
+                    this.tabSelect = 1;
                     this.$nextTick(() => {
                         axios({
                             method: 'post',
@@ -421,6 +419,7 @@
                             params: { body: this.dialog_message }
                         })
                         .then((response) => {
+                            this.dataMessages.push({body: response.data.data.message.body, user: { id: this.user.id, username: this.user.username}, created_at: response.data.data.message.created_at });
                             this.dialog_message = "";
                             this.without_dialogs.splice( this.without_dialogs.indexOf(this.dialogSelect), 1);
                             this.$nextTick(() => {
@@ -441,7 +440,7 @@
                     params: { body: this.message }
                 })
                 .then((response) => {
-                    this.dataMessages.push({body: response.data.data.message, user: { id: this.user.id, username: this.user.username}, created_at: response.data.data.created_at });
+                    this.dataMessages.push({body: response.data.data.message.body, user: { id: this.user.id, username: this.user.username}, created_at: response.data.data.message.created_at });
                     this.message = "";
                     this.$nextTick(() => {
                         var container = this.$el.querySelector(".msg_history");
@@ -456,11 +455,25 @@
                 this.dialogSelect = friend;
             },
             makeActiveFriends: function (friend) {
-                // console.log(this.userSelect.indexOf(friend) !== -1);
                 if (this.userSelect.indexOf(friend) !== -1) {
                     this.userSelect.splice( this.userSelect.indexOf(friend), 1);
                 } else {
                     this.userSelect.push(friend);
+                }
+            },
+            tabActive: function (tab) {
+                this.tabSelect = tab;
+                if (tab == 4) {
+                    axios({
+                        method: 'post',
+                        url: '/api/v1/chat/'+this.chatSelect.id+'/invite-chat-list',
+                        headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+                    })
+                    .then((response) => {
+                        this.nextPageInviteList = response.data.next_page_url;
+                        this.invite_chat_users.splice( 0, this.invite_chat_users.length);
+                        this.invite_chat_users.push(...response.data.data);
+                    });
                 }
             },
 
@@ -475,6 +488,8 @@
                     this.chats.push({id: response.data.id, title: response.data.title, type: response.data.type, pivot: {unread_messages: 0}});
                     this.chatTitle = "";
                     this.userSelect = [];
+                    this.chatSelect = response.data;
+                    this.tabSelect = 1;
                 });
 
             },
@@ -488,18 +503,18 @@
                     this.invite_chat_users.splice( this.invite_chat_users.indexOf(user), 1);
                 });
             },
-            inviteUserList: function () {
-                axios({
-                    method: 'post',
-                    url: '/api/v1/chat/'+this.chatSelect.id+'/invite-chat-list',
-                    headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
-                })
-                .then((response) => {
-                    this.nextPageInviteList = response.data.next_page_url;
-                    this.invite_chat_users.splice( 0, this.invite_chat_users.length);
-                    this.invite_chat_users.push(...response.data.data);
-                });
-            },
+            // inviteUserList: function () {
+            //     axios({
+            //         method: 'post',
+            //         url: '/api/v1/chat/'+this.chatSelect.id+'/invite-chat-list',
+            //         headers: { 'Authorization': 'Bearer ' + localStorage.access_token },
+            //     })
+            //     .then((response) => {
+            //         this.nextPageInviteList = response.data.next_page_url;
+            //         this.invite_chat_users.splice( 0, this.invite_chat_users.length);
+            //         this.invite_chat_users.push(...response.data.data);
+            //     });
+            // },
         }
     }
 </script>
@@ -512,7 +527,6 @@
         position:absolute;
         right:35px;
         bottom: 20px;
-        /* background-color: white; */
     }
 
 
