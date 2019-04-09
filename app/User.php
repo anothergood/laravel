@@ -63,4 +63,9 @@ class User extends Authenticatable
                     ->withTimestamps();
     }
 
+    public function approved_friends()
+    {
+        return $this->friends()->wherePivot('status', 'approved');
+    }
+
 }

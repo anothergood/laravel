@@ -270,7 +270,7 @@
                         }
                     }
                     else if (data.type == 'new_invited') {
-                        if(this.chatSelect.id !== null){
+                        if(this.chatSelect.id == data.data.id){
                             axios({
                                 method: 'post',
                                 url: '/api/v1/chat/'+this.chatSelect.id+'/invite-chat-list',

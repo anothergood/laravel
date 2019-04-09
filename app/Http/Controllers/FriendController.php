@@ -44,14 +44,14 @@ class FriendController extends Controller
     public function allFriends(Request $request)
     {
 
-        return $request->user()->friends()->paginate(10);
+        return $request->user()->approved_friends()->paginate(10);
 
     }
 
     public function withoutDialog(Request $request)
     {
 
-        return $request->user()->friends()->whereDoesntHave('chats', function ($query) use($request) {
+        return $request->user()->approved_friends()->whereDoesntHave('chats', function ($query) use($request) {
             $query->where('type','dialog')->whereHas('users', function ($query) use($request) {
                 $query->where('id', $request->user()->id);
             });

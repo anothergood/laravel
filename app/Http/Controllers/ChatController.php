@@ -81,11 +81,11 @@ class ChatController extends Controller
                 'type' => 'chat_invite',
                 'data' => $chat->load('users'),
             ];
-            $chat->usersNotification($data_chat_invite, $request->user()->id);
+            $chat->userNotification($data_chat_invite, $user->id);
 
             $data_new_invited = [
                 'type' => 'new_invited',
-                'data' => $user,
+                'data' => $chat,
             ];
 
             $chat->usersNotification($data_new_invited, $request->user()->id);

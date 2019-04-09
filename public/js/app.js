@@ -63634,7 +63634,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         });
                     }
                 } else if (data.type == 'new_invited') {
-                    if (_this2.chatSelect.id !== null) {
+                    if (_this2.chatSelect.id == data.data.id) {
                         axios({
                             method: 'post',
                             url: '/api/v1/chat/' + _this2.chatSelect.id + '/invite-chat-list',

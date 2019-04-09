@@ -22,18 +22,20 @@ class Chat extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function chatPush($data)
-    {
-        event(new ChatMessage($this, $data));
+    public function userNotification( $data, $user_id ) {
+
+        $this->users()->where('id', $user_id)->first()->userPush($data);
+
     }
 
     public function usersNotification( $data, $except = null) {
 
         $this->users()->where('id', '<>', $except)->chunk(10, function ($users) use($data) {
             foreach ($users as $user) {
-                $user->userPush($data);
+                $this->userNotification($data, $user->id);
             }
         });
 
     }
+
 }
