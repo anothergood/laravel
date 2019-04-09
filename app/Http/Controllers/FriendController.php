@@ -9,48 +9,42 @@ use Illuminate\Http\Request;
 
 class FriendController extends Controller
 {
-    public function inviteFriend(Request $request, $user)
+    public function inviteFriend(Request $request, User $user)
     {
-        $initiator = $request->user();
-        $friend = $initiator->users()->where('user_id', $user)->first();
-        if ($friend) {
-            $status = $friend->pivot->status;
+        $user_init = $request->user()->friends()->where('id', $user->id)->first();
+        $friend_init = $user->friends()->where('id', $request->user()->id)->first();
+        $status = '';
+        if ($user_init) {
+            $status = $user_init->pivot->status;
             if ($status == 'pending') {
-                return response(['message'=>'request already exists'], 422);
+                return response(['message' => 'request already exists'], 422);
             } elseif ($status == 'approved') {
-                return response(['message'=>'user is already a friend'], 422);
+                return response(['message' => 'user is already a friend'], 422);
             } elseif ($status == 'denied') {
-                return response(['message'=>'request denied'], 422);
+                return response(['message' => 'request denied'], 422);
             }
-        } else {
-            $initiator->users()->attach($user, ['status' => 'pending']);
-            return response(['message' => 'invitation sent']);
-        }
-    }
-
-    public function approveFriend(Request $request, User $initiator)
-    {
-        $friend = $initiator->users()->where('user_id', $request->user()->id)->first();
-        if ($friend) {
-            $status = $friend->pivot->status;
+        } elseif ($friend_init){
+            $status = $friend_init->pivot->status;
             if ($status == 'pending') {
-                $initiator->users()->updateExistingPivot($request->user()->id, ['status' => 'approved']);
+                $user->friends()->updateExistingPivot($request->user()->id, ['status' => 'approved']);
+                $request->user()->friends()->attach($user->id, ['status' => 'approved']);
                 return response(['message' => 'invitation approved']);
             } elseif ($status == 'approved') {
-                return response(['message'=>'user is already a friend'], 422);
+                return response(['message' => 'user is already a friend'], 422);
             } elseif ($status == 'denied') {
-                return response(['message'=>'request denied'], 422);
+                return response(['message' => 'request denied'], 422);
             }
         } else {
-            return response(['message'=>'there is no request from this user'], 422);
+            $request->user()->friends()->attach($user->id, ['status' => 'pending']);
+            return response(['message' => 'invitation sent']);
         }
+
     }
 
     public function allFriends(Request $request)
     {
 
-        return $request->user()->friends;
-        // ()->paginate(10);
+        return $request->user()->friends()->paginate(10);
 
     }
 

@@ -48,7 +48,6 @@ class ChatController extends Controller
                     'data' => $chat->load('users'),
                 ];
                 $chat->usersNotification($data, $request->user()->id);
-                // User::find($request->users)->userPush($data);
 
                 return $chat;
             }
@@ -64,9 +63,8 @@ class ChatController extends Controller
             ];
 
             $chat->users()->attach($request->user()->id);
-            if ($request->users !== null) {
+            if ($request->users) {
                 $chat->users()->syncWithoutDetaching($request->users);
-
                 $chat->usersNotification($data, $request->user()->id);
             }
             return $chat;
@@ -84,13 +82,11 @@ class ChatController extends Controller
                 'data' => $chat->load('users'),
             ];
             $chat->usersNotification($data_chat_invite, $request->user()->id);
-            // $user->userPush($data_chat_invite);
 
             $data_new_invited = [
                 'type' => 'new_invited',
                 'data' => $user,
             ];
-
 
             $chat->usersNotification($data_new_invited, $request->user()->id);
 

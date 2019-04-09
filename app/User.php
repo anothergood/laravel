@@ -23,7 +23,7 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 'pivot',
+        'password', 'remember_token',
     ];
 
     public function routeNotificationForMail($notification)
@@ -56,42 +56,11 @@ class User extends Authenticatable
         event(new ChatPrivateMessage($this, $data));
     }
 
-    public function friendsOfMine()
+    public function friends()
     {
         return $this->belongsToMany(User::class, 'user_user', 'user_initiator_id', 'user_id')
                     ->withPivot('status')
-                    ->wherePivot('status','approved')
                     ->withTimestamps();
     }
 
-    public function friendOf()
-    {
-        return $this->belongsToMany(User::class, 'user_user', 'user_id', 'user_initiator_id')
-                    ->withPivot('status')
-                    ->wherePivot('status','approved')
-                    ->withTimestamps();
-    }
-
-    public function getFriendsAttribute()
-    {
-        if ( ! array_key_exists('user_user', $this->relations)) $this->loadFriends();
-
-        return $this->getRelation('user_user');
-    }
-
-    protected function loadFriends()
-    {
-        if ( ! array_key_exists('user_user', $this->relations))
-        {
-            $friends = $this->mergeFriends();
-
-            $this->setRelation('user_user', $friends);
-        }
-    }
-
-    protected function mergeFriends()
-    {
-        return $this->friendsOfMine->merge($this->friendOf);
-    }
-    
 }
