@@ -55,7 +55,7 @@ export default {
             message_notification: false,
             message: "",
             from_user: "",
-            user: {}
+            user: {},
         }
     },
 

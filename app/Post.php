@@ -32,4 +32,20 @@ class Post extends Model
     {
          return $this->morphMany(Attachment::class, 'attachable');
     }
+
+    public function localization()
+    {
+        return $this->morphMany(Localization::class, 'localizable');
+    }
+
+    public function getLocalizeField($language, $field){
+        return $this->localization()->where(['language' => $language, 'field' => $field])-> firstOrFail()->value;
+    }
+
+    public function getLocalizePost($language){
+        $this->title = $this->localization()->where(['language' => $language, 'field' => 'title'])-> firstOrFail()->value;
+        $this->body = $this->localization()->where(['language' => $language, 'field' => 'body'])-> firstOrFail()->value;
+        return $this;
+    }
+
 }

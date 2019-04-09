@@ -625,6 +625,7 @@
 
     .chat_people{ overflow:hidden; clear:both;}
     .chat_list {
+	cursor: pointer;
     border-bottom: 1px solid #c4c4c4;
     margin: 0;
     padding: 18px 16px 10px;

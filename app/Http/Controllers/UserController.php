@@ -12,4 +12,12 @@ class UserController extends Controller
         return $request->user();
     }
 
+    public function setLocale(Request $request)
+    {
+        \App::setLocale('ru');
+        $locale = \App::getLocale();
+        return $locale;
+        // response(['sadas' => \App::isLocale('ru')]);
+    }
+
 }

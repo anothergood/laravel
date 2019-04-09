@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <div class="content">
-      <router-view></router-view>
+      <router-view ></router-view>
     </div>
   </div>
 </template>
@@ -10,6 +10,11 @@
     import Header from './Header.vue';
 
     export default {
+        data : function(){
+            return {
+                user: {}
+            }
+        },
             name: 'main-app',
             components: {Header},
             created() {
@@ -22,6 +27,7 @@
                         headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
                     })
                     .then((response) => {
+                        this.user = response.data;
                         // this.$router.push({ path: '/home' });
                     })
                     .catch((error) => {

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Attachment;
 use App\Post;
+use App\Attachment;
+use App\Localization;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
@@ -13,8 +14,8 @@ class PostController extends Controller
 {
     public function myPosts(Request $request)
     {
-        $posts = $request->user()->posts()->paginate(1);
-        return $posts;
+        $posts = $request->user()->posts()->find(3);
+        return $posts->getLocalizePost(\App::getLocale());
     }
 
     public function myPost(Request $request, Post $post)
@@ -37,25 +38,36 @@ class PostController extends Controller
         return response($posts);
     }
 
-    public function index()
-    {
-        $posts = Post::paginate(5);
-        return $posts;
-    }
-
-    public function create()  //возвр. view (html) (web.php)
-    {
-        //(web.php)
-    }
-
     public function store(StorePostRequest $request)
     {
         $post = new Post;
-        $post->title = $request->title;
-        $post->body = $request->body;
 
         $post->user_id = $request->user()->id;
         $post->save();
+
+        $localization = new Localization;
+        $localization->language = 'ru';
+        $localization->field = 'title';
+        $localization->value = 'бла';
+        $post->localization()->save($localization);
+
+        $localization = new Localization;
+        $localization->language = 'ru';
+        $localization->field = 'body';
+        $localization->value = 'бла-бла-бла';
+        $post->localization()->save($localization);
+
+        $localization = new Localization;
+        $localization->language = 'en';
+        $localization->field = 'title';
+        $localization->value = 'bla';
+        $post->localization()->save($localization);
+
+        $localization = new Localization;
+        $localization->language = 'en';
+        $localization->field = 'body';
+        $localization->value = 'bla-bla-bla';
+        $post->localization()->save($localization);
 
         if ($request->hasFile('file')) {
             $path = Storage::putFile('attachments', new File($request->file), 'public');
@@ -73,33 +85,4 @@ class PostController extends Controller
         return response($post);
     }
 
-    public function show(Request $request, $id)
-    {
-        $post = Post::find($id);
-    }
-
-
-
-    public function edit($id) //view на изменение объекта (web.php)
-    {
-        //(web.php)
-    }
-
-    public function update(StorePostRequest $request, $id)
-    {
-        $post = Post::find($id);
-        $post->title = $request->title;
-        $post->save();
-        return $post;
-    }
-
-    public function destroy($id)
-    {
-        Post::destroy($id);
-    }
-
-    public function dest($id)
-    {
-        Post::destroy($id);
-    }
 }
