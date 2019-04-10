@@ -34,12 +34,9 @@
                     params: { email: this.email, password: this.password }
                 })
                 .then((response) => {
-                    // this.$router.push('start')
                     if(response.status === 200) {
                         localStorage.setItem("access_token", response.data.token.access_token);
-                        window.location.href = "/private-chat"
-                        // console.log(response.data.token.access_token);
-                        // console.log("bla");
+                        this.$router.push({ path: '/private-chat' });
                     }
                 })
                 .catch((error) => {

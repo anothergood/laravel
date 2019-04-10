@@ -5,7 +5,6 @@
 @section('title', 'Login')
 
 @section('content')
-    <login-component></login-component>
-    <!-- <router-view></router-view> -->
-    <!-- <example-component></example-component> -->
+    <button class="btn btn-secondary btn-sm" type="button" href="http://192.168.1.125/api/v1/user/localization">Отправить</button>
+        {{ __('navbar.main') }}
 @endsection

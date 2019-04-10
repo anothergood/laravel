@@ -14,8 +14,8 @@ class PostController extends Controller
 {
     public function myPosts(Request $request)
     {
-        $posts = $request->user()->posts()->find(3);
-        return $posts->getLocalizePost(\App::getLocale());
+        $posts = $request->user()->posts()->paginate(10);
+        return $posts;
     }
 
     public function myPost(Request $request, Post $post)

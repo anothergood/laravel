@@ -28,6 +28,8 @@ Route::middleware('throttle:60,1')->group(function () {
         Route::post('login', 'LoginController@store')->name('login');
         Route::get('verify/{token}', 'RegisterController@verifyUser');
         Route::get('self', 'UserController@userSelf')->middleware('auth:api')->middleware('verify');
+        Route::post('localization', 'UserController@setLocale');
+        Route::get('current-language', 'UserController@currentLanguage');
     });
 
     Route::group(['prefix' => 'friends','middleware' => 'auth:api'], function () {

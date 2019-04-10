@@ -11,25 +11,12 @@
 |
 */
 
-//
-// Route::middleware('auth')->group(function () {
-//     Route::get('start', function () {
-//       return view('start');
-//     });
-// });
 
-// Route::get('welcome', function () {
-//     return view('welcome');
-// });
-
-// Route::get('login', function () {
-//     return view('login');
-// });
 
 Route::get('{any}', function () {
   return view('start');
 })->where('any', '.*');
 
-// Route::get('chat', function () {
-//     return view('chat');
+// Route::get('test', function () {
+//   return view('login');
 // });
