@@ -28,11 +28,4 @@ class Comment extends Model
         return $this->morphMany(Localization::class, 'localizable');
     }
 
-    public function getFieldAttribute($field = 'body')
-    {
-        foreach($this->localization as $lang) {
-            if ( $lang->field == $field and $lang->language == \App::getLocale() )
-                return $lang->value;
-        }
-    }
 }

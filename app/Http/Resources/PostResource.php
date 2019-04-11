@@ -2,10 +2,13 @@
 
 namespace App\Http\Resources;
 
+use App\Traits\GetLocalizationTrait;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
 {
+    use GetLocalizationTrait;
+
     /**
      * Transform the resource into an array.
      *
@@ -17,8 +20,8 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'title' => $this->getFieldAttribute('title'),
-            'body' => $this->getFieldAttribute('body'),
+            'title' => $this->getLocalizedField('title'),
+            'body' => $this->getLocalizedField('body'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'comments' => CommentResource::Collection($this->comments)
