@@ -6,37 +6,47 @@ use App\User;
 use App\Post;
 use App\Comment;
 use App\Attachment;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreCommentRequest;
-use Illuminate\Support\Facades\Storage;
+use App\Localization;
 use Illuminate\Http\File;
+use Illuminate\Http\Request;
+use App\Http\Resources\CommentResource;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreCommentRequest;
 
 class CommentController extends Controller
 {
     public function myPostComments(Request $request, Post $post)
     {
         if ($post->user_id == $request->user()->id) {
-            $comments = Comment::where('post_id', '=', $post->id)->paginate(2);
-            return response($comments);
+            return CommentResource::collection($post->comments()->paginate(5));
         } else {
             return response(['message' => 'Forbidden'], 403);
         }
     }
 
-    public function store(StoreCommentRequest $request)
+    public function sendComment(StoreCommentRequest $request)
     {
-        $user = $request->user();
-        $post_user_id = Post::find($request->post_id)->user_id;
-        $post_user = User::find($post_user_id);
-        $initiator_user = $user->users()->where('user_id', '=', $post_user_id)->where('status', '=', 'approved')->exists();
-        $initiator_post_user = $post_user->users()->where('user_id', '=', $request->user()->id)->where('status', '=', 'approved')->exists();
+        $post_user = Post::find($request->post_id);
 
-        if ($initiator_user or $initiator_post_user or $request->user()->id == $post_user_id) {
+        $friend = $request->user()->approved_friends()->find($post_user->user_id);
+
+        if ($friend or $request->user()->id == $post_user->user_id) {
             $comment = new Comment;
-            $comment->body = $request->body;
             $comment->user_id = $request->user()->id;
             $comment->post_id = $request->post_id;
             $comment->save();
+
+            $localization = new Localization;
+            $localization->language = 'ru';
+            $localization->field = 'body';
+            $localization->value = 'привет';
+            $comment->localization()->save($localization);
+
+            $localization = new Localization;
+            $localization->language = 'en';
+            $localization->field = 'body';
+            $localization->value = 'hello';
+            $comment->localization()->save($localization);
 
             if ($request->hasFile('file')) {
                 $path = Storage::putFile('attachments', new File($request->file), 'public');

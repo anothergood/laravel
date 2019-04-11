@@ -14,7 +14,7 @@
 
 
 Route::get('{any}', function () {
-  return view('start');
+    return view('start');
 })->where('any', '.*');
 
 // Route::get('test', function () {

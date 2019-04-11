@@ -9,7 +9,7 @@ class Post extends Model
 {
     use Orderable;
 
-    protected $appends = ['title','body'];
+    // protected $appends = ['title','body'];
     protected $fillable = [
         'title', 'body',
     ];
@@ -39,26 +39,12 @@ class Post extends Model
         return $this->morphMany(Localization::class, 'localizable');
     }
 
-    public function getTitleAttribute()
+    public function getFieldAttribute($field)
     {
-        foreach($this->language as $lang) {
-            if ( $lang->field == 'title' )
+        foreach($this->localization as $lang) {
+            if ( $lang->field == $field and $lang->language == \App::getLocale() )
                 return $lang->value;
         }
     }
-
-    public function getBodyAttribute()
-    {
-        foreach($this->language as $lang) {
-            if ( $lang->field == 'body' )
-                return $lang->value;
-        }
-    }
-
-    public function getLanguageAttribute()
-    {
-        return $this->localization()->where('language', \App::getLocale())->get();
-    }
-
 
 }

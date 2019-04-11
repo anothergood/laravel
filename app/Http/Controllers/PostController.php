@@ -9,19 +9,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\PostCollection;
 
 class PostController extends Controller
 {
     public function myPosts(Request $request)
     {
-        $posts = $request->user()->posts()->paginate(10);
-        return $posts;
+        return PostResource::collection(Post::where('user_id', $request->user()->id)->paginate(5));
     }
 
     public function myPost(Request $request, Post $post)
     {
         if ($post->user_id == $request->user()->id) {
-            return response($post);
+            return new PostResource($post);
         } else {
             return response(['message' => 'Forbidden'], 403);
         }
@@ -48,25 +49,25 @@ class PostController extends Controller
         $localization = new Localization;
         $localization->language = 'ru';
         $localization->field = 'title';
-        $localization->value = 'бла';
+        $localization->value = 'ру';
         $post->localization()->save($localization);
 
         $localization = new Localization;
         $localization->language = 'ru';
         $localization->field = 'body';
-        $localization->value = 'бла-бла-бла';
+        $localization->value = 'привет';
         $post->localization()->save($localization);
 
         $localization = new Localization;
         $localization->language = 'en';
         $localization->field = 'title';
-        $localization->value = 'bla';
+        $localization->value = 'en';
         $post->localization()->save($localization);
 
         $localization = new Localization;
         $localization->language = 'en';
         $localization->field = 'body';
-        $localization->value = 'bla-bla-bla';
+        $localization->value = 'hello';
         $post->localization()->save($localization);
 
         if ($request->hasFile('file')) {
