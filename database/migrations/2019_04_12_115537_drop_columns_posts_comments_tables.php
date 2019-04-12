@@ -30,6 +30,13 @@ class DropColumnsPostsCommentsTables extends Migration
     */
     public function down()
     {
-        //
+        Schema::table('posts', function (Blueprint $table) {
+            $table->string('title',50);
+            $table->string('body');
+        });
+
+        Schema::table('comments', function (Blueprint $table) {
+            $table->string('body');
+        });
     }
 }
