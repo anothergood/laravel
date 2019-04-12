@@ -12,15 +12,15 @@ class UserUser extends Authenticatable
     use HasApiTokens,Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-     protected $table = 'user_user';
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
+    protected $table = 'user_user';
 
-     public function users()
-     {
-         return $this->hasMany(User::class);
-     }
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 
 }

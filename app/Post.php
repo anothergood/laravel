@@ -9,7 +9,6 @@ class Post extends Model
 {
     use Orderable;
 
-    // protected $appends = ['title','body'];
     protected $fillable = [
         'title', 'body',
     ];

@@ -15,38 +15,34 @@ use App\Http\Requests\StoreCommentRequest;
 
 class CommentController extends Controller
 {
-    public function myPostComments(Request $request, Post $post)
+    public function postComments(Request $request, Post $post)
     {
-        if ($post->user_id == $request->user()->id) {
+        $friend = $request->user()->approved_friends()->find($post->user_id);
+
+        if ($friend or $post->user_id == $request->user()->id) {
             return CommentResource::collection($post->comments()->paginate(5));
         } else {
             return response(['message' => 'Forbidden'], 403);
         }
     }
 
-    public function sendComment(StoreCommentRequest $request)
+    public function sendComment(StoreCommentRequest $request, Post $post)
     {
-        $post_user = Post::find($request->post_id);
+        $friend = $request->user()->approved_friends()->find($post->user_id);
 
-        $friend = $request->user()->approved_friends()->find($post_user->user_id);
-
-        if ($friend or $request->user()->id == $post_user->user_id) {
+        if ($friend or $request->user()->id == $post->user_id) {
             $comment = new Comment;
             $comment->user_id = $request->user()->id;
-            $comment->post_id = $request->post_id;
+            $comment->post_id = $post->id;
             $comment->save();
 
-            $localization = new Localization;
-            $localization->language = 'ru';
-            $localization->field = 'body';
-            $localization->value = 'привет';
-            $comment->localization()->save($localization);
-
-            $localization = new Localization;
-            $localization->language = 'en';
-            $localization->field = 'body';
-            $localization->value = 'hello';
-            $comment->localization()->save($localization);
+            foreach (array_keys($request->body) as $lang) {
+                $localization = new Localization;
+                $localization->language = $lang;
+                $localization->field = 'body';
+                $localization->value = $request->body[$lang];
+                $comment->localization()->save($localization);
+            }
 
             if ($request->hasFile('file')) {
                 $path = Storage::putFile('attachments', new File($request->file), 'public');
@@ -55,10 +51,8 @@ class CommentController extends Controller
                 $attachment->file_path = $path;
                 $attachment->file_type = $mime;
                 $comment->attachments()->save($attachment);
-                return response(['comment' => $comment,
-                                 'attachment' => $attachment]);
             }
-            return response($comment);
+            return new CommentResource($comment);
         } else {
             return response(['message' => 'only friends can post comments'], 403);
         }

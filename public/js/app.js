@@ -63276,13 +63276,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.$router.push({ path: '/login' });
             });
         };
-        axios({
-            method: 'get',
-            url: '/api/v1/user/current-language'
-        }).then(function (response) {
-            _this.language = response.data;
-        });
-        console.log(navigator.language);
     },
 
 
@@ -65234,13 +65227,14 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
         axios({
             method: 'get',
-            url: '/api/v1/posts/my-posts',
-            headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+            url: '/api/v1/posts/my',
+            headers: { 'Authorization': 'Bearer ' + localStorage.access_token, 'hl': 'en' }
         }).then(function (response) {
             var _posts;
 
             _this.nextPagePosts = response.data.next_page_url;
             (_posts = _this.posts).push.apply(_posts, _toConsumableArray(response.data.data));
+            console.log(response.data);
         });
     },
 

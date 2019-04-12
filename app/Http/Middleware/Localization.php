@@ -17,10 +17,8 @@ class Localization
     {
         $locale = $request->header('hl');
 
-        if ( $locale ) {
-            if (in_array($locale, \Config::get('app.locales'))) {
-                app()->setLocale($locale);
-            }
+        if ( $locale and in_array($locale, config('app.locales')) ) {
+            app()->setLocale($locale);            
         }
         return $next($request);
     }

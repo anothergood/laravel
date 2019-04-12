@@ -58,14 +58,7 @@ export default {
                 this.$router.push({ path: '/login' })
             });
         };
-        axios({
-            method: 'get',
-            url: '/api/v1/user/current-language',
-        })
-        .then((response) => {
-            this.language = response.data;
-        });
-        console.log(navigator.language);
+
     },
 
     watch: {

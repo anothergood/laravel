@@ -40,12 +40,13 @@
 
             axios({
                 method: 'get',
-                url: '/api/v1/posts/my-posts',
-                headers: { 'Authorization': 'Bearer ' + localStorage.access_token }
+                url: '/api/v1/posts/my',
+                headers: { 'Authorization': 'Bearer ' + localStorage.access_token, 'hl': 'en' }
             })
             .then((response) => {
                 this.nextPagePosts = response.data.next_page_url;
                 this.posts.push(...response.data.data);
+                console.log(response.data);
             });
 
         },
@@ -62,7 +63,7 @@
 
 
         methods: {
-            
+
         }
     }
 </script>

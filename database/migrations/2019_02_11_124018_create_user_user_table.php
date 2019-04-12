@@ -14,8 +14,8 @@ class CreateUserUserTable extends Migration
     public function up()
     {
       Schema::create('user_user', function (Blueprint $table) {
-          $table->integer('user_initiator_id')->unsigned();
-          $table->integer('user_id')->unsigned();
+          $table->unsignedInteger('user_initiator_id');
+          $table->unsignedInteger('user_id');
           $table->string('status',50)->index();
           $table->timestamps();
 

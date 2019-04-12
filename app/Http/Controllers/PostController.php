@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Attachment;
 use App\Localization;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
-use App\Http\Resources\PostResource;
 use App\Http\Resources\PostCollection;
 
 class PostController extends Controller
@@ -19,56 +19,44 @@ class PostController extends Controller
         return PostResource::collection(Post::where('user_id', $request->user()->id)->paginate(5));
     }
 
-    public function myPost(Request $request, Post $post)
+    public function friendsPosts(Request $request)
     {
-        if ($post->user_id == $request->user()->id) {
+        $friends = $request->user()->approved_friends()->pluck('id');
+        return PostResource::collection(Post::whereIn('user_id', $friends)->paginate(5));
+    }
+
+    public function getPost(Request $request, Post $post)
+    {
+        $friend = $request->user()->approved_friends()->find($post->user_id);
+
+        if ($friend or $post->user_id == $request->user()->id) {
             return new PostResource($post);
         } else {
             return response(['message' => 'Forbidden'], 403);
         }
     }
 
-    public function friendsPosts(Request $request)
-    {
-        $user = $request->user();
-        $friend_id = [];
-        foreach ($user->users as $friend) {
-            $friend_id[] = $friend->id;
-        }
-        $posts = Post::whereIn('user_id', $friend_id)->paginate(2);
-        return response($posts);
-    }
-
-    public function store(StorePostRequest $request)
+    public function createPost(StorePostRequest $request)
     {
         $post = new Post;
-
         $post->user_id = $request->user()->id;
         $post->save();
 
-        $localization = new Localization;
-        $localization->language = 'ru';
-        $localization->field = 'title';
-        $localization->value = 'ру';
-        $post->localization()->save($localization);
+        foreach (array_keys($request->title) as $title) {
+            $localization = new Localization;
+            $localization->language = $title;
+            $localization->field = 'title';
+            $localization->value = $request->title[$title];
+            $post->localization()->save($localization);
+        }
 
-        $localization = new Localization;
-        $localization->language = 'ru';
-        $localization->field = 'body';
-        $localization->value = 'привет';
-        $post->localization()->save($localization);
-
-        $localization = new Localization;
-        $localization->language = 'en';
-        $localization->field = 'title';
-        $localization->value = 'en';
-        $post->localization()->save($localization);
-
-        $localization = new Localization;
-        $localization->language = 'en';
-        $localization->field = 'body';
-        $localization->value = 'hello';
-        $post->localization()->save($localization);
+        foreach (array_keys($request->body) as $body) {
+            $localization = new Localization;
+            $localization->language = $body;
+            $localization->field = 'body';
+            $localization->value = $request->body[$body];
+            $post->localization()->save($localization);
+        }
 
         if ($request->hasFile('file')) {
             $path = Storage::putFile('attachments', new File($request->file), 'public');
@@ -79,11 +67,8 @@ class PostController extends Controller
             $attachment->file_type = $mime;
             $post->attachments()->save($attachment);
 
-            return response(['post' => $post,
-                             'attachment' => $attachment
-                           ]);
         }
-        return response($post);
+        return new PostResource($post);
     }
 
 }
