@@ -64714,7 +64714,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "collapse navbar-collapse",
+              staticClass: "collapse navbar-collapse ",
               attrs: { id: "navbarSupportedContent" }
             },
             [

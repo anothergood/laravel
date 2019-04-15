@@ -6,15 +6,11 @@ trait GetLocalizationTrait
 {
     public function getLocalizedField($field)
     {
-        foreach( $this->localization as $lang ) {
-            if ( $lang->field == $field and $lang->language == app()->getLocale() ) {
-                return $lang->value;
-            }
-        }
-        foreach( $this->localization as $lang ) {
-            if ( $lang->field == $field) {
-                return $lang->value;
-            }
+        $localizations = $this->localization->where('field', $field)->mapWithKeys(function ($item) {
+            return [$item['language'] => $item['value']];
+        })->toArray();
+        if ( array_key_exists(app()->getLocale(), $localizations) ) {
+            return $localizations[app()->getLocale()];
         }
     }
 }

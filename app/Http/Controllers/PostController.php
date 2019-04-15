@@ -12,11 +12,15 @@ use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\PostCollection;
 
+use Illuminate\Support\Arr;
+
 class PostController extends Controller
 {
     public function myPosts(Request $request)
     {
-        return PostResource::collection(Post::where('user_id', $request->user()->id)->paginate(5));
+        return PostResource::collection(Post::where('user_id', $request->user()->id)->whereHas('localization', function ($query) {
+            $query->where('language', app()->getLocale());
+        })->paginate(5));
     }
 
     public function friendsPosts(Request $request)
@@ -42,19 +46,19 @@ class PostController extends Controller
         $post->user_id = $request->user()->id;
         $post->save();
 
-        foreach (array_keys($request->title) as $title) {
+        foreach ($request->titles as $key => $title) {
             $localization = new Localization;
-            $localization->language = $title;
+            $localization->language = $key;
             $localization->field = 'title';
-            $localization->value = $request->title[$title];
+            $localization->value = $title;
             $post->localization()->save($localization);
         }
 
-        foreach (array_keys($request->body) as $body) {
+        foreach ($request->bodies as $key => $body) {
             $localization = new Localization;
-            $localization->language = $body;
+            $localization->language = $key;
             $localization->field = 'body';
-            $localization->value = $request->body[$body];
+            $localization->value = $body;
             $post->localization()->save($localization);
         }
 
